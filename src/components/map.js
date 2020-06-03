@@ -2,11 +2,13 @@ import React from 'react';
 import Blob from './blob';
 const twoD = [];
 const container = 1000;
-const blobSize = 200;
+const blobSize = 2000;
+const blobAmt = 6;
+const colorlist = ["red", "cherry", "purple", "green", "mauve", "orangeRed"];
 
-for(let i=0; i<Math.ceil(container/blobSize)+1; i++){
+for(let i=0; i<blobAmt; i++){
   twoD[i] = [];
-  for(let j=0; j<Math.ceil(container/blobSize)+1; j++){
+  for(let j=0; j<blobAmt; j++){
     twoD[i][j] = {
       x: i*blobSize -100,
       y: j*blobSize -100
@@ -25,11 +27,14 @@ class Map extends React.Component {
     }
   return (
       <div className="weltanschauung" style={dim}>
+      <p>scroll around!</p>
       {blobs.map((blob, index) => (
           <Blob
           key={'blob'+index}
           x={blob.x}
           y={blob.y}
+          diameter={blobSize*1.25}
+          color={colorlist[Math.floor(Math.random()*colorlist.length)]}
           />
         )) }
       </div>

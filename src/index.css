@@ -3,23 +3,47 @@
   border: 1px solid rgba(255, 0, 0, 0.5);
   transform-origin: center;
   transform: translate(3%, 3%);
-  overflow: hidden;
+  overflow: auto;
 }
 
-.egg {
-      position: absolute;
-      border: 1px solid rgba(255, 0, 0, 0.5);
-      width: 126px;
-      height: 180px;
-      background-color: rgba(255, 0, 0, 0.1);
-      transform-origin: 50% 50%;
-      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    }
+.red{
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  background-color: rgba(255, 0, 0, 0.1);
+  color: rgba(255, 0, 0, 1);
+}
+
+.cherry{
+  border: 1px solid rgba(212, 78, 105, 0.5);
+  background-color: rgba(212, 78, 105, 0.1);
+  color: rgba(212, 78, 105, 1);
+}
+
+.purple{
+  border: 1px solid rgba(127, 93, 148, 0.5);
+  background-color: rgba(127, 93, 148, 0.1);
+  color: rgba(127, 93, 148, 1);
+}
+
+.green{
+  border: 1px solid rgba(96, 166, 111, 0.5);
+  background-color: rgba(96, 166, 111, 0.1);
+  color: rgba(96, 166, 111, 1);
+}
+
+.mauve{
+  border: 1px solid rgba(207, 159, 171, 0.5);
+  background-color: rgba(207, 159, 171, 0.1);
+  color: rgba(207, 159, 171, 1);
+}
+
+.orangeRed{
+  border: 1px solid rgba(232, 75, 28, 0.5);
+  background-color: rgba(232, 75, 28, 0.1);
+  color: rgba(232, 75, 28, 1);
+}
 
 .blob {
   position: absolute;
-  border: 1px solid rgba(255, 0, 0, 0.5);
-  background-color: rgba(255, 0, 0, 0.1);
   transform-origin: 50% 50%;
   height: 10em;
   display: flex;
