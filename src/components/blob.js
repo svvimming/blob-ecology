@@ -8,14 +8,14 @@ class Blob extends React.Component {
 
   render(props) {
     const orientation = {
-      width: '250px',
-      height: '250px',
+      width: this.props.diameter+'px',
+      height: this.props.diameter+'px',
       transform: 'translate('+this.props.x+'px, '+this.props.y+'px) rotate('+90*Math.random()+'deg)',
       borderRadius: ' '+60*Math.random()+15+'% '+60*Math.random()+15+'% '+60*Math.random()+15+'% '+60*Math.random()+15+'% / '+60*Math.random()+15+'% '+60*Math.random()+15+'% '+60*Math.random()+15+'% '+60*Math.random()+15+'%'
     }
     return(
       <div
-      className="blob"
+      className={"blob "+this.props.color}
       style={orientation}
       onMouseOver={() => this.setState({ text: 'hola'})}
       onMouseOut={() =>this.setState({text: ''})}>
