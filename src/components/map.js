@@ -35,6 +35,7 @@ class Map extends React.Component {
           y={blob.y}
           diameter={blobSize*1.25}
           color={colorlist[Math.floor(Math.random()*colorlist.length)]}
+          imgIndex={Math.floor(Math.random()*6)}
           />
         )) }
       </div>

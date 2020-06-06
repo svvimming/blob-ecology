@@ -1,5 +1,6 @@
 import React from 'react';
 import Territory from './territory';
+import Fuites from './fuites';
 
 class Blob extends React.Component {
   constructor(props){
@@ -36,9 +37,14 @@ class Blob extends React.Component {
       >
       {
         this.state.isHovering &&
-        <Territory
-        className="p5canvas"
-        diameter={this.props.diameter}/>
+        <div>
+          <Territory
+          className="p5canvas"
+          diameter={this.props.diameter}
+          imgIndex={this.props.imgIndex}/>
+          <Fuites
+          diameter={this.props.diameter}/>
+        </div>
         }
       </div>
 

@@ -48,7 +48,9 @@
   height: 10em;
   display: flex;
   align-items: center;
-  justify-content: center
+  justify-content: center;
+  overflow: hidden;
+
 }
 
 P { text-align: center }
@@ -56,4 +58,13 @@ P { text-align: center }
 .p5canvas {
   overflow: hidden;
   position: relative;
+}
+
+.player {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  opacity: 0;
+  background-color: rgba(0, 0, 255, 0.1);
 }
