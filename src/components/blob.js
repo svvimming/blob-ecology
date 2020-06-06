@@ -1,9 +1,53 @@
 import React from 'react';
+import Territory from './territory';
+import Tone from 'tone';
+import errlymixx from "../assets/a-long-walk-to-somewhere-close-errlymixx.mp3";
 
 class Blob extends React.Component {
   constructor(props){
     super(props);
-    this.state = {text: ''};
+    this.handleMouseHover = this.handleMouseHover.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.playBuf = this.playBuf.bind(this);
+    this.state = {
+      isHovering: false,
+      player: null,
+      env: null
+    };
+  }
+
+  playBuf() {
+      this.state.env.toMaster();
+      this.state.player.connect(this.state.env);
+      this.state.player.start();
+      this.state.env.triggerAttack();
+  }
+
+  handleMouseHover() {
+    this.setState({
+      isHovering: true,
+      player: new Tone.Player({
+			"url" : errlymixx,
+      "onload" : this.playBuf,
+      "fadeIn" : 0,
+      "fadeOut" : 0
+    }),
+      env: new Tone.AmplitudeEnvelope({
+      	"attack" : 1,
+      	"decay" : 0.2,
+      	"sustain" : 1,
+      	"release" : 10,
+      })
+    });
+  }
+
+  handleMouseLeave() {
+    this.state.env.triggerRelease();
+    this.setState({
+      isHovering: false,
+      player: null,
+      env: null
+    });
   }
 
   render(props) {
@@ -17,9 +61,18 @@ class Blob extends React.Component {
       <div
       className={"blob "+this.props.color}
       style={orientation}
-      onMouseOver={() => this.setState({ text: 'hola'})}
-      onMouseOut={() =>this.setState({text: ''})}>
-      <p>{this.state.text}</p>
+      onMouseEnter={this.handleMouseHover}
+      onMouseLeave={this.handleMouseLeave}
+      >
+      {
+        this.state.isHovering &&
+
+          <Territory
+          className="p5canvas"
+          diameter={this.props.diameter}
+          imgIndex={this.props.imgIndex}/>
+
+        }
       </div>
 
     );
@@ -28,4 +81,11 @@ class Blob extends React.Component {
 
 export default Blob;
 
-// Math.random()*100+
+// onMouseOver={() => this.setState({ text: 'hola'})}
+// onMouseOut={() =>this.setState({text: ''})}
+// <Fuites
+// diameter={this.props.diameter}/>
+
+// <Territory
+// className="p5canvas"
+// diameter={this.props.diameter}/>
