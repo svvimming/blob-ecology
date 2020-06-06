@@ -1,9 +1,23 @@
 import React from 'react';
+import Territory from './territory';
 
 class Blob extends React.Component {
   constructor(props){
     super(props);
-    this.state = {text: ''};
+    this.handleMouseHover = this.handleMouseHover.bind(this);
+    this.state = {
+      isHovering: false,
+    };
+  }
+
+  handleMouseHover() {
+    this.setState(this.toggleHoverState);
+  }
+
+  toggleHoverState(state) {
+    return {
+      isHovering: !state.isHovering,
+    };
   }
 
   render(props) {
@@ -17,9 +31,15 @@ class Blob extends React.Component {
       <div
       className={"blob "+this.props.color}
       style={orientation}
-      onMouseOver={() => this.setState({ text: 'hola'})}
-      onMouseOut={() =>this.setState({text: ''})}>
-      <p>{this.state.text}</p>
+      onMouseEnter={this.handleMouseHover}
+      onMouseLeave={this.handleMouseHover}
+      >
+      {
+        this.state.isHovering &&
+        <Territory
+        className="p5canvas"
+        diameter={this.props.diameter}/>
+        }
       </div>
 
     );
@@ -28,4 +48,10 @@ class Blob extends React.Component {
 
 export default Blob;
 
-// Math.random()*100+
+// onMouseOver={() => this.setState({ text: 'hola'})}
+// onMouseOut={() =>this.setState({text: ''})}
+
+
+// <Territory
+// className="p5canvas"
+// diameter={this.props.diameter}/>

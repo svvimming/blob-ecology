@@ -2,7 +2,7 @@ import React from 'react';
 import Blob from './blob';
 const twoD = [];
 const container = 1000;
-const blobSize = 2000;
+const blobSize = 200;
 const blobAmt = 6;
 const colorlist = ["red", "cherry", "purple", "green", "mauve", "orangeRed"];
 
@@ -17,7 +17,6 @@ for(let i=0; i<blobAmt; i++){
 }
 
 const blobs = [].concat(...twoD);
-console.log(blobs);
 
 class Map extends React.Component {
   render(props) {
@@ -31,6 +30,7 @@ class Map extends React.Component {
       {blobs.map((blob, index) => (
           <Blob
           key={'blob'+index}
+          id={'blob'+index}
           x={blob.x}
           y={blob.y}
           diameter={blobSize*1.25}
