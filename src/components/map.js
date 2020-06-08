@@ -2,7 +2,7 @@ import React from 'react';
 import Blob from './blob';
 const twoD = [];
 const container = 1000;
-const blobSize = 200;
+const blobSize = 2000;
 const blobAmt = 6;
 const colorlist = ["red", "cherry", "purple", "green", "mauve", "orangeRed"];
 
@@ -35,7 +35,8 @@ class Map extends React.Component {
           y={blob.y}
           diameter={blobSize*1.25}
           color={colorlist[Math.floor(Math.random()*colorlist.length)]}
-          imgIndex={Math.floor(Math.random()*6)}
+          imgPath={process.env.PUBLIC_URL + '/assets/cull/cull'+Math.floor(Math.random()*6)+'.png'}
+          audioPath={process.env.PUBLIC_URL + '/assets/a-long-walk-to-somewhere-close-errlymixx.mp3'}
           />
         )) }
       </div>
