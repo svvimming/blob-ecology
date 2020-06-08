@@ -20,8 +20,12 @@ const blobs = [].concat(...twoD);
 class Map extends React.Component {
   constructor(props){
     super(props);
+    this.state = {
+      children: blobs
+    }
     this.handleScroll = this.handleScroll.bind(this);
     this.mapRef = React.createRef();
+    this.blobRef0 = React.createRef();
   }
 
   handleScroll(event) {
@@ -34,18 +38,19 @@ class Map extends React.Component {
   return (
       <div className="weltanschauung" ref={this.mapRef} onScroll={this.handleScroll}>
       <p>scroll around!</p>
-      {blobs.map((blob, index) => (
+
+        {this.state.children.map((element, index) => (
           <Blob
           key={'blob'+index}
           id={'blob'+index}
-          x={blob.x}
-          y={blob.y}
+          x={element.x}
+          y={element.y}
           diameter={blobSize*1.25}
           color={colorlist[Math.floor(Math.random()*colorlist.length)]}
           imgPath={process.env.PUBLIC_URL + '/assets/cull/cull'+Math.floor(Math.random()*6)+'.png'}
           audioPath={process.env.PUBLIC_URL + '/assets/a-long-walk-to-somewhere-close-errlymixx.mp3'}
           />
-        )) }
+        ))}
       </div>
     );
 }
