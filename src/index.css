@@ -67,6 +67,11 @@ p {
   position: relative;
 }
 
+.blobImg {
+  overflow: hidden;
+  position: relative;
+}
+
 .player {
   position: absolute;
   left: 0;

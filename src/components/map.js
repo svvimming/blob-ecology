@@ -25,7 +25,6 @@ class Map extends React.Component {
     }
     this.handleScroll = this.handleScroll.bind(this);
     this.mapRef = React.createRef();
-    this.blobRef0 = React.createRef();
   }
 
   handleScroll(event) {
@@ -46,6 +45,8 @@ class Map extends React.Component {
           x={element.x}
           y={element.y}
           diameter={blobSize*1.25}
+          rotation={90*Math.random()}
+          radii={[60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15]}
           color={colorlist[Math.floor(Math.random()*colorlist.length)]}
           imgPath={process.env.PUBLIC_URL + '/assets/cull/cull'+Math.floor(Math.random()*6)+'.png'}
           audioPath={process.env.PUBLIC_URL + '/assets/a-long-walk-to-somewhere-close-errlymixx.mp3'}

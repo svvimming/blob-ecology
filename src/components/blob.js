@@ -44,7 +44,7 @@ class Blob extends React.Component {
   handleMouseLeave() {
     this.state.env.triggerRelease();
     this.setState({
-      isHovering: false,
+      isHovering: true,
       player: null,
       env: null
     });
@@ -54,8 +54,8 @@ class Blob extends React.Component {
     const orientation = {
       width: this.props.diameter+'px',
       height: this.props.diameter+'px',
-      transform: 'translate('+this.props.x+'px, '+this.props.y+'px) rotate('+90*Math.random()+'deg)',
-      borderRadius: ' '+60*Math.random()+15+'% '+60*Math.random()+15+'% '+60*Math.random()+15+'% '+60*Math.random()+15+'% / '+60*Math.random()+15+'% '+60*Math.random()+15+'% '+60*Math.random()+15+'% '+60*Math.random()+15+'%'
+      transform: 'translate('+this.props.x+'px, '+this.props.y+'px) rotate('+this.props.rotation+'deg)',
+      borderRadius: ' '+this.props.radii[0]+'% '+this.props.radii[1]+'% '+this.props.radii[2]+'% '+this.props.radii[3]+'% / '+this.props.radii[4]+'% '+this.props.radii[5]+'% '+this.props.radii[6]+'% '+this.props.radii[7]+'%'
     }
     const imageStyle = {
       width: this.props.diameter+50+'px',
@@ -72,7 +72,7 @@ class Blob extends React.Component {
         this.state.isHovering &&
 
           <img
-          className="p5canvas"
+          className="blogImg"
           src={this.props.imgPath}
           style={imageStyle}/>
 
