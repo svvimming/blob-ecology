@@ -1,7 +1,6 @@
 import React from 'react';
 import Blob from './blob';
 const twoD = [];
-const container = 1000;
 const blobSize = 2000;
 const blobAmt = 6;
 const colorlist = ["red", "cherry", "purple", "green", "mauve", "orangeRed"];
@@ -19,13 +18,21 @@ for(let i=0; i<blobAmt; i++){
 const blobs = [].concat(...twoD);
 
 class Map extends React.Component {
+  constructor(props){
+    super(props);
+    this.handleScroll = this.handleScroll.bind(this);
+    this.mapRef = React.createRef();
+  }
+
+  handleScroll(event) {
+    let scrollLeft = this.mapRef.current.scrollLeft;
+    let scrollTop = this.mapRef.current.scrollTop;
+    console.log([scrollLeft, scrollTop]);
+  };
+
   render(props) {
-    const dim = {
-      width: container+'px',
-      height: container+'px'
-    }
   return (
-      <div className="weltanschauung" style={dim}>
+      <div className="weltanschauung" ref={this.mapRef} onScroll={this.handleScroll}>
       <p>scroll around!</p>
       {blobs.map((blob, index) => (
           <Blob
