@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/blob-ecology/static/css/main.6a28771d.chunk.css",
+    "main.js": "/blob-ecology/static/js/main.1022b577.chunk.js",
+    "main.js.map": "/blob-ecology/static/js/main.1022b577.chunk.js.map",
+    "runtime-main.js": "/blob-ecology/static/js/runtime-main.ee5d7646.js",
+    "runtime-main.js.map": "/blob-ecology/static/js/runtime-main.ee5d7646.js.map",
+    "static/js/2.c09d1ce5.chunk.js": "/blob-ecology/static/js/2.c09d1ce5.chunk.js",
+    "static/js/2.c09d1ce5.chunk.js.map": "/blob-ecology/static/js/2.c09d1ce5.chunk.js.map",
+    "index.html": "/blob-ecology/index.html",
+    "precache-manifest.9637f831a0a06daf3835fc087082fd88.js": "/blob-ecology/precache-manifest.9637f831a0a06daf3835fc087082fd88.js",
+    "service-worker.js": "/blob-ecology/service-worker.js",
+    "static/css/main.6a28771d.chunk.css.map": "/blob-ecology/static/css/main.6a28771d.chunk.css.map",
+    "static/js/2.c09d1ce5.chunk.js.LICENSE.txt": "/blob-ecology/static/js/2.c09d1ce5.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ee5d7646.js",
+    "static/js/2.c09d1ce5.chunk.js",
+    "static/css/main.6a28771d.chunk.css",
+    "static/js/main.1022b577.chunk.js"
+  ]
+}
