@@ -10,6 +10,7 @@ class Blob extends React.Component {
     this.playBuf = this.playBuf.bind(this);
     this.state = {
       isHovering: false,
+      wasRendered: false,
       player: null,
       env: null
     };
@@ -25,6 +26,7 @@ class Blob extends React.Component {
   handleMouseHover() {
     this.setState({
       isHovering: true,
+      wasRendered: true,
       player: new Tone.Player({
 			"url" : this.props.audioPath,
       "onload" : this.playBuf,
@@ -44,7 +46,7 @@ class Blob extends React.Component {
   handleMouseLeave() {
     this.state.env.triggerRelease();
     this.setState({
-      isHovering: true,
+      isHovering: false,
       player: null,
       env: null
     });
@@ -61,6 +63,14 @@ class Blob extends React.Component {
       width: this.props.diameter+50+'px',
       height: this.props.diameter+50+'px'
     }
+    if (this.state.isHovering && this.props.hasCanvas){
+      var interior = (<div>
+                        <Territory diameter={this.props.diameter} canvasImg={process.env.PUBLIC_URL + '/assets/algae.jpg'} envNode={this.state.env}/>
+                        <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>
+                     </div>);
+    } else {
+      var interior = <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>;
+    }
     return(
       <div
       className={"blob "+this.props.color}
@@ -68,15 +78,7 @@ class Blob extends React.Component {
       onMouseEnter={this.handleMouseHover}
       onMouseLeave={this.handleMouseLeave}
       >
-      {
-        this.state.isHovering &&
-
-          <img
-          className="blogImg"
-          src={this.props.imgPath}
-          style={imageStyle}/>
-
-        }
+      { this.state.wasRendered && interior}
       </div>
 
     );
@@ -91,3 +93,8 @@ export default Blob;
 // className="p5canvas"
 // diameter={this.props.diameter}
 // imgPath={this.props.imgPath}/>
+
+// <img
+// className="blogImg"
+// src={this.props.imgPath}
+// style={imageStyle}/>

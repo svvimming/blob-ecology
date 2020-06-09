@@ -1,7 +1,7 @@
 import React from 'react';
 import Blob from './blob';
 const twoD = [];
-const blobSize = 2000;
+const blobSize = 200;
 const blobAmt = 6;
 const colorlist = ["red", "cherry", "purple", "green", "mauve", "orangeRed"];
 
@@ -10,12 +10,15 @@ for(let i=0; i<blobAmt; i++){
   for(let j=0; j<blobAmt; j++){
     twoD[i][j] = {
       x: i*blobSize -100,
-      y: j*blobSize -100
+      y: j*blobSize -100,
+      canvas: false
     }
   }
 }
 
 const blobs = [].concat(...twoD);
+
+blobs[7].canvas = true;
 
 class Map extends React.Component {
   constructor(props){
@@ -23,7 +26,6 @@ class Map extends React.Component {
     this.state = {
       children: blobs
     }
-    this.handleScroll = this.handleScroll.bind(this);
     this.mapRef = React.createRef();
   }
 
@@ -35,7 +37,7 @@ class Map extends React.Component {
 
   render(props) {
   return (
-      <div className="weltanschauung" ref={this.mapRef} onScroll={this.handleScroll}>
+      <div className="weltanschauung" ref={this.mapRef} >
       <p>scroll around!</p>
 
         {this.state.children.map((element, index) => (
@@ -50,6 +52,7 @@ class Map extends React.Component {
           color={colorlist[Math.floor(Math.random()*colorlist.length)]}
           imgPath={process.env.PUBLIC_URL + '/assets/cull/cull'+Math.floor(Math.random()*6)+'.png'}
           audioPath={process.env.PUBLIC_URL + '/assets/a-long-walk-to-somewhere-close-errlymixx.mp3'}
+          hasCanvas={element.canvas}
           />
         ))}
       </div>
