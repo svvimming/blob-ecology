@@ -1,7 +1,6 @@
 import React from 'react';
 import Territory from './territory';
 import Tone from 'tone';
-import errlymixx from "../assets/a-long-walk-to-somewhere-close-errlymixx.mp3";
 
 class Blob extends React.Component {
   constructor(props){
@@ -19,7 +18,7 @@ class Blob extends React.Component {
   playBuf() {
       this.state.env.toMaster();
       this.state.player.connect(this.state.env);
-      this.state.player.start();
+      this.state.player.start(0, Math.random()*this.state.player.buffer.duration);
       this.state.env.triggerAttack();
   }
 
@@ -27,8 +26,9 @@ class Blob extends React.Component {
     this.setState({
       isHovering: true,
       player: new Tone.Player({
-			"url" : errlymixx,
+			"url" : this.props.audioPath,
       "onload" : this.playBuf,
+      "loop" : true,
       "fadeIn" : 0,
       "fadeOut" : 0
     }),
@@ -36,7 +36,7 @@ class Blob extends React.Component {
       	"attack" : 1,
       	"decay" : 0.2,
       	"sustain" : 1,
-      	"release" : 10,
+      	"release" : 20,
       })
     });
   }
@@ -44,7 +44,7 @@ class Blob extends React.Component {
   handleMouseLeave() {
     this.state.env.triggerRelease();
     this.setState({
-      isHovering: false,
+      isHovering: true,
       player: null,
       env: null
     });
@@ -54,8 +54,12 @@ class Blob extends React.Component {
     const orientation = {
       width: this.props.diameter+'px',
       height: this.props.diameter+'px',
-      transform: 'translate('+this.props.x+'px, '+this.props.y+'px) rotate('+90*Math.random()+'deg)',
-      borderRadius: ' '+60*Math.random()+15+'% '+60*Math.random()+15+'% '+60*Math.random()+15+'% '+60*Math.random()+15+'% / '+60*Math.random()+15+'% '+60*Math.random()+15+'% '+60*Math.random()+15+'% '+60*Math.random()+15+'%'
+      transform: 'translate('+this.props.x+'px, '+this.props.y+'px) rotate('+this.props.rotation+'deg)',
+      borderRadius: ' '+this.props.radii[0]+'% '+this.props.radii[1]+'% '+this.props.radii[2]+'% '+this.props.radii[3]+'% / '+this.props.radii[4]+'% '+this.props.radii[5]+'% '+this.props.radii[6]+'% '+this.props.radii[7]+'%'
+    }
+    const imageStyle = {
+      width: this.props.diameter+50+'px',
+      height: this.props.diameter+50+'px'
     }
     return(
       <div
@@ -67,10 +71,10 @@ class Blob extends React.Component {
       {
         this.state.isHovering &&
 
-          <Territory
-          className="p5canvas"
-          diameter={this.props.diameter}
-          imgIndex={this.props.imgIndex}/>
+          <img
+          className="blogImg"
+          src={this.props.imgPath}
+          style={imageStyle}/>
 
         }
       </div>
@@ -81,11 +85,9 @@ class Blob extends React.Component {
 
 export default Blob;
 
-// onMouseOver={() => this.setState({ text: 'hola'})}
-// onMouseOut={() =>this.setState({text: ''})}
-// <Fuites
-// diameter={this.props.diameter}/>
+
 
 // <Territory
 // className="p5canvas"
-// diameter={this.props.diameter}/>
+// diameter={this.props.diameter}
+// imgPath={this.props.imgPath}/>

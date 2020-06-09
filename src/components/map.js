@@ -1,8 +1,7 @@
 import React from 'react';
 import Blob from './blob';
 const twoD = [];
-const container = 1000;
-const blobSize = 200;
+const blobSize = 2000;
 const blobAmt = 6;
 const colorlist = ["red", "cherry", "purple", "green", "mauve", "orangeRed"];
 
@@ -19,25 +18,40 @@ for(let i=0; i<blobAmt; i++){
 const blobs = [].concat(...twoD);
 
 class Map extends React.Component {
-  render(props) {
-    const dim = {
-      width: container+'px',
-      height: container+'px'
+  constructor(props){
+    super(props);
+    this.state = {
+      children: blobs
     }
+    this.handleScroll = this.handleScroll.bind(this);
+    this.mapRef = React.createRef();
+  }
+
+  handleScroll(event) {
+    let scrollLeft = this.mapRef.current.scrollLeft;
+    let scrollTop = this.mapRef.current.scrollTop;
+    console.log([scrollLeft, scrollTop]);
+  };
+
+  render(props) {
   return (
-      <div className="weltanschauung" style={dim}>
+      <div className="weltanschauung" ref={this.mapRef} onScroll={this.handleScroll}>
       <p>scroll around!</p>
-      {blobs.map((blob, index) => (
+
+        {this.state.children.map((element, index) => (
           <Blob
           key={'blob'+index}
           id={'blob'+index}
-          x={blob.x}
-          y={blob.y}
+          x={element.x}
+          y={element.y}
           diameter={blobSize*1.25}
+          rotation={90*Math.random()}
+          radii={[60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15]}
           color={colorlist[Math.floor(Math.random()*colorlist.length)]}
-          imgIndex={Math.floor(Math.random()*6)}
+          imgPath={process.env.PUBLIC_URL + '/assets/cull/cull'+Math.floor(Math.random()*6)+'.png'}
+          audioPath={process.env.PUBLIC_URL + '/assets/a-long-walk-to-somewhere-close-errlymixx.mp3'}
           />
-        )) }
+        ))}
       </div>
     );
 }
