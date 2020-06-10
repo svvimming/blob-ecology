@@ -24,32 +24,48 @@ class Blob extends React.Component {
   }
 
   handleMouseHover() {
-    this.setState({
-      isHovering: true,
-      wasRendered: true,
-      player: new Tone.Player({
-			"url" : this.props.audioPath,
-      "onload" : this.playBuf,
-      "loop" : true,
-      "fadeIn" : 0,
-      "fadeOut" : 0
-    }),
-      env: new Tone.AmplitudeEnvelope({
-      	"attack" : 1,
-      	"decay" : 0.2,
-      	"sustain" : 1,
-      	"release" : 20,
-      })
-    });
+    if(this.state.player == null) {
+      this.setState({
+        isHovering: true,
+        wasRendered: true,
+        player: new Tone.Player({
+  			"url" : this.props.audioPath,
+        "onload" : this.playBuf,
+        "loop" : true,
+        "fadeIn" : 0,
+        "fadeOut" : 0
+      }),
+        env: new Tone.AmplitudeEnvelope({
+        	"attack" : 1,
+        	"decay" : 0.2,
+        	"sustain" : 1,
+        	"release" : 20,
+        })
+      });
+    }
   }
 
   handleMouseLeave() {
-    this.state.env.triggerRelease();
-    this.setState({
-      isHovering: false,
-      player: null,
-      env: null
-    });
+    if (this.state.player != null) {
+      this.state.env.triggerRelease();
+    // this.setState({
+    //   isHovering: false,
+    //   player: null,
+    //   env: null
+    // });
+      this.delayState();
+    }
+  }
+
+  delayState() {
+    setTimeout(() => {
+      if(this.state.player != null){this.state.player.dispose();}
+      this.setState({
+        isHovering: false,
+        player: null,
+        env: null
+    })
+  }, 2000);
   }
 
   render(props) {
@@ -65,7 +81,7 @@ class Blob extends React.Component {
     }
     if (this.state.isHovering && this.props.hasCanvas){
       var interior = (<div>
-                        <Territory diameter={this.props.diameter} canvasImg={process.env.PUBLIC_URL + '/assets/algae.jpg'} envNode={this.state.env}/>
+                        <Territory classname="p5canvas" diameter={this.props.diameter} canvasImg={this.props.canvasImg} envNode={this.state.env}/>
                         <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>
                      </div>);
     } else {
