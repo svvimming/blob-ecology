@@ -1,6 +1,10 @@
 import React from 'react';
 import Territory from './territory';
+import AnimateCull from './animate-cull';
 import Tone from 'tone';
+
+const smoothing = 0.3;
+const windowSize = 16; //don't change unless binWidth in animate-cull.js is changed also!
 
 class Blob extends React.Component {
   constructor(props){
@@ -10,12 +14,17 @@ class Blob extends React.Component {
     this.playBuf = this.playBuf.bind(this);
     this.state = {
       isHovering: false,
+      wasRendered: false,
       player: null,
       env: null
     };
   }
 
   playBuf() {
+      this.state.follower.connect(this.state.meter);
+      this.state.gain.connect(this.state.fft);
+      this.state.gain.connect(this.state.follower);
+      this.state.env.connect(this.state.gain);
       this.state.env.toMaster();
       this.state.player.connect(this.state.env);
       this.state.player.start(0, Math.random()*this.state.player.buffer.duration);
@@ -23,31 +32,47 @@ class Blob extends React.Component {
   }
 
   handleMouseHover() {
-    this.setState({
-      isHovering: true,
-      player: new Tone.Player({
-			"url" : this.props.audioPath,
-      "onload" : this.playBuf,
-      "loop" : true,
-      "fadeIn" : 0,
-      "fadeOut" : 0
-    }),
-      env: new Tone.AmplitudeEnvelope({
-      	"attack" : 1,
-      	"decay" : 0.2,
-      	"sustain" : 1,
-      	"release" : 20,
-      })
-    });
+    if(this.state.player == null) {
+      this.setState({
+        wasRendered: true,
+        player: new Tone.Player({
+  			"url" : this.props.audioPath,
+        "onload" : this.playBuf,
+        "loop" : true,
+        "fadeIn" : 0,
+        "fadeOut" : 0
+      }),
+        env: new Tone.AmplitudeEnvelope({
+        	"attack" : 1,
+        	"decay" : 0.2,
+        	"sustain" : 1,
+        	"release" : 20,
+        }),
+        follower: new Tone.Follower(smoothing),
+        meter: new Tone.Meter(),
+        gain: new Tone.Gain(4.0),
+        fft: new Tone.FFT(windowSize),
+        isHovering: true,
+      });
+    }
   }
 
   handleMouseLeave() {
-    this.state.env.triggerRelease();
-    this.setState({
-      isHovering: true,
-      player: null,
-      env: null
-    });
+    if (this.state.player != null) {
+      this.state.env.triggerRelease();
+      this.delayState();
+    }
+  }
+
+  delayState() {
+    setTimeout(() => {
+      if(this.state.player != null){this.state.player.dispose();}
+      this.setState({
+        isHovering: false,
+        player: null,
+        env: null
+    })
+  }, 2000);
   }
 
   render(props) {
@@ -61,6 +86,17 @@ class Blob extends React.Component {
       width: this.props.diameter+50+'px',
       height: this.props.diameter+50+'px'
     }
+    if (this.state.isHovering){
+      var interior = (<div>
+                        <AnimateCull
+                        meter={this.state.meter}
+                        fft={this.state.fft}
+                        canvasImg={this.props.imgPath}
+                        diameter={this.props.diameter}/>
+                     </div>);
+    } else {
+      var interior = <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>;
+    }
     return(
       <div
       className={"blob "+this.props.color}
@@ -68,15 +104,7 @@ class Blob extends React.Component {
       onMouseEnter={this.handleMouseHover}
       onMouseLeave={this.handleMouseLeave}
       >
-      {
-        this.state.isHovering &&
-
-          <img
-          className="blogImg"
-          src={this.props.imgPath}
-          style={imageStyle}/>
-
-        }
+      { this.state.wasRendered && interior}
       </div>
 
     );
@@ -91,3 +119,11 @@ export default Blob;
 // className="p5canvas"
 // diameter={this.props.diameter}
 // imgPath={this.props.imgPath}/>
+
+// <img
+// className="blogImg"
+// src={this.props.imgPath}
+// style={imageStyle}/>
+
+// <Territory classname="p5canvas" diameter={this.props.diameter} canvasImg={this.props.canvasImg} envNode={this.state.env}/>
+// <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>
