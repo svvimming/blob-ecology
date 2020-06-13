@@ -1,7 +1,7 @@
 import React from 'react';
 import Blob from './blob';
 const twoD = [];
-const blobSize = 2000;
+const blobSize = 1000;
 const blobAmt = 6;
 const colorlist = ["red", "cherry", "purple", "green", "mauve", "orangeRed"];
 const canvasLinks = ['/assets/algae.jpg', '/assets/scrapchi.png', '/assets/grim.jpeg', '/assets/icecast.jpeg', '/assets/manytimes.png', '/assets/resonance.jpeg', '/assets/pedaling.jpeg'];

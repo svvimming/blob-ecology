@@ -1,6 +1,10 @@
 import React from 'react';
 import Territory from './territory';
+import AnimateCull from './animate-cull';
 import Tone from 'tone';
+
+const smoothing = 0.3;
+const windowSize = 16; //don't change unless binWidth in animate-cull.js is changed also!
 
 class Blob extends React.Component {
   constructor(props){
@@ -17,6 +21,10 @@ class Blob extends React.Component {
   }
 
   playBuf() {
+      this.state.follower.connect(this.state.meter);
+      this.state.gain.connect(this.state.fft);
+      this.state.gain.connect(this.state.follower);
+      this.state.env.connect(this.state.gain);
       this.state.env.toMaster();
       this.state.player.connect(this.state.env);
       this.state.player.start(0, Math.random()*this.state.player.buffer.duration);
@@ -26,7 +34,6 @@ class Blob extends React.Component {
   handleMouseHover() {
     if(this.state.player == null) {
       this.setState({
-        isHovering: true,
         wasRendered: true,
         player: new Tone.Player({
   			"url" : this.props.audioPath,
@@ -40,7 +47,12 @@ class Blob extends React.Component {
         	"decay" : 0.2,
         	"sustain" : 1,
         	"release" : 20,
-        })
+        }),
+        follower: new Tone.Follower(smoothing),
+        meter: new Tone.Meter(),
+        gain: new Tone.Gain(4.0),
+        fft: new Tone.FFT(windowSize),
+        isHovering: true,
       });
     }
   }
@@ -48,11 +60,6 @@ class Blob extends React.Component {
   handleMouseLeave() {
     if (this.state.player != null) {
       this.state.env.triggerRelease();
-    // this.setState({
-    //   isHovering: false,
-    //   player: null,
-    //   env: null
-    // });
       this.delayState();
     }
   }
@@ -79,10 +86,13 @@ class Blob extends React.Component {
       width: this.props.diameter+50+'px',
       height: this.props.diameter+50+'px'
     }
-    if (this.state.isHovering && this.props.hasCanvas){
+    if (this.state.isHovering){
       var interior = (<div>
-                        <Territory classname="p5canvas" diameter={this.props.diameter} canvasImg={this.props.canvasImg} envNode={this.state.env}/>
-                        <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>
+                        <AnimateCull
+                        meter={this.state.meter}
+                        fft={this.state.fft}
+                        canvasImg={this.props.imgPath}
+                        diameter={this.props.diameter}/>
                      </div>);
     } else {
       var interior = <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>;
@@ -114,3 +124,6 @@ export default Blob;
 // className="blogImg"
 // src={this.props.imgPath}
 // style={imageStyle}/>
+
+// <Territory classname="p5canvas" diameter={this.props.diameter} canvasImg={this.props.canvasImg} envNode={this.state.env}/>
+// <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>
