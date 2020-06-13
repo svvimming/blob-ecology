@@ -1,5 +1,5 @@
 import React from 'react';
-import Territory from './territory';
+import Cull from './cull';
 import Tone from 'tone';
 
 class Blob extends React.Component {
@@ -81,8 +81,7 @@ class Blob extends React.Component {
     }
     if (this.state.isHovering && this.props.hasCanvas){
       var interior = (<div>
-                        <Territory classname="p5canvas" diameter={this.props.diameter} canvasImg={this.props.canvasImg} envNode={this.state.env}/>
-                        <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>
+                        <Cull classname="p5canvas" diameter={this.props.diameter} canvasImg={this.props.imgPath} envNode={this.state.env}/>
                      </div>);
     } else {
       var interior = <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>;
@@ -105,7 +104,7 @@ export default Blob;
 
 
 
-// <Territory
+// <Cull
 // className="p5canvas"
 // diameter={this.props.diameter}
 // imgPath={this.props.imgPath}/>

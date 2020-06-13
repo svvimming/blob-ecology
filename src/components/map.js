@@ -13,7 +13,7 @@ for(let i=0; i<blobAmt; i++){
     twoD[i][j] = {
       x: i*blobSize -100,
       y: j*blobSize -100,
-      canvas: false,
+      canvas: true,
       url: null
     }
   }
@@ -21,11 +21,11 @@ for(let i=0; i<blobAmt; i++){
 
 const blobs = [].concat(...twoD);
 
-for (let i=0; i<canvasLinks.length; i++){
-  randInds[i] = Math.floor(Math.random()*blobs.length);
-  blobs[randInds[i]].canvas = true;
-  blobs[randInds[i]].url = canvasLinks[i];
-}
+// for (let i=0; i<canvasLinks.length; i++){
+//   randInds[i] = Math.floor(Math.random()*blobs.length);
+//   blobs[randInds[i]].canvas = true;
+//   blobs[randInds[i]].url = canvasLinks[i];
+// }
 console.log(randInds);
 
 class Map extends React.Component {

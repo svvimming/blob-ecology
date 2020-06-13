@@ -1,10 +1,10 @@
 import React from 'react';
-import Map from './components/map';
+import AnimateCull from './components/animate-cull';
 import './index.css';
 
 function App() {
   return (
-      <Map/>
+      <AnimateCull/>
   );
 }
 
