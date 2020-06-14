@@ -87,13 +87,13 @@ class Blob extends React.Component {
       height: this.props.diameter+50+'px'
     }
     if (this.state.isHovering){
-      var interior = (<div>
+      var interior = (
                         <AnimateCull
                         meter={this.state.meter}
                         fft={this.state.fft}
                         canvasImg={this.props.imgPath}
                         diameter={this.props.diameter}/>
-                     </div>);
+                    );
     } else {
       var interior = <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>;
     }
