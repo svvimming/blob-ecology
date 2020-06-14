@@ -6,7 +6,7 @@ import hoistNonReactStatics from "hoist-non-react-statics";
 // NB this is only an utility for the examples
 export default (
   C: ReactClass<*>,
-  { refreshRate = 60 }: { refreshRate?: number } = {}
+  { refreshRate = 30 }: { refreshRate?: number } = {}
 ): ReactClass<*> => {
   class TL extends PureComponent {
     static displayName = `timeLoop(${C.displayName||C.name||""})`;

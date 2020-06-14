@@ -6,6 +6,7 @@ import timeLoop from "./timeloop";
 
 //16 is the windowSize in blob.js
 const binWidth = (44100/(2*16));
+const movements = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 1.0, 0.2, 0.3, 0.5];
 //*******************
 //in fragment shader function lookup: the 0.05 multiplying bins.z and the 0.0 multiplying the second bins.z can be modulated to intensify the effect
 //*******************
@@ -16,16 +17,13 @@ precision highp float;
 varying vec2 uv;
 uniform sampler2D t;
 uniform vec2 mouse;
-uniform float time, level;
+uniform float time, level, throb;
 uniform vec3 bins;
 vec2 lookup (vec2 offset, float amp2) {
   return mod(
-    uv + amp2 * bins.z*0.05 * vec2(
+    uv + amp2 * bins.z*throb * vec2(
       cos(bins.x*(uv.x+offset.x)+time),
-      sin(bins.y*(uv.y+offset.x)+time))
-      + vec2(
-        bins.z*0.0 * time/10.0,
-        0.0),
+      sin(bins.y*(uv.y+offset.x)+time)),
     vec2(1.0));
 }
 void main() {
@@ -72,7 +70,7 @@ function getBinLevels(fftIn){
   return [low/5, mid/5, high/5];
 }
 
-const Cull = timeLoop(({ children: t, time, mouse, meter, fft }) =>
+const Cull = timeLoop(({ children: t, time, mouse, meter, fft, throb }) =>
   <Node
     shader={shaders.fftGloop}
     uniforms={{
@@ -80,7 +78,8 @@ const Cull = timeLoop(({ children: t, time, mouse, meter, fft }) =>
       time: time / 1000, // seconds is better for float precision
       mouse,
       level: Math.pow(10.0, meter.getLevel()/20.0),
-      bins: getBinLevels(fft.getValue())
+      bins: getBinLevels(fft.getValue()),
+      throb: throb
     }}
   />);
 
@@ -103,10 +102,25 @@ export default class AnimateCull extends Component {
   render() {
     return (
         <Surface width={this.props.diameter} height={this.props.diameter}>
-          <Cull mouse={this.state.mouse} meter={this.props.meter} fft={this.props.fft}>
+          <Cull mouse={this.state.mouse} meter={this.props.meter} fft={this.props.fft} throb={movements[Math.floor(Math.random()*10)]}>
             {this.props.canvasImg}
           </Cull>
         </Surface>
     );
   }
 };
+
+
+// 0.05 + Math.random()*0.2
+
+
+// vec2 lookup (vec2 offset, float amp2) {
+//   return mod(
+//     uv + amp2 * bins.z*throb * vec2(
+//       cos(bins.x*(uv.x+offset.x)+time),
+//       sin(bins.y*(uv.y+offset.x)+time))
+//       + vec2(
+//         bins.z*schiz * time/10.0,
+//         0.0),
+//     vec2(1.0));
+// }
