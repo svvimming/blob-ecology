@@ -38,18 +38,49 @@ class Map extends React.Component {
     super(props);
     this.state = {
       children: blobs,
-      zoom: 10.0
+      zoom: 10.0,
+      scrollCoords: {left: 0, top: 0}
     }
+    this.mapRef = React.createRef();
+    this.handleClick = this.handleClick.bind(this);
+    this.printScroll  = this.printScroll.bind(this);
   }
 
-  render(props) {
+  componentDidUpdate(){
+    this.setScrollCoords();
+  }
 
+  setScrollCoords(){
+    this.mapRef.current.scrollLeft = this.state.scrollCoords.left;
+    this.mapRef.current.scrollTop = this.state.scrollCoords.top;
+  }
+
+  printScroll(){
+    console.log([this.mapRef.current.scrollLeft, this.mapRef.current.scrollTop]);
+  }
+
+  handleClick(scale) {
+    this.setState({
+      zoom: scale,
+      scrollCoords: {
+        left: this.mapRef.current.scrollLeft,
+        top: this.mapRef.current.scrollTop}
+    });
+  }
+  render(props) {
   return (
-      <div className="weltanschauung">
+      <div className="weltanschauung" ref={this.mapRef} onScroll={this.printScroll}>
         <div className="clip-border-left"></div>
         <div className="clip-border-right"></div>
         <div className="clip-border-top"></div>
         <div className="clip-border-bottom"></div>
+        <div className="zoom-select">
+          <button onClick={() => this.handleClick(10.0)}>x10.0</button>
+          <button onClick={() => this.handleClick(4.0)}>x4.0</button>
+          <button onClick={() => this.handleClick(2.0)}>x2.0</button>
+          <button onClick={() => this.handleClick(1.5)}>x1.5</button>
+          <button onClick={() => this.handleClick(1.0)}>x1</button>
+        </div>
         {this.state.children.map((element, index) => (
           <Blob
           key={'blob'+index}
