@@ -1,7 +1,7 @@
 import React from 'react';
 import Blob from './blob';
 const twoD = [];
-const blobSize = 200;
+const blobSize = 160;
 const blobAmt = 6;
 const colorlist = ["red", "cherry", "purple", "green", "mauve", "orangeRed"];
 const canvasLinks = ['/assets/algae.jpg', '/assets/scrapchi.png', '/assets/grim.jpeg', '/assets/icecast.jpeg', '/assets/manytimes.png', '/assets/resonance.jpeg', '/assets/pedaling.jpeg'];
@@ -11,8 +11,8 @@ for(let i=0; i<blobAmt; i++){
   twoD[i] = [];
   for(let j=0; j<blobAmt; j++){
     twoD[i][j] = {
-      x: Math.floor(Math.random()*12)*blobSize,
-      y: Math.floor(Math.random()*12)*blobSize,
+      x: i*window.innerWidth/6,
+      y: j*window.innerHeight/6,
       diameter: blobSize*1.25,
       rotation: 90*Math.random(),
       radii: [60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15],
@@ -38,18 +38,49 @@ class Map extends React.Component {
     super(props);
     this.state = {
       children: blobs,
+      isZoomed: false,
+      isDraggable: false,
       zoom: 10.0,
+      hola: "survol",
       scrollCoords: {left: 0, top: 0}
     }
     this.mapRef = React.createRef();
-    this.handleClick = this.handleClick.bind(this);
+    this.handleZoom = this.handleZoom.bind(this);
+    this.handleChildPositionChange = this.handleChildPositionChange.bind(this);
   }
 
-  handleClick(scale) {
-      this.setState({
-        zoom: scale
-      });
+  componentDidUpdate() {
+    if(!this.state.isZoomed){
+      this.mapRef.current.scrollLeft = this.state.scrollCoords.left;
+      this.mapRef.current.scrollTop = this.state.scrollCoords.top;
+    }
+    console.log([this.mapRef.current.scrollLeft, this.mapRef.current.scrollTop]);
   }
+
+  handleZoom(){
+    if(this.state.isZoomed){
+      console.log([this.state.scrollCoords.left, this.state.scrollCoords.top]);
+      this.setState({
+        isZoomed: false,
+        isDraggable: false,
+        zoom: 10.0,
+        hola: "survol"
+      });
+    } else {
+      this.setState({
+        isZoomed: true,
+        isDraggable: true,
+        zoom: 1.0,
+        hola: "explore",
+        scrollCoords: {left: this.mapRef.current.scrollLeft, top: this.mapRef.current.scrollTop}
+      });
+    }
+  }
+
+  handleChildPositionChange(x, y){
+
+  }
+
   render(props) {
   return (
       <div className="weltanschauung" ref={this.mapRef}>
@@ -58,11 +89,7 @@ class Map extends React.Component {
         <div className="clip-border-top"></div>
         <div className="clip-border-bottom"></div>
         <div className="zoom-select">
-          <button onClick={() => this.handleClick(10.0)}>x10.0</button>
-          <button onClick={() => this.handleClick(4.0)}>x4.0</button>
-          <button onClick={() => this.handleClick(2.0)}>x2.0</button>
-          <button onClick={() => this.handleClick(1.5)}>x1.5</button>
-          <button onClick={() => this.handleClick(1.0)}>x1</button>
+          <button onClick={() => this.handleZoom()}>{this.state.hola}</button>
         </div>
         {this.state.children.map((element, index) => (
           <Blob
@@ -76,6 +103,8 @@ class Map extends React.Component {
           color={element.color}
           imgPath={process.env.PUBLIC_URL + element.image}
           audioPath={process.env.PUBLIC_URL + '/assets/a-long-walk-to-somewhere-close-errlymixx.mp3'}
+          isDraggable={this.state.isDraggable}
+          onPositionChange={this.handleChildPositionChange}
           />
         ))}
       </div>

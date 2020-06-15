@@ -1,4 +1,5 @@
 import React from 'react';
+import Draggable from 'react-draggable';
 import Territory from './territory';
 import AnimateCull from './animate-cull';
 import Tone from 'tone';
@@ -11,6 +12,7 @@ class Blob extends React.Component {
     super(props);
     this.handleMouseHover = this.handleMouseHover.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleStop = this.handleStop.bind(this);
     this.playBuf = this.playBuf.bind(this);
     this.state = {
       isHovering: false,
@@ -75,6 +77,11 @@ class Blob extends React.Component {
   }, 2000);
   }
 
+  handleStop(x, y){
+    // this.props.onPositionChange(this.props.id, x, y);
+    console.log([this.props.id, x, y]);
+  }
+
   render(props) {
     const orientation = {
       width: this.props.diameter+'px',
@@ -86,7 +93,7 @@ class Blob extends React.Component {
       width: this.props.diameter+50+'px',
       height: this.props.diameter+50+'px'
     }
-    if (this.state.isHovering){
+    if (this.state.isHovering && !this.props.isDraggable){
       var interior = (
                         <AnimateCull
                         meter={this.state.meter}
@@ -97,23 +104,43 @@ class Blob extends React.Component {
     } else {
       var interior = <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>;
     }
-    return(
-      <div
-      className={"blob "+this.props.color}
-      style={orientation}
-      onMouseEnter={this.handleMouseHover}
-      onMouseLeave={this.handleMouseLeave}
-      >
-      { this.state.wasRendered && interior}
-      </div>
 
-    );
+    if(this.props.isDraggable){
+      var theBlob = (
+        <Draggable
+        defaultPosition={{x: this.props.x, y: this.props.y}}
+        >
+          <div
+          className={"blob "+this.props.color}
+          style={orientation}
+          onMouseEnter={this.handleMouseHover}
+          onMouseLeave={this.handleMouseLeave}
+          >
+          { this.state.wasRendered && interior}
+          </div>
+          </Draggable>);
+    } else {
+      var theBlob = (
+        <div
+        className={"blob "+this.props.color}
+        style={orientation}
+        onMouseEnter={this.handleMouseHover}
+        onMouseLeave={this.handleMouseLeave}
+        >
+        { this.state.wasRendered && interior}
+        </div>);
+    }
+
+    return(theBlob);
   }
 }
 
 export default Blob;
 
+// defaultPosition={{x: this.props.x, y: this.props.y}}
+// onStop={this.handleStop}
 
+// onStop={() => this.handleStop(this.position.x, this.position.y)}
 
 // <Territory
 // className="p5canvas"
