@@ -11,8 +11,8 @@ for(let i=0; i<blobAmt; i++){
   twoD[i] = [];
   for(let j=0; j<blobAmt; j++){
     twoD[i][j] = {
-      x: Math.floor(Math.random()*12)*blobSize -100,
-      y: Math.floor(Math.random()*12)*blobSize -100,
+      x: Math.floor(Math.random()*12)*blobSize,
+      y: Math.floor(Math.random()*12)*blobSize,
       diameter: blobSize*1.25,
       rotation: 90*Math.random(),
       radii: [60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15],
@@ -43,33 +43,16 @@ class Map extends React.Component {
     }
     this.mapRef = React.createRef();
     this.handleClick = this.handleClick.bind(this);
-    this.printScroll  = this.printScroll.bind(this);
-  }
-
-  componentDidUpdate(){
-    this.setScrollCoords();
-  }
-
-  setScrollCoords(){
-    this.mapRef.current.scrollLeft = this.state.scrollCoords.left;
-    this.mapRef.current.scrollTop = this.state.scrollCoords.top;
-  }
-
-  printScroll(){
-    console.log([this.mapRef.current.scrollLeft, this.mapRef.current.scrollTop]);
   }
 
   handleClick(scale) {
-    this.setState({
-      zoom: scale,
-      scrollCoords: {
-        left: this.mapRef.current.scrollLeft,
-        top: this.mapRef.current.scrollTop}
-    });
+      this.setState({
+        zoom: scale
+      });
   }
   render(props) {
   return (
-      <div className="weltanschauung" ref={this.mapRef} onScroll={this.printScroll}>
+      <div className="weltanschauung" ref={this.mapRef}>
         <div className="clip-border-left"></div>
         <div className="clip-border-right"></div>
         <div className="clip-border-top"></div>
