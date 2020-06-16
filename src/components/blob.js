@@ -3,15 +3,13 @@ import Territory from './territory';
 import AnimateCull from './animate-cull';
 import Tone from 'tone';
 
-const smoothing = 0.3;
-const windowSize = 16; //don't change unless binWidth in animate-cull.js is changed also!
-
 class Blob extends React.Component {
   constructor(props){
     super(props);
     this.handleMouseHover = this.handleMouseHover.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    // this.loadBuf = this.loadBuf.bind(this);
     this.playBuf = this.playBuf.bind(this);
     this.state = {
       isHovering: false,
@@ -30,11 +28,12 @@ class Blob extends React.Component {
     });
   }
 
+  // loadBuf() {
+  //
+  // }
+
   playBuf() {
-      this.state.follower.connect(this.state.meter);
-      this.state.gain.connect(this.state.fft);
-      this.state.gain.connect(this.state.follower);
-      this.state.env.connect(this.state.gain);
+      this.state.env.connect(this.props.gain);
       this.state.env.toMaster();
       this.state.player.connect(this.state.env);
       this.state.player.start(0, Math.random()*this.state.player.buffer.duration);
@@ -53,15 +52,11 @@ class Blob extends React.Component {
         "fadeOut" : 0
       }),
         env: new Tone.AmplitudeEnvelope({
-        	"attack" : 1,
+        	"attack" : 0.1,
         	"decay" : 0.2,
         	"sustain" : 1,
         	"release" : 20,
         }),
-        follower: new Tone.Follower(smoothing),
-        meter: new Tone.Meter(),
-        gain: new Tone.Gain(4.0),
-        fft: new Tone.FFT(windowSize),
         isHovering: true,
       });
     }
@@ -104,8 +99,8 @@ class Blob extends React.Component {
       if (this.state.isHovering && !this.props.zoomedOut){
         var interior = (
                           <AnimateCull
-                          meter={this.state.meter}
-                          fft={this.state.fft}
+                          meter={this.props.meter}
+                          fft={this.props.fft}
                           canvasImg={this.props.imgPath}
                           diameter={this.props.diameter}/>
                       );

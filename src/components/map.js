@@ -1,11 +1,14 @@
 import React from 'react';
 import Blob from './blob';
+import Tone from 'tone';
 const twoD = [];
 const blobSize = 160;
 const blobAmt = 6;
 const colorlist = ["red", "cherry", "purple", "green", "mauve", "orangeRed"];
 const canvasLinks = ['/assets/algae.jpg', '/assets/scrapchi.png', '/assets/grim.jpeg', '/assets/icecast.jpeg', '/assets/manytimes.png', '/assets/resonance.jpeg', '/assets/pedaling.jpeg'];
 const randInds = [];
+const smoothing = 0.3;
+const windowSize = 16; //don't change unless binWidth in animate-cull.js is changed also!
 
 for(let i=0; i<blobAmt; i++){
   twoD[i] = [];
@@ -42,12 +45,22 @@ class Map extends React.Component {
       isZoomedOut: false,
       zoom: 10.0,
       hola: "survol",
-      scrollCoords: {left: 0, top: 0}
+      scrollCoords: {left: 0, top: 0},
+      follower: new Tone.Follower(smoothing),
+      meter: new Tone.Meter(),
+      gain: new Tone.Gain(4.0),
+      fft: new Tone.FFT(windowSize)
     }
     this.mapRef = React.createRef();
     this.handleZoom = this.handleZoom.bind(this);
     this.handleButton = this.handleButton.bind(this);
     this.dummyClick = this.dummyClick.bind(this);
+  }
+
+  componentDidMount(){
+    this.state.follower.connect(this.state.meter);
+    this.state.gain.connect(this.state.fft);
+    this.state.gain.connect(this.state.follower);
   }
 
   componentDidUpdate() {
@@ -118,6 +131,9 @@ class Map extends React.Component {
           onBlobSelect={clickBehaviour}
           zoomedOut={this.state.isZoomedOut}
           renderDefault={false}
+          gain={this.state.gain}
+          fft={this.state.fft}
+          meter={this.state.meter}
           />
         ))}
       </div>
