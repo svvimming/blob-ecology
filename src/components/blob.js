@@ -1,5 +1,4 @@
 import React from 'react';
-import Draggable from 'react-draggable';
 import Territory from './territory';
 import AnimateCull from './animate-cull';
 import Tone from 'tone';
@@ -12,14 +11,23 @@ class Blob extends React.Component {
     super(props);
     this.handleMouseHover = this.handleMouseHover.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    this.handleStop = this.handleStop.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.playBuf = this.playBuf.bind(this);
     this.state = {
       isHovering: false,
-      wasRendered: false,
+      wasRendered: this.props.renderDefault,
       player: null,
       env: null
     };
+  }
+
+  componentWillReceiveProps(){
+    this.setState({
+      isHovering: false,
+      wasRendered: this.props.renderDefault,
+      player: null,
+      env: null
+    });
   }
 
   playBuf() {
@@ -77,9 +85,8 @@ class Blob extends React.Component {
   }, 2000);
   }
 
-  handleStop(x, y){
-    // this.props.onPositionChange(this.props.id, x, y);
-    console.log([this.props.id, x, y]);
+  handleClick() {
+    this.props.onBlobSelect(this.props.x, this.props.y);
   }
 
   render(props) {
@@ -93,64 +100,31 @@ class Blob extends React.Component {
       width: this.props.diameter+50+'px',
       height: this.props.diameter+50+'px'
     }
-    if (this.state.isHovering && !this.props.isDraggable){
-      var interior = (
-                        <AnimateCull
-                        meter={this.state.meter}
-                        fft={this.state.fft}
-                        canvasImg={this.props.imgPath}
-                        diameter={this.props.diameter}/>
-                    );
-    } else {
-      var interior = <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>;
-    }
 
-    if(this.props.isDraggable){
-      var theBlob = (
-        <Draggable
-        defaultPosition={{x: this.props.x, y: this.props.y}}
-        >
-          <div
-          className={"blob "+this.props.color}
-          style={orientation}
-          onMouseEnter={this.handleMouseHover}
-          onMouseLeave={this.handleMouseLeave}
-          >
-          { this.state.wasRendered && interior}
-          </div>
-          </Draggable>);
-    } else {
-      var theBlob = (
-        <div
+      if (this.state.isHovering && !this.props.zoomedOut){
+        var interior = (
+                          <AnimateCull
+                          meter={this.state.meter}
+                          fft={this.state.fft}
+                          canvasImg={this.props.imgPath}
+                          diameter={this.props.diameter}/>
+                      );
+      } else {
+        var interior = <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>;
+      }
+
+    return(
+      <div
         className={"blob "+this.props.color}
         style={orientation}
-        onMouseEnter={this.handleMouseHover}
+        onMouseOver={this.handleMouseHover}
         onMouseLeave={this.handleMouseLeave}
+        onClick={this.handleClick}
         >
         { this.state.wasRendered && interior}
-        </div>);
-    }
-
-    return(theBlob);
+      </div>
+    );
   }
 }
 
 export default Blob;
-
-// defaultPosition={{x: this.props.x, y: this.props.y}}
-// onStop={this.handleStop}
-
-// onStop={() => this.handleStop(this.position.x, this.position.y)}
-
-// <Territory
-// className="p5canvas"
-// diameter={this.props.diameter}
-// imgPath={this.props.imgPath}/>
-
-// <img
-// className="blogImg"
-// src={this.props.imgPath}
-// style={imageStyle}/>
-
-// <Territory classname="p5canvas" diameter={this.props.diameter} canvasImg={this.props.canvasImg} envNode={this.state.env}/>
-// <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>
