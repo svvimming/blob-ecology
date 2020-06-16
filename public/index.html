@@ -3,13 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="Web site created using create-react-app"
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -26,12 +27,40 @@
     -->
     <title>Fuites</title>
     <style>
+    button{
+      color: rgba(255, 0, 0, 0.5);
+      font-family: 'Roboto Mono', monospace;
+      font-size: 13px;
+      background: none;
+      border: none;
+      width: 60px;
+      outline: none;
+    }
+
+    button:hover{
+      color: rgba(255, 0, 0, 0.85);
+    }
+
     #curtain{
       position: absolute;
       top: 0px;
       left: 0px;
       background-color: white;
       z-index: 100;
+    }
+
+    #enter {
+      width: 220px;
+      font-family: "Times New Roman", Times, serif;
+      color: rgba(0.0, 0.0, 0.0, 0.5);
+      background-image: url('/assets/culltext.png');
+    }
+
+    #enter:hover{
+      color: rgba(0.0, 0.0, 0.0, 0.85);
+    }
+
+    .blur {
     }
 
     .closed {
@@ -51,7 +80,7 @@
     .center {
       margin: 0;
       position: absolute;
-      top: 50%;
+      top: 47%;
       left: 50%;
       -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
@@ -61,15 +90,15 @@
   <body>
     <!-- <noscript>You need to enable JavaScript to run this app.</noscript> -->
     <div id="curtain" class="closed">
-      <button id="enter" class="center" onClick="showTime()">enter</button>
+      <button id="enter" class="center" onClick="showTime()">How to not fall prey to the archive?</button>
     </div>
     <div id="root"></div>
     <script>
 
     function showTime() {
-      document.getElementById("curtain").classList.add('open');
-      document.getElementById("curtain").classList.remove('closed');
-      document.getElementById("enter").classList.add('byebye');
+        document.getElementById("curtain").classList.add('open');
+        document.getElementById("curtain").classList.remove('closed');
+        document.getElementById("enter").classList.add('byebye');
     }
 
     </script>

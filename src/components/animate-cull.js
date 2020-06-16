@@ -7,9 +7,6 @@ import timeLoop from "./timeloop";
 //16 is the windowSize in blob.js
 const binWidth = (44100/(2*16));
 const movements = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 1.0, 0.2, 0.3, 0.5];
-//*******************
-//in fragment shader function lookup: the 0.05 multiplying bins.z and the 0.0 multiplying the second bins.z can be modulated to intensify the effect
-//*******************
 const shaders = Shaders.create({
   fftGloop: {
     frag: GLSL`
@@ -55,18 +52,9 @@ function getBinLevels(fftIn){
   for(let i=0; i<fftIn.length; i++) {
     bins[i] = Math.pow(10, fftIn[i]/20) * 0.01 * binWidth * (i+1);
   }
-  var low = bins.slice(0, 5).reduce(function(a, b){
-        return a + b;
-    }, 0);
-
-  var mid = bins.slice(5, 10).reduce(function(a, b){
-        return a + b;
-    }, 0);
-
-  var high = bins.slice(10, 15).reduce(function(a, b){
-        return a + b;
-    }, 0);
-    console.log([low/5, mid/5, high/5]);
+  var low = bins.slice(0, 5).reduce(function(a, b){return a + b;}, 0);
+  var mid = bins.slice(5, 10).reduce(function(a, b){return a + b;}, 0);
+  var high = bins.slice(10, 15).reduce(function(a, b){return a + b;}, 0);
   return [low/5, mid/5, high/5];
 }
 
@@ -82,14 +70,6 @@ const Cull = timeLoop(({ children: t, time, mouse, meter, fft, throb }) =>
       throb: throb
     }}
   />);
-
-  // time: time / 1000, // seconds is better for float precision
-  // mouse,
-  // freq: 10 + 2 * Math.sin(0.0007*time),
-  // amp: 0.05 + Math.max(0, 0.03*Math.cos(0.001 * time)),
-  // moving: 0,
-  // level: Math.pow(10.0, meter.getLevel()/20.0),
-  // bins: getBinLevels(fft.getValue())
 
 export default class AnimateCull extends Component {
   constructor(props){
@@ -109,18 +89,3 @@ export default class AnimateCull extends Component {
     );
   }
 };
-
-
-// 0.05 + Math.random()*0.2
-
-
-// vec2 lookup (vec2 offset, float amp2) {
-//   return mod(
-//     uv + amp2 * bins.z*throb * vec2(
-//       cos(bins.x*(uv.x+offset.x)+time),
-//       sin(bins.y*(uv.y+offset.x)+time))
-//       + vec2(
-//         bins.z*schiz * time/10.0,
-//         0.0),
-//     vec2(1.0));
-// }

@@ -19,7 +19,7 @@ export default (
     componentDidMount() {
       this.onPausedChange(this.props.paused);
     }
-    componentWillReceiveProps({ paused }) {
+    UNSAFE_componentWillReceiveProps({ paused }) {
       if (this.props.paused !== paused) {
         this.onPausedChange(paused);
       }
