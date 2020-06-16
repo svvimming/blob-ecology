@@ -9,7 +9,6 @@ class Blob extends React.Component {
     this.handleMouseHover = this.handleMouseHover.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    // this.loadBuf = this.loadBuf.bind(this);
     this.playBuf = this.playBuf.bind(this);
     this.state = {
       isHovering: false,
@@ -19,7 +18,7 @@ class Blob extends React.Component {
     };
   }
 
-  componentWillReceiveProps(){
+  UNSAFE_componentWillReceiveProps(){
     this.setState({
       isHovering: false,
       wasRendered: this.props.renderDefault,
@@ -27,10 +26,6 @@ class Blob extends React.Component {
       env: null
     });
   }
-
-  // loadBuf() {
-  //
-  // }
 
   playBuf() {
       this.state.env.connect(this.props.gain);
@@ -42,25 +37,26 @@ class Blob extends React.Component {
 
   handleMouseHover() {
     if(this.state.player == null) {
-      this.setState({
-        wasRendered: true,
-        player: new Tone.Player({
-  			"url" : this.props.audioPath,
-        "onload" : this.playBuf,
-        "loop" : true,
-        "fadeIn" : 0,
-        "fadeOut" : 0
-      }),
-        env: new Tone.AmplitudeEnvelope({
-        	"attack" : 0.1,
-        	"decay" : 0.2,
-        	"sustain" : 1,
-        	"release" : 20,
-        }),
-        isHovering: true,
-      });
+          this.setState({
+            wasRendered: true,
+            player: new Tone.Player({
+      			"url" : this.props.audioPath,
+            "onload" : this.playBuf,
+            "loop" : true,
+            "fadeIn" : 0,
+            "fadeOut" : 0
+          }),
+            env: new Tone.AmplitudeEnvelope({
+            	"attack" : 0.1,
+            	"decay" : 0.2,
+            	"sustain" : 1,
+            	"release" : 20,
+            }),
+            isHovering: true,
+          });
+      }
     }
-  }
+  
 
   handleMouseLeave() {
     if (this.state.player != null) {
