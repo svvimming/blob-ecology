@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Tone from 'tone';
 import { Shaders, Node, GLSL } from "gl-react";
 import { Surface } from "gl-react-dom";
 import timeLoop from "./timeloop";

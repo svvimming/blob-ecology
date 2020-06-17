@@ -9,6 +9,7 @@ const windowSize = 16; //don't change unless binWidth in animate-cull.js is chan
 class Fuites extends React.Component {
   constructor(props){
     super(props);
+    this.handleClick = this.handleClick.bind(this);
     this.state = {
       children: blobData,
       zoom: 10.0,
@@ -25,26 +26,35 @@ class Fuites extends React.Component {
     this.state.gain.connect(this.state.follower);
   }
 
+  handleClick() {
+    this.props.modeSelect(0, 0);
+  }
+
   render(props) {
 
   return (
       <span>
-        {this.state.children.map((element, index) => (
-          <Blob
-          key={'blob'+index}
-          x={element.x*this.state.zoom}
-          y={element.y*this.state.zoom}
-          diameter={element.diameter*this.state.zoom}
-          rotation={element.rotation}
-          radii={element.radii}
-          color={element.color}
-          imgPath={process.env.PUBLIC_URL + element.image}
-          audioPath={process.env.PUBLIC_URL + '/assets/a-long-walk-to-somewhere-close-errlymixx.mp3'}
-          gain={this.state.gain}
-          fft={this.state.fft}
-          meter={this.state.meter}
-          />
-        ))}
+        <div className="zoom-select">
+          <button onClick={this.handleClick}>survol</button>
+        </div>
+
+          {this.state.children.map((element, index) => (
+            <Blob
+            key={'blob'+index}
+            x={element.x*this.state.zoom}
+            y={element.y*this.state.zoom}
+            diameter={element.diameter*this.state.zoom}
+            rotation={element.rotation}
+            radii={element.radii}
+            color={element.color}
+            imgPath={process.env.PUBLIC_URL + element.image}
+            audioPath={process.env.PUBLIC_URL + '/assets/a-long-walk-to-somewhere-close-errlymixx.mp3'}
+            gain={this.state.gain}
+            fft={this.state.fft}
+            meter={this.state.meter}
+            />
+          ))}
+
       </span>
     );
 }
