@@ -8,7 +8,7 @@ class Mode extends React.Component {
     this.modeRef = React.createRef();
     this.modeChange = this.modeChange.bind(this);
     this.state = {
-      zoomedOut: false,
+      zoomedOut: true,
       scrollRatio: {
         left: 0,
         top: 0
@@ -44,7 +44,7 @@ class Mode extends React.Component {
         <div className="clip-border-top"></div>
         <div className="clip-border-bottom"></div>
         <div className="zoom-select">
-          <a href="index.html" className="fuites">fuites</a>
+          <a href="index.html" className="fuites"></a>
         </div>
           {currentMode}
       </div>

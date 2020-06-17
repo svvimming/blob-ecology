@@ -37,7 +37,6 @@ class Fuites extends React.Component {
         <div className="zoom-select">
           <button onClick={this.handleClick}>survol</button>
         </div>
-
           {this.state.children.map((element, index) => (
             <Blob
             key={'blob'+index}
