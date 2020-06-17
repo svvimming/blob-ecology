@@ -1,5 +1,4 @@
 import React from 'react';
-import Territory from './territory';
 import AnimateCull from './animate-cull';
 import Tone from 'tone';
 
@@ -8,23 +7,13 @@ class Blob extends React.Component {
     super(props);
     this.handleMouseHover = this.handleMouseHover.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.playBuf = this.playBuf.bind(this);
     this.state = {
       isHovering: false,
-      wasRendered: this.props.renderDefault,
+      wasRendered: false,
       player: null,
       env: null
     };
-  }
-
-  UNSAFE_componentWillReceiveProps(){
-    this.setState({
-      isHovering: false,
-      wasRendered: this.props.renderDefault,
-      player: null,
-      env: null
-    });
   }
 
   playBuf() {
@@ -56,7 +45,7 @@ class Blob extends React.Component {
           });
       }
     }
-  
+
 
   handleMouseLeave() {
     if (this.state.player != null) {
@@ -76,10 +65,6 @@ class Blob extends React.Component {
   }, 2000);
   }
 
-  handleClick() {
-    this.props.onBlobSelect(this.props.x, this.props.y);
-  }
-
   render(props) {
     const orientation = {
       width: this.props.diameter+'px',
@@ -92,7 +77,7 @@ class Blob extends React.Component {
       height: this.props.diameter+50+'px'
     }
 
-      if (this.state.isHovering && !this.props.zoomedOut){
+      if (this.state.isHovering){
         var interior = (
                           <AnimateCull
                           meter={this.props.meter}
@@ -110,7 +95,6 @@ class Blob extends React.Component {
         style={orientation}
         onMouseOver={this.handleMouseHover}
         onMouseLeave={this.handleMouseLeave}
-        onClick={this.handleClick}
         >
         { this.state.wasRendered && interior}
       </div>
