@@ -5,14 +5,13 @@ import timeLoop from "./timeloop";
 
 //16 is the windowSize in blob.js
 const binWidth = (44100/(2*16));
-const movements = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 1.0, 0.2, 0.3, 0.5];
+const movements = [0.05, 0.05, 1.0, 0.2, 0.3, 0.5];
 const shaders = Shaders.create({
   fftGloop: {
     frag: GLSL`
 precision highp float;
 varying vec2 uv;
 uniform sampler2D t;
-uniform vec2 mouse;
 uniform float time, level, throb;
 uniform vec3 bins;
 vec2 lookup (vec2 offset, float amp2) {
@@ -23,7 +22,8 @@ vec2 lookup (vec2 offset, float amp2) {
     vec2(1.0));
 }
 void main() {
-  float dist = distance(uv, mouse);
+  vec2 cent = vec2(0.5, 0.5);
+  float dist = distance(uv, cent);
   float amp2 = pow(1.0 - dist, 2.0);
   float colorSeparation = 0.02 * mix(amp2, 1.0, 0.5);
   vec2 orientation = vec2(1.0, 0.0);
@@ -57,13 +57,12 @@ function getBinLevels(fftIn){
   return [low/5, mid/5, high/5];
 }
 
-const Cull = timeLoop(({ children: t, time, mouse, meter, fft, throb }) =>
+const Cull = timeLoop(({ children: t, time, meter, fft, throb }) =>
   <Node
     shader={shaders.fftGloop}
     uniforms={{
       t,
       time: time / 1000, // seconds is better for float precision
-      mouse,
       level: Math.pow(10.0, meter.getLevel()/20.0),
       bins: getBinLevels(fft.getValue()),
       throb: throb
@@ -71,17 +70,10 @@ const Cull = timeLoop(({ children: t, time, mouse, meter, fft, throb }) =>
   />);
 
 export default class AnimateCull extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      mouse: [ 0.5, 0.5 ]
-    }
-  }
-
   render() {
     return (
         <Surface width={this.props.diameter} height={this.props.diameter}>
-          <Cull mouse={this.state.mouse} meter={this.props.meter} fft={this.props.fft} throb={movements[Math.floor(Math.random()*10)]}>
+          <Cull meter={this.props.meter} fft={this.props.fft} throb={movements[Math.floor(Math.random()*movements.length)]}>
             {this.props.canvasImg}
           </Cull>
         </Surface>

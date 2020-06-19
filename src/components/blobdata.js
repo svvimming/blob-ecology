@@ -16,8 +16,7 @@ for(let i=0; i<blobAmt; i++){
       radii: [60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15, 60*Math.random()+15],
       color: colorlist[Math.floor(Math.random()*colorlist.length)],
       image: '/assets/cull/cull'+Math.floor(Math.random()*6)+'.png',
-      canvas: false,
-      url: null
+      animate: false,
     }
   }
 }
@@ -26,7 +25,19 @@ const blobs = [].concat(...twoD);
 
 for (let i=0; i<canvasLinks.length; i++){
   randInds[i] = Math.floor(Math.random()*blobs.length);
+}
+console.log(randInds);
+for (let i=0; i<randInds.length; i++){
   blobs[randInds[i]].image = canvasLinks[i];
+  blobs[randInds[i]].animate = true;
 }
 
-export const blobData = blobs;
+var plobs =  blobs.filter(function(element) {
+  return element.animate;
+});
+
+var globs = blobs.filter(function(element) {
+  return !element.animate;
+});
+
+export {plobs, globs}
