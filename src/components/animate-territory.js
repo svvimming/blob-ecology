@@ -1,8 +1,8 @@
 import React from 'react';
 import Tone from 'tone';
-// import soundfile from '../assets/arp.mp3'
+import AnimateCull from './animate-cull';
 
-class Territory extends React.Component {
+class AnimateTerritory extends React.Component {
   constructor(props){
     super(props);
     this.handleMouseHover = this.handleMouseHover.bind(this);
@@ -63,10 +63,15 @@ class Territory extends React.Component {
         onMouseEnter={this.handleMouseHover}
         onMouseLeave={this.handleMouseLeave}
         >
-        <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>
+        <AnimateCull
+        diameter={this.props.diameter}
+        canvasImg={this.props.imgPath}
+        meter={this.props.meter}
+        fft={this.props.fft}
+        />
       </div>
     );
   }
 }
 
-export default Territory;
+export default AnimateTerritory;
