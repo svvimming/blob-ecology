@@ -113,6 +113,9 @@ button:hover{
 .blob {
   position: absolute;
   transform-origin: 50% 50%;
+  background-image: url('./assets/culling-corner.png');
+  background-repeat: no-repeat;
+  background-size: 1440px, 900px;
   height: 10em;
   display: flex;
   align-items: center;

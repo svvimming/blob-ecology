@@ -54,43 +54,26 @@ class Territory extends React.Component {
   }
 
   render(props) {
-    if(this.state.isZoomed){
-      var orientation = this.state.loaded ? {
-          width: this.props.diameter+'px',
-          height: this.props.diameter+'px',
-          left: this.props.x+'px',
-          top: this.props.y+'px',
-          transform: 'scale(15.0)',
-          zIndex: '100',
-          borderRadius: ' '+this.props.radii[0]+'% '+this.props.radii[1]+'% '+this.props.radii[2]+'% '+this.props.radii[3]+'% / '+this.props.radii[4]+'% '+this.props.radii[5]+'% '+this.props.radii[6]+'% '+this.props.radii[7]+'%'
-        } : {display: 'none'};
-      } else {
-        var orientation = this.state.loaded ? {
+    const orientation = this.state.loaded ? {
+            backgroundPosition: '-'+this.props.x+'px -'+this.props.y+'px',
             width: this.props.diameter+'px',
             height: this.props.diameter+'px',
             left: this.props.x+'px',
             top: this.props.y+'px',
-            borderRadius: ' '+this.props.radii[0]+'% '+this.props.radii[1]+'% '+this.props.radii[2]+'% '+this.props.radii[3]+'% / '+this.props.radii[4]+'% '+this.props.radii[5]+'% '+this.props.radii[6]+'% '+this.props.radii[7]+'%'
           } : {display: 'none'};
-      }
-    const imageStyle = {
-      width: this.props.diameter+50+'px',
-      height: this.props.diameter+50+'px'
-    }
+
     return(
       <div
-        className={"blob "+this.props.color}
+        className={"blob"}
         style={orientation}
         onMouseEnter={this.handleMouseHover}
         onMouseLeave={this.handleMouseLeave}
         onClick={this.handleClick}
         >
-        <img className="blogImg" src={this.props.imgPath} alt="cull" style={imageStyle}/>
+
       </div>
     );
   }
 }
 
 export default Territory;
-
-// translate('+this.props.x+'px, '+this.props.y+'px)
