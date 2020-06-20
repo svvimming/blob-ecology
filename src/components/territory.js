@@ -49,7 +49,9 @@ class Territory extends React.Component {
     const orientation = this.state.loaded ? {
       width: this.props.diameter+'px',
       height: this.props.diameter+'px',
-      transform: 'translate('+this.props.x+'px, '+this.props.y+'px) rotate('+this.props.rotation+'deg)',
+      left: this.props.x+'px',
+      top: this.props.y+'px',
+      // transform: 'rotate('+this.props.rotation+'deg)',
       borderRadius: ' '+this.props.radii[0]+'% '+this.props.radii[1]+'% '+this.props.radii[2]+'% '+this.props.radii[3]+'% / '+this.props.radii[4]+'% '+this.props.radii[5]+'% '+this.props.radii[6]+'% '+this.props.radii[7]+'%'
     } : {display: 'none'};
     const imageStyle = {
@@ -70,3 +72,5 @@ class Territory extends React.Component {
 }
 
 export default Territory;
+
+// translate('+this.props.x+'px, '+this.props.y+'px)
