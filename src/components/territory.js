@@ -50,7 +50,7 @@ class Territory extends React.Component {
   handleClick(){
     this.setState({
       isZoomed: !this.state.isZoomed
-    })
+    });
   }
 
   render(props) {
@@ -62,6 +62,7 @@ class Territory extends React.Component {
           top: this.props.y+'px',
           transform: 'scale(15.0)',
           zIndex: '100',
+          opacity: '1.0',
           borderRadius: ' '+this.props.radii[0]+'% '+this.props.radii[1]+'% '+this.props.radii[2]+'% '+this.props.radii[3]+'% / '+this.props.radii[4]+'% '+this.props.radii[5]+'% '+this.props.radii[6]+'% '+this.props.radii[7]+'%'
         } : {display: 'none'};
       } else {
@@ -92,5 +93,3 @@ class Territory extends React.Component {
 }
 
 export default Territory;
-
-// translate('+this.props.x+'px, '+this.props.y+'px)
