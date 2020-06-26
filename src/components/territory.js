@@ -50,7 +50,7 @@ class Territory extends React.Component {
   handleClick(){
     this.setState({
       isZoomed: !this.state.isZoomed
-    })
+    });
   }
 
   render(props) {

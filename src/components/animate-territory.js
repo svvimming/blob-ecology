@@ -50,7 +50,7 @@ class AnimateTerritory extends React.Component {
   handleClick(){
     this.setState({
       isZoomed: !this.state.isZoomed
-    })
+    });
   }
 
   render(props) {
