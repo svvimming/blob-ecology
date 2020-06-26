@@ -8,6 +8,7 @@ class AnimateTerritory extends React.Component {
     this.handleMouseHover = this.handleMouseHover.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.initializePlayer = this.initializePlayer.bind(this);
+    this.newBufferStart = this.newBufferStart.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
       loaded: false,
@@ -25,8 +26,10 @@ class AnimateTerritory extends React.Component {
         "sustain" : 1,
         "release" : 2,
       }),
-      isZoomed: false
+      isZoomed: false,
+      start: 0.0
     };
+    this.timer = null;
   }
 
   initializePlayer() {
@@ -38,13 +41,23 @@ class AnimateTerritory extends React.Component {
       });
   }
 
+  newBufferStart() {
+    this.setState({
+      start: Math.random()*this.state.player.buffer.duration
+    });
+  }
+
   handleMouseHover() {
-    this.state.player.start(0, Math.random()*this.state.player.buffer.duration);
+    this.state.player.start(0, this.state.start);
     this.state.env.triggerAttack();
+    if(this.timer != null){
+      clearTimeout(this.timer);
+    }
   }
 
   handleMouseLeave() {
     this.state.env.triggerRelease();
+    this.timer = setTimeout(() => this.newBufferStart(), 2000);
   }
 
   handleClick(){

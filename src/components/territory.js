@@ -1,6 +1,6 @@
 import React from 'react';
 import Tone from 'tone';
-// import soundfile from '../assets/arp.mp3'
+const pitchCoefs = [1.0, 0.5, 2.0, 1.3348, 0.74915];
 
 class Territory extends React.Component {
   constructor(props){
@@ -8,6 +8,7 @@ class Territory extends React.Component {
     this.handleMouseHover = this.handleMouseHover.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.initializePlayer = this.initializePlayer.bind(this);
+    this.newBufferStart = this.newBufferStart.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
       loaded: false,
@@ -25,8 +26,11 @@ class Territory extends React.Component {
         "sustain" : 1,
         "release" : 2,
       }),
-      isZoomed: false
+      isZoomed: false,
+      start: 0.0,
+      rate: 1.0
     };
+    this.timer = null;
   }
 
   initializePlayer() {
@@ -38,19 +42,31 @@ class Territory extends React.Component {
       });
   }
 
+  newBufferStart() {
+    this.setState({
+      start: Math.random()*this.state.player.buffer.duration,
+      rate: pitchCoefs[Math.floor(Math.random()*pitchCoefs.length)]
+    });
+  }
+
   handleMouseHover() {
-    this.state.player.start(0, Math.random()*this.state.player.buffer.duration);
+    this.state.player.start(0, this.state.start);
+    this.state.player.playbackRate = this.state.rate;
     this.state.env.triggerAttack();
+    if(this.timer != null){
+      clearTimeout(this.timer);
+    }
   }
 
   handleMouseLeave() {
     this.state.env.triggerRelease();
+    this.timer = setTimeout(() => this.newBufferStart(), 2000);
   }
 
   handleClick(){
     this.setState({
       isZoomed: !this.state.isZoomed
-    })
+    });
   }
 
   render(props) {
@@ -61,6 +77,7 @@ class Territory extends React.Component {
           left: this.props.x+'px',
           top: this.props.y+'px',
           transform: 'scale(15.0)',
+          opacity: '1.0',
           zIndex: '100',
           borderRadius: ' '+this.props.radii[0]+'% '+this.props.radii[1]+'% '+this.props.radii[2]+'% '+this.props.radii[3]+'% / '+this.props.radii[4]+'% '+this.props.radii[5]+'% '+this.props.radii[6]+'% '+this.props.radii[7]+'%'
         } : {display: 'none'};
@@ -92,5 +109,3 @@ class Territory extends React.Component {
 }
 
 export default Territory;
-
-// translate('+this.props.x+'px, '+this.props.y+'px)
