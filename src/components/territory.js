@@ -1,6 +1,5 @@
 import React from 'react';
 import Tone from 'tone';
-// import soundfile from '../assets/arp.mp3'
 
 class Territory extends React.Component {
   constructor(props){

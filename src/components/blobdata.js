@@ -40,4 +40,4 @@ var globs = blobs.filter(function(element) {
   return !element.animate;
 });
 
-export {plobs, globs}
+export {blobs}
