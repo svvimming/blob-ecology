@@ -8,6 +8,7 @@ class AnimateTerritory extends React.Component {
     this.handleMouseHover = this.handleMouseHover.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.initializePlayer = this.initializePlayer.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.state = {
       loaded: false,
       isHovering: false,
@@ -23,7 +24,8 @@ class AnimateTerritory extends React.Component {
         "decay" : 0.2,
         "sustain" : 1,
         "release" : 2,
-      })
+      }),
+      isZoomed: false
     };
   }
 
@@ -45,25 +47,39 @@ class AnimateTerritory extends React.Component {
     this.state.env.triggerRelease();
   }
 
+  handleClick(){
+    this.setState({
+      isZoomed: !this.state.isZoomed
+    });
+  }
+
   render(props) {
-    const orientation = this.state.loaded ? {
-      width: this.props.diameter+'px',
-      height: this.props.diameter+'px',
-      left: this.props.x+'px',
-      top: this.props.y+'px',
-      // transform: 'translate('+this.props.x+'px, '+this.props.y+'px) rotate('+this.props.rotation+'deg)',
-      borderRadius: ' '+this.props.radii[0]+'% '+this.props.radii[1]+'% '+this.props.radii[2]+'% '+this.props.radii[3]+'% / '+this.props.radii[4]+'% '+this.props.radii[5]+'% '+this.props.radii[6]+'% '+this.props.radii[7]+'%'
-    } : {display: 'none'};
-    const imageStyle = {
-      width: this.props.diameter+50+'px',
-      height: this.props.diameter+50+'px'
-    }
+    if(this.state.isZoomed){
+      var orientation = this.state.loaded ? {
+          width: this.props.diameter+'px',
+          height: this.props.diameter+'px',
+          left: this.props.x+'px',
+          top: this.props.y+'px',
+          transform: 'scale(15.0)',
+          zIndex: '100',
+          borderRadius: ' '+this.props.radii[0]+'% '+this.props.radii[1]+'% '+this.props.radii[2]+'% '+this.props.radii[3]+'% / '+this.props.radii[4]+'% '+this.props.radii[5]+'% '+this.props.radii[6]+'% '+this.props.radii[7]+'%'
+        } : {display: 'none'};
+      } else {
+        var orientation = this.state.loaded ? {
+            width: this.props.diameter+'px',
+            height: this.props.diameter+'px',
+            left: this.props.x+'px',
+            top: this.props.y+'px',
+            borderRadius: ' '+this.props.radii[0]+'% '+this.props.radii[1]+'% '+this.props.radii[2]+'% '+this.props.radii[3]+'% / '+this.props.radii[4]+'% '+this.props.radii[5]+'% '+this.props.radii[6]+'% '+this.props.radii[7]+'%'
+          } : {display: 'none'};
+      }
     return(
       <div
         className={"blob "+this.props.color}
         style={orientation}
         onMouseEnter={this.handleMouseHover}
         onMouseLeave={this.handleMouseLeave}
+        onClick={this.handleClick}
         >
         <AnimateCull
         diameter={this.props.diameter}
