@@ -60,6 +60,7 @@ class Territory extends React.Component {
             height: this.props.diameter+'px',
             left: this.props.x+'px',
             top: this.props.y+'px',
+            clipPath: this.props.clip
           } : {display: 'none'};
 
     return(
