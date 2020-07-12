@@ -1,7 +1,8 @@
 import React from 'react';
 import Tone from 'tone';
-import AnimateTerritory from './animate-territory';
+import Oblong from './oblong';
 import Archipelago from './archipelago';
+
 import {plobs, globs} from './blobdata';
 import arp from '../assets/soundfiles/arp.mp3';
 import chandelier from '../assets/soundfiles/chandelier.mp3';
@@ -50,14 +51,23 @@ class Map extends React.Component {
 
   render(props) {
     return (
-      <div>
-          <div className="oblong-black"></div>
-          <div className="oblong-yellow">
-            <Archipelago
+      <div className="weltanschauung">
+          <Oblong
+          styleClass={"oblong-black"}
+          audioPath={falling}
+          gain={this.state.gain}
+          />
+          <Oblong
+          styleClass={"oblong-yellow"}
+          audioPath={collectors}
+          gain={this.state.gain}
+          />
+          <Archipelago
+          left={730}
+          top={440}
             audioPath={chandelier}
             gain={this.state.gain}
             />
-          </div>
         </div>
       );
 }

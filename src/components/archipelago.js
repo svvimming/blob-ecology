@@ -57,8 +57,8 @@ class Archipelago extends React.Component {
         {this.state.islands.map((element, index) => (
             <Island
             key={'island'+index}
-            left={100}
-            top={100}
+            left={this.props.left}
+            top={this.props.top}
             density={100}
             width={40}
             height={40}

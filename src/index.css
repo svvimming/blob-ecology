@@ -7,13 +7,6 @@
   overflow: auto;
 }
 
-.fuites {
-  position: fixed;
-  top: 60px;
-  left: 60px;
-  z-index: 1000;
-}
-
 a{
   color: rgba(255, 0, 0, 0.5);
   font-family: 'Roboto Mono', monospace;
@@ -39,25 +32,6 @@ button:hover{
   color: rgba(255, 0, 0, 0.85);
 }
 
-.blob {
-  position: absolute;
-  transform-origin: 50% 50%;
-  height: 10em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  opacity: 0.9;
-}
-
-.blob:hover{
-  -ms-transform: scale(1.25); /* IE 9 */
-  -webkit-transform: scale(1.25); /* Safari 3-8 */
-  transform: scale(1.25);
-  transition: transform .2s; /* Animation */
-  opacity: 1.0;
-}
-
 p {
   text-align: left;
   z-index: 100;
@@ -70,12 +44,7 @@ p {
   left: 0px;
 }
 
-.blobImg {
-  overflow: hidden;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-}
+
 
 .player {
   position: absolute;
@@ -85,8 +54,6 @@ p {
   opacity: 0;
   background-color: rgba(0, 0, 255, 0.1);
 }
-
-
 
 
 /* oblongs */
@@ -105,6 +72,17 @@ p {
   background-position: -200px, -100px;
 }
 
+.oblong-yellow:active{
+  animation-name: swell-yellow;
+  animation-duration: 0.25s;
+}
+
+@keyframes swell-yellow {
+  0% {transform: scale(1.0) rotate(-10deg)}
+  50% {transform: scale(1.02) rotate(-10deg)}
+  100% {transform: scale(1.0) rotate(-10deg)}
+}
+
 .oblong-black{
   position: absolute;
   width: 1000px;
@@ -120,6 +98,16 @@ p {
   background-position: 100px, 0px;
 }
 
+.oblong-black:active{
+  animation-name: swell-black;
+  animation-duration: 0.25s;
+}
+
+@keyframes swell-black {
+  0% {transform: scale(1.0) rotate3d(1, 0, 1, 27deg)}
+  50% {transform: scale(1.02) rotate3d(1, 0, 1, 27deg)}
+  100% {transform: scale(1.0) rotate3d(1, 0, 1, 27deg)}
+}
 
 /* islands styling vvvvv */
 

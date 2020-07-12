@@ -1,10 +1,10 @@
 import React from 'react';
-import Mode from './components/mode';
+import Map from './components/map';
 import './index.css';
 
 function App() {
   return (
-    <Mode/>
+    <Map/>
   );
 }
 
