@@ -141,3 +141,15 @@ p {
 }
 
 /* islands styling ^^^^^ */
+
+.culling-bottom{
+  position: absolute;
+  left: 100px;
+  top: 140px;
+}
+
+.culling-zoom{
+  position: absolute;
+  left: 40px;
+  top: 500px;
+}

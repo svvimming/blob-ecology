@@ -1,7 +1,11 @@
 import React from 'react';
 import Tone from 'tone';
 import Oblong from './oblong';
+import Cull from './cull';
 import Archipelago from './archipelago';
+
+import cullingBottom from '../assets/culling-bottom-low-res.png';
+import cullingTop from '../assets/culling-top-low-res-top-left-corner.png';
 
 import {plobs, globs} from './blobdata';
 import arp from '../assets/soundfiles/arp.mp3';
@@ -52,22 +56,40 @@ class Map extends React.Component {
   render(props) {
     return (
       <div className="weltanschauung">
-          <Oblong
-          styleClass={"oblong-black"}
-          audioPath={falling}
-          gain={this.state.gain}
+          <Cull
+          styleClass={"culling-bottom"}
+          width={600}
+          height={282}
+          meter={this.state.meter}
+          fft={this.state.fft}
+          canvasImg={cullingBottom}
+          movement={0.3}
           />
-          <Oblong
-          styleClass={"oblong-yellow"}
-          audioPath={collectors}
-          gain={this.state.gain}
+          <Cull
+          styleClass={"culling-zoom"}
+          width={400}
+          height={182}
+          meter={this.state.meter}
+          fft={this.state.fft}
+          canvasImg={cullingTop}
+          movement={0.7}
           />
-          <Archipelago
-          left={730}
-          top={440}
-            audioPath={chandelier}
+            <Oblong
+            styleClass={"oblong-black"}
+            audioPath={falling}
             gain={this.state.gain}
             />
+            <Oblong
+            styleClass={"oblong-yellow"}
+            audioPath={collectors}
+            gain={this.state.gain}
+            />
+            <Archipelago
+            left={730}
+            top={440}
+              audioPath={chandelier}
+              gain={this.state.gain}
+              />
         </div>
       );
 }
