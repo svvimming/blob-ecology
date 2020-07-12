@@ -4,42 +4,19 @@
   left: 0;
   width: 100%;
   height: 100%;
-  clip-path: inset(50px 50px 50px 50px); /* or "none" */
   overflow: auto;
 }
 
-.clip-border-left{
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 51px;
-  background-color: rgba(255, 0, 0, 0.5);
+.culling-bottom{
+  position: absolute;
+  left: 100px;
+  top: 140px;
 }
 
-.clip-border-right{
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 51px;
-  background-color: rgba(255, 0, 0, 0.5);
-}
-
-.clip-border-top{
-  position: fixed;
-  top: 0;
-  height: 51px;
-  width: 100%;
-  background-color: rgba(255, 0, 0, 0.5);
-}
-
-.clip-border-bottom{
-  position: fixed;
-  bottom: 0;
-  height: 51px;
-  width: 100%;
-  background-color: rgba(255, 0, 0, 0.5);
+.culling-zoom{
+  position: absolute;
+  left: 40px;
+  top: 500px;
 }
 
 .fuites {
