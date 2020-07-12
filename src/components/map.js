@@ -1,7 +1,7 @@
 import React from 'react';
 import Tone from 'tone';
 import AnimateTerritory from './animate-territory';
-import Territory from './territory';
+import Archipelago from './archipelago';
 import {plobs, globs} from './blobdata';
 import arp from '../assets/soundfiles/arp.mp3';
 import chandelier from '../assets/soundfiles/chandelier.mp3';
@@ -39,7 +39,7 @@ class Map extends React.Component {
       meter: new Tone.Meter(),
       gain: new Tone.Gain(4.0),
       fft: new Tone.FFT(windowSize)
-    }
+    };
   }
 
   componentDidMount(){
@@ -50,38 +50,15 @@ class Map extends React.Component {
 
   render(props) {
     return (
-      <span>
-          {this.state.still.map((element, index) => (
-            <Territory
-            key={'blob'+index}
-            x={element.x*this.state.zoom}
-            y={element.y*this.state.zoom}
-            diameter={element.diameter*this.state.zoom}
-            rotation={element.rotation}
-            radii={element.radii}
-            color={element.color}
-            imgPath={process.env.PUBLIC_URL + element.image}
-            audioPath={audioLinks[Math.floor(Math.random()*audioLinks.length)]}
+      <div>
+          <div className="oblong-black"></div>
+          <div className="oblong-yellow">
+            <Archipelago
+            audioPath={chandelier}
             gain={this.state.gain}
             />
-          ))}
-          {this.state.gloopy.map((element, index) => (
-            <AnimateTerritory
-            key={'blob'+index}
-            x={element.x*this.state.zoom}
-            y={element.y*this.state.zoom}
-            diameter={element.diameter*this.state.zoom}
-            rotation={element.rotation}
-            radii={element.radii}
-            color={element.color}
-            imgPath={process.env.PUBLIC_URL + element.image}
-            audioPath={audioLinks[Math.floor(Math.random()*audioLinks.length)]}
-            meter={this.state.meter}
-            fft={this.state.fft}
-            gain={this.state.gain}
-            />
-          ))}
-        </span>
+          </div>
+        </div>
       );
 }
 }
@@ -90,15 +67,33 @@ export default Map;
 
 
 
-// <Territory
-// key={'blob'+index}
-// x={element.x*this.state.zoom}
-// y={element.y*this.state.zoom}
-// diameter={element.diameter*this.state.zoom}
-// rotation={element.rotation}
-// radii={element.radii}
-// color={element.color}
-// imgPath={process.env.PUBLIC_URL + element.image}
-// audioPath={audioLinks[Math.floor(Math.random()*audioLinks.length)]}
-// onTerritorySelect={this.props.onTerritorySelect}
-// />
+// {this.state.still.map((element, index) => (
+//   <Territory
+//   key={'blob'+index}
+//   x={element.x*this.state.zoom}
+//   y={element.y*this.state.zoom}
+//   diameter={element.diameter*this.state.zoom}
+//   rotation={element.rotation}
+//   radii={element.radii}
+//   color={element.color}
+//   imgPath={process.env.PUBLIC_URL + element.image}
+//   audioPath={audioLinks[Math.floor(Math.random()*audioLinks.length)]}
+//   gain={this.state.gain}
+//   />
+// ))}
+// {this.state.gloopy.map((element, index) => (
+//   <AnimateTerritory
+//   key={'blob'+index}
+//   x={element.x*this.state.zoom}
+//   y={element.y*this.state.zoom}
+//   diameter={element.diameter*this.state.zoom}
+//   rotation={element.rotation}
+//   radii={element.radii}
+//   color={element.color}
+//   imgPath={process.env.PUBLIC_URL + element.image}
+//   audioPath={audioLinks[Math.floor(Math.random()*audioLinks.length)]}
+//   meter={this.state.meter}
+//   fft={this.state.fft}
+//   gain={this.state.gain}
+//   />
+// ))}
