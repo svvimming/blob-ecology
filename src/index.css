@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Arvo:ital@1&family=Courier+Prime:wght@700&family=Cousine:ital,wght@1,700&family=Grenze+Gotisch:wght@700&family=Merriweather&family=Nanum+Myeongjo:wght@800&family=Source+Code+Pro:ital@1&display=swap');
+
 .weltanschauung {
   position: absolute;
   top: 0;
@@ -152,4 +154,50 @@ p {
   position: absolute;
   left: 40px;
   top: 500px;
+}
+
+/* gloopy culls^^^^ */
+
+.testarch{
+  position: absolute;
+  left: 400px;
+  top: 500px;
+  transform: rotate3d(0, 1, 0, 45deg);
+}
+
+.testcnv{
+  position: absolute;
+  display: inline-block
+}
+
+.anton{
+  font-family: 'Anton', sans-serif;
+}
+
+.arvo{
+  font-family: 'Arvo', serif;
+}
+
+.courier{
+  font-family: 'Courier Prime', monospace;
+}
+
+.cousine{
+  font-family: 'Cousine', monospace;
+}
+
+.grenze{
+  font-family: 'Grenze Gotisch', cursive;
+}
+
+.merriweather{
+  font-family: 'Merriweather', serif;
+}
+
+.nanum{
+  font-family: 'Nanum Myeongjo', serif;
+}
+
+.source-code{
+  font-family: 'Source Code Pro', monospace;
 }

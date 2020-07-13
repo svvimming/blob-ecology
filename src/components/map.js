@@ -3,6 +3,7 @@ import Tone from 'tone';
 import Oblong from './oblong';
 import Cull from './cull';
 import Archipelago from './archipelago';
+import Letter from './letter';
 
 import cullingBottom from '../assets/culling-bottom-low-res.png';
 import cullingTop from '../assets/culling-top-low-res-top-left-corner.png';
@@ -90,6 +91,7 @@ class Map extends React.Component {
               audioPath={chandelier}
               gain={this.state.gain}
               />
+              <Letter/>
         </div>
       );
 }
