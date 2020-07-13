@@ -1,4 +1,6 @@
 import React from 'react';
+import Draggable from 'react-draggable';
+
 const fonts = ['anton', 'arvo', 'courier', 'merriweather', 'nanum', 'source-code'];
 
 class Letter extends React.Component{
@@ -14,7 +16,9 @@ class Letter extends React.Component{
           return (
             <div className={"testarch"}>
               {this.state.letters.map((element, index) => (
-                <div
+              <Draggable handle=".handle">
+              <div className={"handle"}>
+                <p
                 key={"letter"+index}
                 className={"testcnv "+fonts[Math.floor(Math.random()*fonts.length)]}
                 style={{
@@ -24,7 +28,9 @@ class Letter extends React.Component{
                   transform: 'rotate3d('+Math.random()+', '+Math.random()+', '+Math.random()+', 10deg)'
                 }}
                 >{element}
+                </p>
                 </div>
+                </Draggable>
               ))}
             </div>
           );

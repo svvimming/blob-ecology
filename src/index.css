@@ -86,7 +86,7 @@ p {
 }
 
 
-.oval {
+/* .oval {
   position: absolute;
   width: 1000px;
   height: 1200px;
@@ -94,32 +94,21 @@ p {
   left: 28%;
   clip-path: ellipse(35% 50% at 50% 50%);
   transform: rotate3d(1, 0, 1, 27deg);
-}
+} */
 
 .oblong-black{
   position: absolute;
   width: 1000px;
-  height: 1200px;
-  top: 220px;
-  left: 28%;
+  height: 1500px;
+  top: -380px;
+  left: 580px;
   background-color: #303030;
-  clip-path: ellipse(35% 50% at 50% 50%);
+  /* clip-path: ellipse(42% 50% at 50% 50%); */
   transform: rotate3d(1, 0, 1, 27deg);
-  background-image: url('assets/cull1.png');
+  background-image: url('assets/cull-border-large.png');
   background-repeat: no-repeat;
   background-size: 1000px, 1200px;
-  background-position: 100px, 0px;
-}
-
-.oblong-black:active{
-  animation-name: swell-black;
-  animation-duration: 0.25s;
-}
-
-@keyframes swell-black {
-  0% {transform: scale(1.0) rotate3d(1, 0, 1, 27deg)}
-  50% {transform: scale(1.02) rotate3d(1, 0, 1, 27deg)}
-  100% {transform: scale(1.0) rotate3d(1, 0, 1, 27deg)}
+  background-position: 0px -200px;
 }
 
 
@@ -172,6 +161,10 @@ p {
 
 /* gloopy culls^^^^ */
 
+
+
+/* text VVVVVVVVVV */
+
 .testarch{
   position: absolute;
   left: 400px;
@@ -182,6 +175,17 @@ p {
 .testcnv{
   position: absolute;
   display: inline-block;
+}
+
+.testcnv:active{
+  animation-name: swell;
+  animation-duration: 0.25s;
+}
+
+@keyframes swell {
+  0% {transform: scale(1.0)}
+  50% {transform: scale(1.1)}
+  100% {transform: scale(1.0)}
 }
 
 .anton{
@@ -214,4 +218,11 @@ p {
 
 .source-code{
   font-family: 'Source Code Pro', monospace;
+}
+
+
+
+.bottom{
+  position: absolute;
+  top: 3000px;
 }

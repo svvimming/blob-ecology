@@ -50,8 +50,7 @@ class Oblong extends React.Component {
   render(props) {
     const ready = this.state.loaded ? {display: 'initial'} : {display: 'none'};
     return(
-      <Draggable handle=".handle">
-        <div className="handle">
+
           <div
             className={this.props.styleClass}
             style={ready}
@@ -59,8 +58,7 @@ class Oblong extends React.Component {
             onMouseLeave={this.handleMouseLeave}
             >
           </div>
-        </div>
-      </Draggable>
+
     );
   }
 }

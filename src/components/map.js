@@ -2,9 +2,9 @@ import React from 'react';
 import Tone from 'tone';
 import Oblong from './oblong';
 import Cull from './cull';
+import Culldrip from './culldrip';
 import Archipelago from './archipelago';
 import Letter from './letter';
-import Ellipsoid from './ellipsoid';
 
 import cullingBottom from '../assets/culling-bottom-low-res.png';
 import cullingTop from '../assets/culling-top-low-res-top-left-corner.png';
@@ -59,7 +59,9 @@ class Map extends React.Component {
     return (
       <div className="weltanschauung">
 
-          <Cull
+      <div className={"oblong-black"}></div>
+
+          <Culldrip
           styleClass={"culling-bottom"}
           width={600}
           height={282}
@@ -79,21 +81,7 @@ class Map extends React.Component {
           movement={0.7}
           />
 
-            <Oblong
-            styleClass={"oblong-black"}
-            audioPath={falling}
-            gain={this.state.gain}
-            />
-            
-            <Ellipsoid
-            width={1000}
-            height={1200}/>
 
-            <Oblong
-            styleClass={"oblong-yellow"}
-            audioPath={collectors}
-            gain={this.state.gain}
-            />
 
             <Archipelago
             left={730}
@@ -104,6 +92,7 @@ class Map extends React.Component {
 
               <Letter/>
 
+                <div className={"bottom"}>hola</div>
         </div>
       );
 }
@@ -111,35 +100,8 @@ class Map extends React.Component {
 
 export default Map;
 
-
-
-// {this.state.still.map((element, index) => (
-//   <Territory
-//   key={'blob'+index}
-//   x={element.x*this.state.zoom}
-//   y={element.y*this.state.zoom}
-//   diameter={element.diameter*this.state.zoom}
-//   rotation={element.rotation}
-//   radii={element.radii}
-//   color={element.color}
-//   imgPath={process.env.PUBLIC_URL + element.image}
-//   audioPath={audioLinks[Math.floor(Math.random()*audioLinks.length)]}
-//   gain={this.state.gain}
-//   />
-// ))}
-// {this.state.gloopy.map((element, index) => (
-//   <AnimateTerritory
-//   key={'blob'+index}
-//   x={element.x*this.state.zoom}
-//   y={element.y*this.state.zoom}
-//   diameter={element.diameter*this.state.zoom}
-//   rotation={element.rotation}
-//   radii={element.radii}
-//   color={element.color}
-//   imgPath={process.env.PUBLIC_URL + element.image}
-//   audioPath={audioLinks[Math.floor(Math.random()*audioLinks.length)]}
-//   meter={this.state.meter}
-//   fft={this.state.fft}
-//   gain={this.state.gain}
-//   />
-// ))}
+// <Oblong
+// styleClass={"oblong-yellow"}
+// audioPath={collectors}
+// gain={this.state.gain}
+// />
