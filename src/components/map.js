@@ -4,6 +4,7 @@ import Oblong from './oblong';
 import Cull from './cull';
 import Archipelago from './archipelago';
 import Letter from './letter';
+import Ellipsoid from './ellipsoid';
 
 import cullingBottom from '../assets/culling-bottom-low-res.png';
 import cullingTop from '../assets/culling-top-low-res-top-left-corner.png';
@@ -57,6 +58,7 @@ class Map extends React.Component {
   render(props) {
     return (
       <div className="weltanschauung">
+
           <Cull
           styleClass={"culling-bottom"}
           width={600}
@@ -66,6 +68,7 @@ class Map extends React.Component {
           canvasImg={cullingBottom}
           movement={0.3}
           />
+
           <Cull
           styleClass={"culling-zoom"}
           width={400}
@@ -75,23 +78,32 @@ class Map extends React.Component {
           canvasImg={cullingTop}
           movement={0.7}
           />
+
             <Oblong
             styleClass={"oblong-black"}
             audioPath={falling}
             gain={this.state.gain}
             />
+            
+            <Ellipsoid
+            width={1000}
+            height={1200}/>
+
             <Oblong
             styleClass={"oblong-yellow"}
             audioPath={collectors}
             gain={this.state.gain}
             />
+
             <Archipelago
             left={730}
             top={440}
               audioPath={chandelier}
               gain={this.state.gain}
               />
+
               <Letter/>
+
         </div>
       );
 }

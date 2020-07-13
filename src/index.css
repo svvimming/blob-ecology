@@ -85,6 +85,17 @@ p {
   100% {transform: scale(1.0) rotate(-10deg)}
 }
 
+
+.oval {
+  position: absolute;
+  width: 1000px;
+  height: 1200px;
+  top: 220px;
+  left: 28%;
+  clip-path: ellipse(35% 50% at 50% 50%);
+  transform: rotate3d(1, 0, 1, 27deg);
+}
+
 .oblong-black{
   position: absolute;
   width: 1000px;
@@ -110,6 +121,9 @@ p {
   50% {transform: scale(1.02) rotate3d(1, 0, 1, 27deg)}
   100% {transform: scale(1.0) rotate3d(1, 0, 1, 27deg)}
 }
+
+
+/* oblongs^^^^^^^ */
 
 /* islands styling vvvvv */
 
