@@ -5,7 +5,7 @@ class Letter extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      letters: ['how', 'not', 't', 'o', 'f', 'a', 'l', 'l', 'pr', 'e', 'y', 'to', 't', 'h', 'e', 'a', 'r', 'c', 'h', 'i', 'v', 'e', '?']
+      letters: ['how', 'not', 't', 'o', 'f', 'a', 'l', 'l', 'p', 'r', 'e', 'y', 'to', 't', 'h', 'e', 'a', 'r', 'c', 'h', 'i', 'v', 'e', '?']
     }
   }
 
@@ -33,5 +33,3 @@ class Letter extends React.Component{
 }
 
 export default Letter;
-
-// + Math.sin((index*Math.pi)/100)

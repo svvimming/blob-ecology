@@ -94,9 +94,9 @@ p {
   background-color: #303030;
   clip-path: ellipse(35% 50% at 50% 50%);
   transform: rotate3d(1, 0, 1, 27deg);
-  background-image: url('assets/thewall.jpg');
+  background-image: url('assets/cull1.png');
   background-repeat: no-repeat;
-  background-size: 800px, 600px;
+  background-size: 1000px, 1200px;
   background-position: 100px, 0px;
 }
 
@@ -167,7 +167,7 @@ p {
 
 .testcnv{
   position: absolute;
-  display: inline-block
+  display: inline-block;
 }
 
 .anton{
