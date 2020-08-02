@@ -149,14 +149,46 @@ p {
 
 .culling-bottom{
   position: absolute;
-  left: 100px;
-  top: 140px;
+  left: -400px;
+  top: 0px;
+  transform: rotateZ(-45deg);
 }
 
 .culling-zoom{
   position: absolute;
   left: 40px;
   top: 500px;
+}
+
+.radial1 {
+  position: absolute;
+  top: 20px;
+  left: 140px;
+}
+.radial2 {
+  position: absolute;
+  top: 20px;
+  left: 220px;
+}
+.radial3 {
+  position: absolute;
+  top: 168px;
+  left: 458px;
+}
+.radial4 {
+  position: absolute;
+  top: 80px;
+  left: 550px;
+}
+
+.irridescent{
+  position: absolute;
+  top: 250px;
+  left: 700px;
+}
+
+.white{
+    background-color: white;
 }
 
 /* gloopy culls^^^^ */

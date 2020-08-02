@@ -16,8 +16,8 @@ class Letter extends React.Component{
           return (
             <div className={"testarch"}>
               {this.state.letters.map((element, index) => (
-              <Draggable handle=".handle">
-              <div className={"handle"}>
+              <Draggable handle=".handle" key={"drag"+index}>
+              <div className={"handle"} key={"handle"+index}>
                 <p
                 key={"letter"+index}
                 className={"testcnv "+fonts[Math.floor(Math.random()*fonts.length)]}

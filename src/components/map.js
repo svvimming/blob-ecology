@@ -6,8 +6,13 @@ import Culldrip from './culldrip';
 import Archipelago from './archipelago';
 import Letter from './letter';
 
-import cullingBottom from '../assets/culling-bottom-low-res.png';
+import cullingBottom from '../assets/culling-bottom.png';
 import cullingTop from '../assets/culling-top-low-res-top-left-corner.png';
+import radial1 from '../assets/radial/radial1.png';
+import radial2 from '../assets/radial/radial2.png';
+import radial3 from '../assets/radial/radial3.png';
+import radial4 from '../assets/radial/radial4.png';
+import irridescent from '../assets/radial/irridescent.png';
 
 import {plobs, globs} from './blobdata';
 import arp from '../assets/soundfiles/arp.mp3';
@@ -59,26 +64,15 @@ class Map extends React.Component {
     return (
       <div className="weltanschauung">
 
-      <div className={"oblong-black"}></div>
-
-          <Culldrip
-          styleClass={"culling-bottom"}
-          width={600}
-          height={282}
-          meter={this.state.meter}
-          fft={this.state.fft}
-          canvasImg={cullingBottom}
-          movement={0.3}
-          />
 
           <Cull
-          styleClass={"culling-zoom"}
-          width={400}
-          height={182}
+          styleClass={"irridescent"}
+          width={500}
+          height={1000}
           meter={this.state.meter}
           fft={this.state.fft}
-          canvasImg={cullingTop}
-          movement={0.7}
+          canvasImg={irridescent}
+          movement={0.3}
           />
 
 
@@ -92,7 +86,7 @@ class Map extends React.Component {
 
               <Letter/>
 
-                <div className={"bottom"}>hola</div>
+      <div className={"bottom"}>hola</div>
         </div>
       );
 }
@@ -100,8 +94,53 @@ class Map extends React.Component {
 
 export default Map;
 
-// <Oblong
-// styleClass={"oblong-yellow"}
-// audioPath={collectors}
-// gain={this.state.gain}
+// <Culldrip
+// styleClass={"culling-bottom"}
+// width={600}
+// height={282}
+// meter={this.state.meter}
+// fft={this.state.fft}
+// canvasImg={cullingBottom}
+// movement={0.3}
 // />
+
+      // <div className={"oblong-black"}></div>
+      // <div className={"bottom"}>hola</div>
+
+
+                // <Cull
+                // styleClass={"radial1"}
+                // width={100}
+                // height={182}
+                // meter={this.state.meter}
+                // fft={this.state.fft}
+                // canvasImg={radial1}
+                // movement={0.7}
+                // />
+                // <Cull
+                // styleClass={"radial2"}
+                // width={300}
+                // height={300}
+                // meter={this.state.meter}
+                // fft={this.state.fft}
+                // canvasImg={radial2}
+                // movement={0.3}
+                // />
+                // <Cull
+                // styleClass={"radial3"}
+                // width={100}
+                // height={200}
+                // meter={this.state.meter}
+                // fft={this.state.fft}
+                // canvasImg={radial3}
+                // movement={0.3}
+                // />
+                // <Cull
+                // styleClass={"radial4"}
+                // width={200}
+                // height={300}
+                // meter={this.state.meter}
+                // fft={this.state.fft}
+                // canvasImg={radial4}
+                // movement={0.3}
+                // />
