@@ -19,7 +19,7 @@ vec2 lookup (vec2 offset, float amp2) {
   return uv + amp2 * bins.z*throb * vec2(cos(bins.x*(uv.x+offset.x)+time), sin(bins.y*(uv.y+offset.x)+time));
 }
 void main() {
-  float dist = distance(uv, mouse);
+  float dist = distance(uv, mouse*0.5);
   float amp2 = pow(1.0 - dist, 2.0);
   float colorSeparation = 0.02 * mix(amp2, 1.0, 0.5);
   vec2 orientation = vec2(1.0, 0.0);
@@ -62,9 +62,9 @@ const Cullshader = timeLoop(({ children: t, time, mouse, meter, fft, throb }) =>
     shader={shaders.fftGloop}
     uniforms={{
       t,
-      time: time / 1000, // seconds is better for float precision
+      time: time / 10000, // seconds is better for float precision
       mouse,
-      bins: [0.1, 0.1, 0.1],
+      bins: [0.0, 0.0, 0.1],
       level: 0.05 + Math.max(0, 0.03*Math.cos(0.001 * time)),
       throb: throb,
     }}
@@ -75,9 +75,10 @@ export default class Cull extends Component {
     mouse: [0.5, 0.5]
   }
   render() {
-    const { mouse } = this.state;
+    const styling = {left: this.props.x+'px', top: this.props.y+'px'};
+    const {mouse} = this.state;
     return (
-      <div className={this.props.styleClass}>
+      <div className={"abso"} style={styling}>
         <Surface width={this.props.width} height={this.props.height} onMouseMove={this.onMouseMove}>
           <Cullshader mouse={mouse} meter={this.props.meter} fft={this.props.fft} throb={this.props.movement}>
             {this.props.canvasImg}
@@ -98,7 +99,7 @@ export default class Cull extends Component {
 };
 
 
-
+//FOR USING WITH FFT & TONE
 // level: Math.pow(10.0, meter.getLevel()/20.0),
 // bins: getBinLevels(fft.getValue()),
 // throb: throb

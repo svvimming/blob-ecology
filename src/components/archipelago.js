@@ -23,7 +23,7 @@ class Archipelago extends React.Component {
         "release" : 0.3,
       }),
       isZoomed: false,
-      islands: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      islands: new Array(this.props.amount).fill(0)
     };
     this.timer = null;
   }
@@ -57,8 +57,8 @@ class Archipelago extends React.Component {
         {this.state.islands.map((element, index) => (
             <Island
             key={'island'+index}
-            left={this.props.left}
-            top={this.props.top}
+            x={this.props.x}
+            y={this.props.y}
             density={100}
             width={40}
             height={40}

@@ -7,25 +7,25 @@ class Letter extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      letters: ['how', 'not', 't', 'o', 'f', 'a', 'l', 'l', 'p', 'r', 'e', 'y', 'to', 't', 'h', 'e', 'a', 'r', 'c', 'h', 'i', 'v', 'e', '?']
+      letters: this.props.characters
     }
   }
 
       render() {
-
+        const styling = {left: this.props.x+'px', top: this.props.y+'px', transform: this.props.trans};
           return (
-            <div className={"testarch"}>
+            <div className={"abso"} style={styling}>
               {this.state.letters.map((element, index) => (
               <Draggable handle=".handle" key={"drag"+index}>
               <div className={"handle"} key={"handle"+index}>
                 <p
                 key={"letter"+index}
-                className={"testcnv "+fonts[Math.floor(Math.random()*fonts.length)]}
+                className={"testcnv noselect "+fonts[Math.floor(Math.random()*fonts.length)]+" "+this.props.classList}
                 style={{
                   left: (50*index+Math.random()*40)+'px',
                   top: (30*Math.sin(0.25*index)+ Math.random()*10)+'px',
-                  fontSize: (25+(Math.floor(35*Math.random())))+'px',
-                  transform: 'rotate3d('+Math.random()+', '+Math.random()+', '+Math.random()+', 10deg)'
+                  fontSize: (this.props.fontsize+(Math.floor(this.props.rand*Math.random())))+'px',
+                  transform: 'rotate3d('+Math.random()+', '+Math.random()+', '+Math.random()+', '+this.props.orient+'deg)'
                 }}
                 >{element}
                 </p>

@@ -39,24 +39,19 @@ p {
   z-index: 100;
 }
 
-.p5canvas {
-  overflow: hidden;
-  position: absolute;
-  top: 0px;
-  left: 0px;
+.click-me{
+  cursor: pointer;
 }
 
-
-
-.player {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 10;
-  opacity: 0;
-  background-color: rgba(0, 0, 255, 0.1);
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
-
 
 /* oblongs */
 
@@ -84,33 +79,6 @@ p {
   50% {transform: scale(1.02) rotate(-10deg)}
   100% {transform: scale(1.0) rotate(-10deg)}
 }
-
-
-/* .oval {
-  position: absolute;
-  width: 1000px;
-  height: 1200px;
-  top: 220px;
-  left: 28%;
-  clip-path: ellipse(35% 50% at 50% 50%);
-  transform: rotate3d(1, 0, 1, 27deg);
-} */
-
-.oblong-black{
-  position: absolute;
-  width: 1000px;
-  height: 1500px;
-  top: -380px;
-  left: 580px;
-  background-color: #303030;
-  /* clip-path: ellipse(42% 50% at 50% 50%); */
-  transform: rotate3d(1, 0, 1, 27deg);
-  background-image: url('assets/cull-border-large.png');
-  background-repeat: no-repeat;
-  background-size: 1000px, 1200px;
-  background-position: 0px -200px;
-}
-
 
 /* oblongs^^^^^^^ */
 
@@ -160,35 +128,8 @@ p {
   top: 500px;
 }
 
-.radial1 {
+.abso{
   position: absolute;
-  top: 20px;
-  left: 140px;
-}
-.radial2 {
-  position: absolute;
-  top: 20px;
-  left: 220px;
-}
-.radial3 {
-  position: absolute;
-  top: 168px;
-  left: 458px;
-}
-.radial4 {
-  position: absolute;
-  top: 80px;
-  left: 550px;
-}
-
-.irridescent{
-  position: absolute;
-  top: 250px;
-  left: 700px;
-}
-
-.white{
-    background-color: white;
 }
 
 /* gloopy culls^^^^ */
@@ -197,19 +138,12 @@ p {
 
 /* text VVVVVVVVVV */
 
-.testarch{
-  position: absolute;
-  left: 400px;
-  top: 500px;
-  transform: rotate3d(0, 1, 0, 45deg);
-}
-
 .testcnv{
   position: absolute;
   display: inline-block;
 }
 
-.testcnv:active{
+.testcnv:hover{
   animation-name: swell;
   animation-duration: 0.25s;
 }

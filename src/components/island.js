@@ -5,8 +5,8 @@ class Island extends React.Component{
     super(props);
     this.handleMouseHover = this.handleMouseHover.bind(this);
     this.state = {
-      x: this.props.left + Math.random()*this.props.density,
-      y: this.props.top + Math.random()*this.props.density,
+      x: this.props.x + Math.random()*this.props.density,
+      y: this.props.y + Math.random()*this.props.density,
       w: 10+Math.random()*this.props.width,
       h: 10+Math.random()*this.props.height,
       imgPos: {x: -1*866*Math.random(), y: -1*1000*Math.random()},
