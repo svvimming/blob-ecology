@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Draggable from 'react-draggable';
 import Tone from 'tone';
 
@@ -7,23 +6,22 @@ class Oblong extends React.Component {
   constructor(props){
     super(props);
     this.handleMouseClick = this.handleMouseClick.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.initializePlayer = this.initializePlayer.bind(this);
     this.state = {
-      loaded: false,
+      isPlaying: false,
       player: new Tone.Player({
       "url" : this.props.audioPath,
       "onload" : this.initializePlayer,
-      "loop" : false,
-      "retrigger": false,
+      "loop" : true,
+      "retrigger": true,
       "fadeIn" : 0,
       "fadeOut" : 0
     }),
       env: new Tone.AmplitudeEnvelope({
         "attack" : 0.1,
         "decay" : 0.2,
-        "sustain" : 1,
-        "release" : 2,
+        "sustain" : 1.0,
+        "release" : 0.7,
       })
     };
   }
@@ -32,33 +30,39 @@ class Oblong extends React.Component {
       this.state.env.toMaster();
       this.state.env.connect(this.props.gain);
       this.state.player.connect(this.state.env);
-      this.setState({
-        loaded: true
-      });
   }
 
   handleMouseClick() {
-    // 0, Math.random()*this.state.player.buffer.duration
-      this.state.player.start();
-      this.state.env.triggerAttack();
-  }
-
-  handleMouseLeave() {
-    this.state.env.triggerRelease();
+      if(this.state.isPlaying){
+        this.state.env.triggerRelease();
+        this.setState({
+          isPlaying: !this.state.isPlaying
+        });
+      } else {
+        this.state.player.start(0, Math.random()*this.state.player.buffer.duration);
+        this.state.env.triggerAttack();
+        this.setState({
+          isPlaying: !this.state.isPlaying
+        });
+      }
   }
 
   render(props) {
-    const ready = this.state.loaded ? {display: 'initial'} : {display: 'none'};
+    const animation = this.state.isPlaying ? "oblong-shake" : " ";
     return(
-
+      <Draggable handle=".handle">
           <div
-            className={this.props.styleClass}
-            style={ready}
+            className={"abso oblong handle"}
+            style={{left: this.props.x+'px', top: this.props.y+'px'}}
             onClick={this.handleMouseClick}
-            onMouseLeave={this.handleMouseLeave}
             >
+            <img
+            className={animation}
+            style={{width: this.props.width+'px', height: this.props.height+'px'}}
+            src={this.props.imgPath}
+            alt="okie"></img>
           </div>
-
+        </Draggable>
     );
   }
 }

@@ -4,12 +4,13 @@ import Cull from './cull';
 import Archipelago from './archipelago';
 import Letter from './letter';
 import Fuite from './fuite';
+import Oblong from './oblong';
 
-import cullingBottom from '../assets/culling-bottom.png';
-import cullingTop from '../assets/culling-top-low-res-top-left-corner.png';
 import irridescent from '../assets/radial/irridescent.png';
+import octo from '../assets/octo.png';
 
 import chandelier from '../assets/soundfiles/chandelier.mp3';
+import slopoke from '../assets/soundfiles/slopoke.mp3';
 
 const smoothing = 0.3;
 const windowSize = 16;
@@ -75,6 +76,16 @@ class Map extends React.Component {
               text={'how not to fall prey to the archive?'}
               />
 
+            <Oblong
+            x={260}
+            y={800}
+            width={80}
+            height={80}
+            audioPath={slopoke}
+            imgPath={octo}
+            gain={this.state.gain}
+            />
+
               <div className={"bottom"}>hola</div>
         </div>
       );
@@ -82,6 +93,13 @@ class Map extends React.Component {
 }
 
 export default Map;
+
+
+
+
+
+
+
 
 // <Culldrip
 // styleClass={"culling-bottom"}
