@@ -1,30 +1,17 @@
 import React from 'react';
 import Tone from 'tone';
-import AnimateTerritory from './animate-territory';
-import Territory from './territory';
-import {plobs, globs} from './blobdata';
-import arp from '../assets/soundfiles/arp.mp3';
-import chandelier from '../assets/soundfiles/chandelier.mp3';
-import collectors from '../assets/soundfiles/collectors.mp3';
-import comeon from '../assets/soundfiles/comeon.mp3';
-import ehorn from '../assets/soundfiles/ehorn.mp3';
-import falling from '../assets/soundfiles/falling.mp3';
-import flick from '../assets/soundfiles/flick.mp3';
-import glassy from '../assets/soundfiles/glassy.mp3';
-import mmmwow from '../assets/soundfiles/mmmwow.mp3';
-import oiltin from '../assets/soundfiles/oiltin.mp3';
-import pluck from '../assets/soundfiles/pluck.mp3';
-import squeaky from '../assets/soundfiles/squeaky.mp3';
-import svvimming1 from '../assets/soundfiles/svvimming1.mp3';
-import svvimming2 from '../assets/soundfiles/svvimming2.mp3';
-import svvimming3 from '../assets/soundfiles/svvimming3.mp3';
-import svvimming4 from '../assets/soundfiles/svvimming4.mp3';
-import svvimming5 from '../assets/soundfiles/svvimming5.mp3';
-import tongue from '../assets/soundfiles/tongue.mp3';
-import whoops from '../assets/soundfiles/whoops.mp3';
-import yes from '../assets/soundfiles/yes.mp3';
+import Cull from './cull';
+import Archipelago from './archipelago';
+import Letter from './letter';
+import Fuite from './fuite';
+import Oblong from './oblong';
 
-const audioLinks = [arp, chandelier, collectors, comeon, ehorn, falling, flick, glassy, mmmwow, oiltin, pluck, squeaky, svvimming1, svvimming2, svvimming3, svvimming4, svvimming5, tongue, whoops, yes];
+import irridescent from '../assets/radial/irridescent.png';
+import octo from '../assets/octo.png';
+
+import chandelier from '../assets/soundfiles/chandelier.mp3';
+import slopoke from '../assets/soundfiles/slopoke.mp3';
+
 const smoothing = 0.3;
 const windowSize = 16;
 
@@ -32,14 +19,11 @@ class Map extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      still: globs,
-      gloopy: plobs,
-      zoom: 1.0,
       follower: new Tone.Follower(smoothing),
       meter: new Tone.Meter(),
       gain: new Tone.Gain(4.0),
       fft: new Tone.FFT(windowSize)
-    }
+    };
   }
 
   componentDidMount(){
@@ -50,38 +34,60 @@ class Map extends React.Component {
 
   render(props) {
     return (
-      <span>
-          {this.state.still.map((element, index) => (
-            <Territory
-            key={'blob'+index}
-            x={element.x*this.state.zoom}
-            y={element.y*this.state.zoom}
-            diameter={element.diameter*this.state.zoom}
-            rotation={element.rotation}
-            radii={element.radii}
-            color={element.color}
-            imgPath={process.env.PUBLIC_URL + element.image}
-            audioPath={audioLinks[Math.floor(Math.random()*audioLinks.length)]}
+      <div className="weltanschauung">
+
+          <Cull
+          x={0}
+          y={0}
+          width={750}
+          height={1500}
+          meter={this.state.meter}
+          fft={this.state.fft}
+          canvasImg={irridescent}
+          movement={0.3}
+          />
+
+            <Archipelago
+            x={730}
+            y={440}
+            amount={10}
+            audioPath={chandelier}
             gain={this.state.gain}
             />
-          ))}
-          {this.state.gloopy.map((element, index) => (
-            <AnimateTerritory
-            key={'blob'+index}
-            x={element.x*this.state.zoom}
-            y={element.y*this.state.zoom}
-            diameter={element.diameter*this.state.zoom}
-            rotation={element.rotation}
-            radii={element.radii}
-            color={element.color}
-            imgPath={process.env.PUBLIC_URL + element.image}
-            audioPath={audioLinks[Math.floor(Math.random()*audioLinks.length)]}
-            meter={this.state.meter}
-            fft={this.state.fft}
+
+              <Letter
+              x={400}
+              y={500}
+              trans={'rotate3d(0, 1, 0, 45deg)'}
+              orient={10}
+              fontsize={25}
+              rand={35}
+              characters={['how', 'not', 't', 'o', 'f', 'a', 'l', 'l', 'p', 'r', 'e', 'y', 'to', 't', 'h', 'e', 'a', 'r', 'c', 'h', 'i', 'v', 'e', '?']}
+              />
+
+              <Fuite
+              x={100}
+              y={100}
+              width={100}
+              height={100}
+              trans={'rotate3d(0, 1, 0, 0deg)'}
+              orient={0}
+              classList={'nanum'}
+              text={'how not to fall prey to the archive?'}
+              />
+
+            <Oblong
+            x={260}
+            y={800}
+            width={80}
+            height={80}
+            audioPath={slopoke}
+            imgPath={octo}
             gain={this.state.gain}
             />
-          ))}
-        </span>
+
+              <div className={"bottom"}>hola</div>
+        </div>
       );
 }
 }
@@ -90,15 +96,58 @@ export default Map;
 
 
 
-// <Territory
-// key={'blob'+index}
-// x={element.x*this.state.zoom}
-// y={element.y*this.state.zoom}
-// diameter={element.diameter*this.state.zoom}
-// rotation={element.rotation}
-// radii={element.radii}
-// color={element.color}
-// imgPath={process.env.PUBLIC_URL + element.image}
-// audioPath={audioLinks[Math.floor(Math.random()*audioLinks.length)]}
-// onTerritorySelect={this.props.onTerritorySelect}
+
+
+
+
+
+// <Culldrip
+// styleClass={"culling-bottom"}
+// width={600}
+// height={282}
+// meter={this.state.meter}
+// fft={this.state.fft}
+// canvasImg={cullingBottom}
+// movement={0.3}
 // />
+
+      // <div className={"oblong-black"}></div>
+      // <div className={"bottom"}>hola</div>
+
+
+                // <Cull
+                // styleClass={"radial1"}
+                // width={100}
+                // height={182}
+                // meter={this.state.meter}
+                // fft={this.state.fft}
+                // canvasImg={radial1}
+                // movement={0.7}
+                // />
+                // <Cull
+                // styleClass={"radial2"}
+                // width={300}
+                // height={300}
+                // meter={this.state.meter}
+                // fft={this.state.fft}
+                // canvasImg={radial2}
+                // movement={0.3}
+                // />
+                // <Cull
+                // styleClass={"radial3"}
+                // width={100}
+                // height={200}
+                // meter={this.state.meter}
+                // fft={this.state.fft}
+                // canvasImg={radial3}
+                // movement={0.3}
+                // />
+                // <Cull
+                // styleClass={"radial4"}
+                // width={200}
+                // height={300}
+                // meter={this.state.meter}
+                // fft={this.state.fft}
+                // canvasImg={radial4}
+                // movement={0.3}
+                // />
