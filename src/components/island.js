@@ -9,8 +9,8 @@ class Island extends React.Component{
       y: this.props.y + Math.random()*this.props.density,
       w: 10+Math.random()*this.props.width,
       h: 10+Math.random()*this.props.height,
-      imgPos: {x: -1*866*Math.random(), y: -1*1000*Math.random()},
-      classlist: "island appear"
+      imgPos: {x: -1*this.props.imgW*Math.random(), y: -1*this.props.imgH*Math.random()},
+      classlist: "appear "+this.props.classList
     };
     this.mouseCoords = {x: 0, y:0};
     this.mouseVec = {x:0, y: 0};
@@ -26,12 +26,12 @@ class Island extends React.Component{
   }
 
   handleMouseHover(){
-    this.setState({classlist: "island disappear"});
+    this.setState({classlist: "disappear "+this.props.classList});
     setTimeout((offX, offY) => {
       this.setState({
         x: this.state.x + 6*offX,
         y: this.state.y + 6*offY,
-        classlist: "island appear"
+        classlist: "appear "+this.props.classList
       });
     }, 400, this.mouseVec.x, this.mouseVec.y);
   }

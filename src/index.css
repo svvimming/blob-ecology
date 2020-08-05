@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Arvo:ital@1&family=Courier+Prime:wght@700&family=Cousine:ital,wght@1,700&family=Grenze+Gotisch:wght@700&family=Merriweather&family=Nanum+Myeongjo:wght@800&family=Source+Code+Pro:ital@1&display=swap');
 
+.fuites{
+  z-index: 1000;
+}
+
 .weltanschauung {
   position: absolute;
   top: 0;
@@ -10,19 +14,17 @@
 }
 
 a{
-  color: rgba(255, 0, 0, 0.5);
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Nanum Myeongjo', serif;
   font-size: 13px;
   text-decoration: none;
 }
 
 a:hover{
-  color: rgba(255, 0, 0, 0.85);
+  color: rgba(0, 0, 0, 0.75);
 }
 
 button{
-  color: rgba(255, 0, 0, 0.5);
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Nanum Myeongjo', serif;
   font-size: 13px;
   background: none;
   border: none;
@@ -31,7 +33,7 @@ button{
 }
 
 button:hover{
-  color: rgba(255, 0, 0, 0.85);
+  color: rgba(0, 0, 0, 0.75);
 }
 
 p {
@@ -41,6 +43,11 @@ p {
 
 .click-me{
   cursor: pointer;
+}
+
+.click-me:hover{
+  cursor: pointer;
+  opacity: 75%;
 }
 
 .noselect {
@@ -96,11 +103,18 @@ img {
 
 /* islands styling vvvvv */
 
-.island{
+.yell{
   position: absolute;
   background-image: url('assets/yell.png');
   background-repeat: no-repeat;
   background-size: 1165px, 1403px;
+}
+
+.sinkcin{
+  position: absolute;
+  background-image: url('assets/sinkcin.png');
+  background-repeat: no-repeat;
+  background-size: 818px, 553px;
 }
 
 .appear{
@@ -144,6 +158,9 @@ img {
   position: absolute;
 }
 
+.fortyfive{
+  transform: rotateZ(-45deg);
+}
 /* gloopy culls^^^^ */
 
 
@@ -156,6 +173,11 @@ img {
 }
 
 .testcnv:hover{
+  animation-name: swell;
+  animation-duration: 0.25s;
+}
+
+.swell:hover{
   animation-name: swell;
   animation-duration: 0.25s;
 }
@@ -198,6 +220,9 @@ img {
   font-family: 'Source Code Pro', monospace;
 }
 
+.seafoam{
+  color: #497373;
+}
 
 
 .bottom{

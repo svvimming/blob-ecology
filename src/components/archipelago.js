@@ -20,7 +20,7 @@ class Archipelago extends React.Component {
         "attack" : 0.1,
         "decay" : 0.1,
         "sustain" : 1.0,
-        "release" : 0.3,
+        "release" : 0.7,
       }),
       isZoomed: false,
       islands: new Array(this.props.amount).fill(0)
@@ -59,9 +59,12 @@ class Archipelago extends React.Component {
             key={'island'+index}
             x={this.props.x}
             y={this.props.y}
-            density={100}
-            width={40}
-            height={40}
+            classList={this.props.classList}
+            density={this.props.density}
+            width={this.props.w}
+            height={this.props.h}
+            imgW={this.props.imgW}
+            imgH={this.props.imgH}
             onHoverSelect={this.handlePlayer}
             />
         ))}
