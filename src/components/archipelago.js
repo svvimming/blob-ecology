@@ -7,8 +7,8 @@ class Archipelago extends React.Component {
     super(props);
     this.initializePlayer = this.initializePlayer.bind(this);
     this.handlePlayer = this.handlePlayer.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.state = {
+      isLoaded: false,
       player: new Tone.Player({
       "url" : this.props.audioPath,
       "onload" : this.initializePlayer,
@@ -22,7 +22,6 @@ class Archipelago extends React.Component {
         "sustain" : 1.0,
         "release" : 0.7,
       }),
-      isZoomed: false,
       islands: new Array(this.props.amount).fill(0)
     };
     this.timer = null;
@@ -32,6 +31,9 @@ class Archipelago extends React.Component {
       this.state.env.toMaster();
       this.state.env.connect(this.props.gain);
       this.state.player.connect(this.state.env);
+      this.setState({
+        isLoaded: true
+      });
   }
 
   componentWillUnmount(){
@@ -49,14 +51,8 @@ class Archipelago extends React.Component {
     }, 750);
   }
 
-  handleClick(){
-    this.setState({
-      isZoomed: !this.state.isZoomed
-    });
-  }
-
   render(props) {
-
+    const trig = this.state.isLoaded ? this.handlePlayer : null;
     return(
       <span>
         {this.state.islands.map((element, index) => (
@@ -70,7 +66,7 @@ class Archipelago extends React.Component {
             height={this.props.h}
             imgW={this.props.imgW}
             imgH={this.props.imgH}
-            onHoverSelect={this.handlePlayer}
+            onHoverSelect={trig}
             />
         ))}
       </span>

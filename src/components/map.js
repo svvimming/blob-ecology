@@ -194,7 +194,7 @@ class Map extends React.Component {
               shaderNo={1}
               />
 
-              <Link to="/" classList={'nanum navy'} style={{position: 'absolute', top: '150px', left: '900px'}}>non-being ad nauseam</Link>
+              <Link to="/" style={{position: 'absolute', top: '150px', left: '900px'}}>non-being ad nauseam</Link>
 
           </div>);
       }
@@ -227,7 +227,7 @@ class Map extends React.Component {
               classList={"fortyfive"}
               />
 
-              <Link to="/" classList={'nanum seafoam'} style={{position: 'absolute', top: '850px', left: '1000px'}}>how not to fall prey to the archive?</Link>
+              <Link to="/" style={{position: 'absolute', top: '850px', left: '1000px'}}>how not to fall prey to the archive?</Link>
 
 
                       <Archipelago x={730} y={440} w={80} h={80}

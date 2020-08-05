@@ -9,6 +9,7 @@ class Oblong extends React.Component {
     this.initializePlayer = this.initializePlayer.bind(this);
     this.state = {
       isPlaying: false,
+      isLoaded: false,
       player: new Tone.Player({
       "url" : this.props.audioPath,
       "onload" : this.initializePlayer,
@@ -30,6 +31,9 @@ class Oblong extends React.Component {
       this.state.env.toMaster();
       this.state.env.connect(this.props.gain);
       this.state.player.connect(this.state.env);
+      this.setState({
+        isLoaded: true
+      });
   }
 
   componentWillUnmount(){
@@ -53,11 +57,12 @@ class Oblong extends React.Component {
   }
 
   render(props) {
+    const view = this.state.isLoaded ? " " : "byebye";
     const animation = this.state.isPlaying ? "oblong-light" : " ";
     return(
       <Draggable handle=".handle">
           <div
-            className={"abso oblong handle"}
+            className={"abso oblong handle "+view}
             style={{left: this.props.x+'px', top: this.props.y+'px'}}
             onClick={this.handleMouseClick}
             >
