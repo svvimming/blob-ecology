@@ -12,12 +12,12 @@ class Fuite extends React.Component{
     const styling = {left: this.props.x+'px', top: this.props.y+'px', width: this.props.w+'px', height: this.props.h+'px'};
 
     const element = (this.props.text!=null) ?
-        <p
-        onClick={this.props.route}
+        <a
+        href="/"
         className={"click-me"}
         >
           {this.props.text}
-        </p>
+        </a>
       :
         <img
         onClick={this.props.route}

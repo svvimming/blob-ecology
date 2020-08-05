@@ -32,6 +32,11 @@ class Oblong extends React.Component {
       this.state.player.connect(this.state.env);
   }
 
+  componentWillUnmount(){
+    this.state.player.dispose();
+    this.state.env.dispose();
+  }
+
   handleMouseClick() {
       if(this.state.isPlaying){
         this.state.env.triggerRelease();

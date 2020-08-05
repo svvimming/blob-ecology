@@ -1,9 +1,14 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import Tone from 'tone';
 import Cull from './cull';
 import Archipelago from './archipelago';
 import Letter from './letter';
-import Fuite from './fuite';
 import Oblong from './oblong';
 
 import irridescent from '../assets/radial/irridescent.png';
@@ -30,7 +35,7 @@ class Map extends React.Component {
     super(props);
     this.reRoute = this.reRoute.bind(this);
     this.state = {
-      route: 0,
+      route: this.props.portal,
       follower: new Tone.Follower(smoothing),
       meter: new Tone.Meter(),
       gain: new Tone.Gain(4.0),
@@ -120,19 +125,7 @@ class Map extends React.Component {
                               characters={['t', 'i', 'n', 'y', 't', 'i', 'n', 'y', 't', 'i', 'i', 'i', 'n', 'y']}
                               />
 
-                <Fuite x={150} y={100} w={100} h={100}
-                classList={'nanum'}
-                text={'fuites'}
-                imgPath={null}
-                route={() => this.reRoute(2)}
-                />
 
-                <Fuite x={550} y={1370} w={700*0.1} h={500*0.1}
-                classList={'nanum'}
-                text={null}
-                imgPath={squidge}
-                route={() => this.reRoute(1)}
-                />
 
 {/*change slopoke buffer here*/}
               <Oblong
@@ -167,6 +160,16 @@ class Map extends React.Component {
                 gain={this.state.gain}
                 />
 
+                <Link to="/nban" style={{position: 'absolute', top: '1370px', left: '550px'}}>
+                    <img
+                    src={squidge}
+                    alt="oopsie"
+                    style={{width: '70px', height: '50px'}}
+                    >
+                    </img>
+                </Link>
+
+                <Link to="/alongwalksomewhereclose" style={{position: 'absolute', top: '100px', left: '150px', width: '100px'}}>a long walk to somewhere close</Link>
 
 
               <div className={"bottom"}>hola</div>
@@ -177,13 +180,6 @@ class Map extends React.Component {
       if(this.state.route === 1){ // NON-BEING AD NAUSEAM
         var page = (
           <div className="weltanschauung">
-
-              <Fuite x={900} y={150} w={200} h={200}
-              classList={'nanum navy'}
-              text={'non-being ad nauseam'}
-              imgPath={null}
-              route={() => this.reRoute(0)}
-              />
 
               {/* shader number is 0=culling, 1=squiggly */}
               <Cull
@@ -197,6 +193,9 @@ class Map extends React.Component {
               movement={1.0}
               shaderNo={1}
               />
+
+              <Link to="/" classList={'nanum navy'} style={{position: 'absolute', top: '150px', left: '900px'}}>non-being ad nauseam</Link>
+
           </div>);
       }
 
@@ -228,12 +227,7 @@ class Map extends React.Component {
               classList={"fortyfive"}
               />
 
-              <Fuite x={1000} y={850} w={100} h={100}
-              classList={'nanum seafoam'}
-              text={'a long walk to somewhere close'}
-              imgPath={null}
-              route={() => this.reRoute(0)}
-              />
+              <Link to="/" classList={'nanum seafoam'} style={{position: 'absolute', top: '850px', left: '1000px'}}>how not to fall prey to the archive?</Link>
 
 
                       <Archipelago x={730} y={440} w={80} h={80}
@@ -278,3 +272,36 @@ class Map extends React.Component {
 
 
 export default Map;
+
+
+
+
+// from notfallprey
+// <Fuite x={550} y={1370} w={700*0.1} h={500*0.1}
+// classList={'nanum'}
+// text={null}
+// imgPath={squidge}
+// route={() => this.reRoute(1)}
+// />
+
+
+// <Fuite x={1000} y={850} w={100} h={100}
+// classList={'nanum seafoam'}
+// text={'a long walk to somewhere close'}
+// imgPath={null}
+// route={() => this.reRoute(0)}
+// />
+
+// <Fuite x={150} y={100} w={100} h={100}
+// classList={'nanum'}
+// text={'fuites'}
+// imgPath={null}
+// route={() => this.reRoute(2)}
+// />
+
+// <Fuite x={900} y={150} w={200} h={200}
+// classList={'nanum navy'}
+// text={'non-being ad nauseam'}
+// imgPath={null}
+// route={() => this.reRoute(0)}
+// />

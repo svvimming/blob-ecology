@@ -18,6 +18,7 @@ const squiggly = Shaders.create({
 
     void main() {
 
+      float dist = distance(uv, mouse*0.5);
       vec2 ij = vec2(uv.x, uv.y);
 
       ij.x += (cos((12.0*time)-uv.x)-0.8) * 0.0025 * level * sin(bins.y*uv.y*4.0) * sin(uv.y*50.0);
