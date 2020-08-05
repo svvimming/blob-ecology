@@ -39,7 +39,7 @@ class Oblong extends React.Component {
           isPlaying: !this.state.isPlaying
         });
       } else {
-        this.state.player.start(0, Math.random()*this.state.player.buffer.duration);
+        this.state.player.start(0, this.props.startTime*this.state.player.buffer.duration);
         this.state.env.triggerAttack();
         this.setState({
           isPlaying: !this.state.isPlaying
@@ -48,7 +48,7 @@ class Oblong extends React.Component {
   }
 
   render(props) {
-    const animation = this.state.isPlaying ? "oblong-shake" : " ";
+    const animation = this.state.isPlaying ? "oblong-light" : " ";
     return(
       <Draggable handle=".handle">
           <div

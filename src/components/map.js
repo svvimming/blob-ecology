@@ -7,14 +7,20 @@ import Fuite from './fuite';
 import Oblong from './oblong';
 
 import irridescent from '../assets/radial/irridescent.png';
-import octo from '../assets/octo.png';
-import feet from '../assets/feet.png';
 import squidge from '../assets/nban-squidge.png';
 import mewr from '../assets/radial/mew-sat-r.png';
+import dots from '../assets/radial/dots3.png';
+
+import octo from '../assets/octo.png';
+import orbitals from '../assets/orbitals.gif';
+import bubble from '../assets/bubble.png';
 
 import chandelier from '../assets/soundfiles/chandelier.mp3';
+import glassy from '../assets/soundfiles/glassy.mp3';
 import slopoke from '../assets/soundfiles/slopoke.mp3';
 import svvities from '../assets/soundfiles/svvities.mp3';
+import psychic from '../assets/soundfiles/psychic-life.mp3';
+import ovaling from '../assets/soundfiles/ovaling-short.mp3';
 
 const smoothing = 0.3;
 const windowSize = 16;
@@ -62,29 +68,61 @@ class Map extends React.Component {
             shaderNo={0}
             />
 
-              <Archipelago x={730} y={440} w={40} h={40}
-              imgW={866}
-              imgH={1000}
-              amount={10}
-              density={100}
-              classList={"yell"}
-              audioPath={chandelier}
-              gain={this.state.gain}
-              />
+            <Cull
+            x={500}
+            y={1400}
+            width={972}
+            height={1600}
+            meter={this.state.meter}
+            fft={this.state.fft}
+            canvasImg={dots}
+            movement={0.3}
+            shaderNo={0}
+            />
 
-                <Letter
-                x={400}
-                y={500}
-                trans={'rotate3d(0, 1, 0, 45deg)'}
-                orient={10}
-                fontsize={25}
-                rand={35}
-                characters={['how', 'not', 't', 'o', 'f', 'a', 'l', 'l', 'p', 'r', 'e', 'y', 'to', 't', 'h', 'e', 'a', 'r', 'c', 'h', 'i', 'v', 'e', '?']}
+                <Archipelago x={730} y={440} w={40} h={40}
+                imgW={866}
+                imgH={1000}
+                amount={10}
+                density={100}
+                classList={"yell"}
+                audioPath={chandelier}
+                gain={this.state.gain}
                 />
 
-                <Fuite x={100} y={100} w={100} h={100}
+                              <Letter
+                              x={400}
+                              y={500}
+                              trans={'rotate3d(0, 1, 0, 45deg)'}
+                              orient={10}
+                              fontsize={25}
+                              rand={35}
+                              characters={['how', 'not', 't', 'o', 'f', 'a', 'l', 'l', 'p', 'r', 'e', 'y', 'to', 't', 'h', 'e', 'a', 'r', 'c', 'h', 'i', 'v', 'e', '?']}
+                              />
+
+                              <Letter
+                              x={270}
+                              y={1300}
+                              trans={'rotate3d(0.7, 1, 0.2, 45deg)'}
+                              orient={10}
+                              fontsize={25}
+                              rand={35}
+                              characters={['in', ' ', 'a,', ' ', 's', 'w', 'e', 'e', 'p', 'i', 'n', 'g', 'm', 'o', 't', 'i', 'o', 'n']}
+                              />
+
+                              <Letter
+                              x={470}
+                              y={2400}
+                              trans={'rotate3d(-0.2, 1, -0.5, 45deg)'}
+                              orient={10}
+                              fontsize={35}
+                              rand={35}
+                              characters={['t', 'i', 'n', 'y', 't', 'i', 'n', 'y', 't', 'i', 'i', 'i', 'n', 'y']}
+                              />
+
+                <Fuite x={150} y={100} w={100} h={100}
                 classList={'nanum'}
-                text={'how not to fall prey to the archive?'}
+                text={'fuites'}
                 imgPath={null}
                 route={() => this.reRoute(2)}
                 />
@@ -96,35 +134,60 @@ class Map extends React.Component {
                 route={() => this.reRoute(1)}
                 />
 
+{/*change slopoke buffer here*/}
               <Oblong
               x={260}
               y={800}
               width={80}
               height={80}
-              audioPath={slopoke}
+              audioPath={glassy}
+              startTime={Math.random()}
               imgPath={octo}
               gain={this.state.gain}
               />
+
+                <Archipelago x={800} y={1500} w={40} h={40}
+                imgW={320}
+                imgH={680}
+                amount={9}
+                density={100}
+                classList={"slant"}
+                audioPath={slopoke}
+                gain={this.state.gain}
+                />
+
+                <Oblong
+                x={830}
+                y={2450}
+                width={80}
+                height={80}
+                audioPath={psychic}
+                startTime={0.0}
+                imgPath={orbitals}
+                gain={this.state.gain}
+                />
+
+
 
               <div className={"bottom"}>hola</div>
             </div>
         );
       }
 
-      if(this.state.route === 1){
+      if(this.state.route === 1){ // NON-BEING AD NAUSEAM
         var page = (
           <div className="weltanschauung">
 
               <Fuite x={900} y={150} w={200} h={200}
-              classList={'nanum'}
-              text={null}
-              imgPath={feet}
+              classList={'nanum navy'}
+              text={'non-being ad nauseam'}
+              imgPath={null}
               route={() => this.reRoute(0)}
               />
 
               {/* shader number is 0=culling, 1=squiggly */}
               <Cull
-              x={200}
+              x={600}
               y={400}
               width={700}
               height={500}
@@ -137,7 +200,7 @@ class Map extends React.Component {
           </div>);
       }
 
-      if(this.state.route === 2){
+      if(this.state.route === 2){ // A LONG WALK TO SOMEWHERE CLOSE
         var page = (
           <div className="weltanschauung">
 
@@ -167,7 +230,7 @@ class Map extends React.Component {
 
               <Fuite x={1000} y={850} w={100} h={100}
               classList={'nanum seafoam'}
-              text={'in a sweeping motion'}
+              text={'a long walk to somewhere close'}
               imgPath={null}
               route={() => this.reRoute(0)}
               />
@@ -183,6 +246,27 @@ class Map extends React.Component {
                       gain={this.state.gain}
                       />
 
+                      <Archipelago x={130} y={840} w={25} h={25}
+                      imgW={894}
+                      imgH={724}
+                      amount={8}
+                      density={300}
+                      classList={"fungi"}
+                      audioPath={ovaling}
+                      gain={this.state.gain}
+                      />
+
+                      <Oblong
+                      x={330}
+                      y={1000}
+                      width={80}
+                      height={80}
+                      audioPath={ovaling}
+                      startTime={0.0}
+                      imgPath={bubble}
+                      gain={this.state.gain}
+                      />
+
           </div>
         );
       }
@@ -194,61 +278,3 @@ class Map extends React.Component {
 
 
 export default Map;
-
-
-
-
-
-
-
-
-// <Culldrip
-// styleClass={"culling-bottom"}
-// width={600}
-// height={282}
-// meter={this.state.meter}
-// fft={this.state.fft}
-// canvasImg={cullingBottom}
-// movement={0.3}
-// />
-
-      // <div className={"oblong-black"}></div>
-      // <div className={"bottom"}>hola</div>
-
-
-                // <Cull
-                // styleClass={"radial1"}
-                // width={100}
-                // height={182}
-                // meter={this.state.meter}
-                // fft={this.state.fft}
-                // canvasImg={radial1}
-                // movement={0.7}
-                // />
-                // <Cull
-                // styleClass={"radial2"}
-                // width={300}
-                // height={300}
-                // meter={this.state.meter}
-                // fft={this.state.fft}
-                // canvasImg={radial2}
-                // movement={0.3}
-                // />
-                // <Cull
-                // styleClass={"radial3"}
-                // width={100}
-                // height={200}
-                // meter={this.state.meter}
-                // fft={this.state.fft}
-                // canvasImg={radial3}
-                // movement={0.3}
-                // />
-                // <Cull
-                // styleClass={"radial4"}
-                // width={200}
-                // height={300}
-                // meter={this.state.meter}
-                // fft={this.state.fft}
-                // canvasImg={radial4}
-                // movement={0.3}
-                // />
