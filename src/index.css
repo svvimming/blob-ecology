@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Arvo:ital@1&family=Courier+Prime:wght@700&family=Cousine:ital,wght@1,700&family=Grenze+Gotisch:wght@700&family=Merriweather&family=Nanum+Myeongjo:wght@800&family=Source+Code+Pro:ital@1&display=swap');
 
+.fuites{
+  z-index: 1000;
+}
+
 .weltanschauung {
   position: absolute;
   top: 0;
@@ -7,22 +11,25 @@
   width: 100%;
   height: 100%;
   overflow: auto;
+  z-index: -1000;
+}
+
+.abso{
+  position: absolute;
 }
 
 a{
-  color: rgba(255, 0, 0, 0.5);
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Nanum Myeongjo', serif;
   font-size: 13px;
   text-decoration: none;
 }
 
 a:hover{
-  color: rgba(255, 0, 0, 0.85);
+  color: rgba(0, 0, 0, 0.75);
 }
 
 button{
-  color: rgba(255, 0, 0, 0.5);
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Nanum Myeongjo', serif;
   font-size: 13px;
   background: none;
   border: none;
@@ -31,7 +38,7 @@ button{
 }
 
 button:hover{
-  color: rgba(255, 0, 0, 0.85);
+  color: rgba(0, 0, 0, 0.75);
 }
 
 p {
@@ -43,21 +50,9 @@ p {
   cursor: pointer;
 }
 
-.noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
-}
-
-
-/* oblongs */
-
-.oblong{
-  display: inline-block;
+.click-me:hover{
+  cursor: pointer;
+  opacity: 75%;
 }
 
 img {
@@ -66,6 +61,30 @@ img {
   -moz-user-drag: none;
   -o-user-drag: none;
   user-drag: none;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+.byebye {
+  display: none;
+}
+
+/* oblongs */
+
+.oblong{
+  display: inline-block;
+}
+
+.oblong:active{
+  animation-name: swell;
+  animation-duration: 0.25s;
 }
 
 .oblong-shake{
@@ -90,18 +109,54 @@ img {
     100% { transform: translate(1px, -2px) rotate(-1deg); }
   }
 
+  .oblong-light{
+    animation: light 1.5s;
+    /* When the animation is finished, start again */
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes light {
+    0% { opacity: 100%}
+    50% { opacity: 70%}
+    100% { opacity: 100%}
+  }
+
 /* oblongs^^^^^^^ */
 
 
 
-/* islands styling vvvvv */
+/* archipelagos vvvvv */
 
-.island{
+.yell{
   position: absolute;
   background-image: url('assets/yell.png');
   background-repeat: no-repeat;
   background-size: 1165px, 1403px;
 }
+
+.sinkcin{
+  position: absolute;
+  background-image: url('assets/sinkcin.png');
+  background-repeat: no-repeat;
+  background-size: 818px, 553px;
+}
+
+.slant{
+  position: absolute;
+  background-image: url('assets/slant.jpg');
+  background-repeat: no-repeat;
+  background-size: 320px, 680px;
+}
+
+.fungi{
+  position: absolute;
+  background-image: url('assets/fung.png');
+  background-repeat: no-repeat;
+  background-size: 894px, 724px;
+}
+
+/* archipelagos ^^^^ */
+/* island animation */
 
 .appear{
   animation-name: popin;
@@ -125,26 +180,15 @@ img {
   100% {transform: scale(0.0)}
 }
 
-/* islands styling ^^^^^ */
+/* island animation ^^^^^ */
 
-.culling-bottom{
-  position: absolute;
-  left: -400px;
-  top: 0px;
+
+/* culls */
+
+.fortyfive{
   transform: rotateZ(-45deg);
 }
-
-.culling-zoom{
-  position: absolute;
-  left: 40px;
-  top: 500px;
-}
-
-.abso{
-  position: absolute;
-}
-
-/* gloopy culls^^^^ */
+/* culls^^^^ */
 
 
 
@@ -156,6 +200,11 @@ img {
 }
 
 .testcnv:hover{
+  animation-name: swell;
+  animation-duration: 0.25s;
+}
+
+.swell:hover{
   animation-name: swell;
   animation-duration: 0.25s;
 }
@@ -198,7 +247,15 @@ img {
   font-family: 'Source Code Pro', monospace;
 }
 
+.seafoam{
+  color: #497373;
+}
 
+.navy{
+  color: #083182;
+}
+
+/* end */
 
 .bottom{
   position: absolute;
