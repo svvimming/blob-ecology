@@ -1,16 +1,15 @@
 import React from 'react';
 import Map from './components/map';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 function App() {
   return (
     <Router>
-      <div>
+      <div id="router">
         {/*
           A <Switch> looks through all its children <Route>
           elements and renders the first one whose path

@@ -22,10 +22,22 @@ a{
   font-family: 'Nanum Myeongjo', serif;
   font-size: 13px;
   text-decoration: none;
+  color: rgba(0, 0, 0, 0.9);
 }
 
-a:hover{
+/* Each state */
+
+a:visited {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.9);
+}
+a:focus {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.9);
+}
+a:hover, a:active{
   color: rgba(0, 0, 0, 0.75);
+  text-decoration: none;
 }
 
 button{
@@ -52,7 +64,7 @@ p {
 
 .click-me:hover{
   cursor: pointer;
-  opacity: 75%;
+  opacity: 0.75;
 }
 
 img {
@@ -116,9 +128,9 @@ img {
   }
 
   @keyframes light {
-    0% { opacity: 100%}
-    50% { opacity: 70%}
-    100% { opacity: 100%}
+    0% { opacity: 1.0}
+    50% { opacity: 0.75}
+    100% { opacity: 1.0}
   }
 
 /* oblongs^^^^^^^ */
