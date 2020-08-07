@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Tone from 'tone';
 import Cull from './cull';
 import Archipelago from './archipelago';
@@ -160,7 +155,7 @@ class Map extends React.Component {
                 gain={this.state.gain}
                 />
 
-                <Link to="/nban" style={{position: 'absolute', top: '1370px', left: '550px'}}>
+                <Link to="/nban" style={{position: 'absolute', top: '1370px', left: '550px', color: '#083182'}}>
                     <img
                     src={squidge}
                     alt="oopsie"
@@ -194,7 +189,7 @@ class Map extends React.Component {
               shaderNo={1}
               />
 
-              <Link to="/" style={{position: 'absolute', top: '150px', left: '900px'}}>non-being ad nauseam</Link>
+              <Link to="/" style={{position: 'absolute', top: '150px', left: '900px', color: '#083182'}}>non-being ad nauseam</Link>
 
           </div>);
       }
@@ -227,7 +222,7 @@ class Map extends React.Component {
               classList={"fortyfive"}
               />
 
-              <Link to="/" style={{position: 'absolute', top: '850px', left: '1000px'}}>how not to fall prey to the archive?</Link>
+              <Link to="/" style={{position: 'absolute', top: '850px', left: '1000px', color: '#497373'}}>how not to fall prey to the archive?</Link>
 
 
                       <Archipelago x={730} y={440} w={80} h={80}
