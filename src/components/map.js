@@ -11,6 +11,12 @@ import squidge from '../assets/nban-squidge.png';
 import mewr from '../assets/radial/mew-sat-r.png';
 import dots from '../assets/radial/dots3.png';
 
+import hellfun from '../assets/grate/hellfun.png';
+import grate1 from '../assets/grate/1.png';
+import grate2 from '../assets/grate/2.png';
+import grate3 from '../assets/grate/3.png';
+import grate4 from '../assets/grate/4.png';
+
 import octo from '../assets/octo.png';
 import orbitals from '../assets/orbitals.gif';
 import bubble from '../assets/bubble.png';
@@ -21,6 +27,8 @@ import slopoke from '../assets/soundfiles/slopoke.mp3';
 import svvities from '../assets/soundfiles/svvities.mp3';
 import psychic from '../assets/soundfiles/psychic-life.mp3';
 import ovaling from '../assets/soundfiles/ovaling-short.mp3';
+import clunks from '../assets/grate/clunks.mp3';
+import aside from '../assets/grate/aside.mp3';
 
 const smoothing = 0.3;
 const windowSize = 16;
@@ -28,7 +36,6 @@ const windowSize = 16;
 class Map extends React.Component {
   constructor(props){
     super(props);
-    this.reRoute = this.reRoute.bind(this);
     this.state = {
       route: this.props.portal,
       follower: new Tone.Follower(smoothing),
@@ -42,12 +49,6 @@ class Map extends React.Component {
     this.state.follower.connect(this.state.meter);
     this.state.gain.connect(this.state.fft);
     this.state.gain.connect(this.state.follower);
-  }
-
-  reRoute(newRoute){
-    this.setState({
-      route: newRoute
-    });
   }
 
   render(props) {
@@ -223,6 +224,14 @@ class Map extends React.Component {
               />
 
               <Link to="/" style={{position: 'absolute', top: '850px', left: '1000px', color: '#497373'}}>how not to fall prey to the archive?</Link>
+              <Link to="/aside" style={{position: 'absolute', top: '1100px', left: '600px'}}>
+                  <img
+                  src={grate1}
+                  alt="oopsie"
+                  style={{width: '50px', height: '50px'}}
+                  >
+                  </img>
+              </Link>
 
 
                       <Archipelago x={730} y={440} w={80} h={80}
@@ -260,6 +269,86 @@ class Map extends React.Component {
         );
       }
 
+        if(this.state.route === 3){ // ASIDE
+          var page = (
+            <div className="weltanschauung mustard">
+
+              <Oblong
+              x={300}
+              y={300}
+              width={300}
+              height={300}
+              audioPath={aside}
+              startTime={0.0}
+              imgPath={grate1}
+              gain={this.state.gain}
+              classList={"click-me"}
+              />
+
+              <Oblong
+              x={300}
+              y={300}
+              width={300*0.89}
+              height={300*0.85}
+              audioPath={aside}
+              startTime={0.2353}
+              imgPath={grate2}
+              gain={this.state.gain}
+              classList={"click-me"}
+              />
+
+              <Oblong
+              x={300}
+              y={300}
+              width={300*0.81}
+              height={300*0.72}
+              audioPath={aside}
+              startTime={0.48}
+              imgPath={grate3}
+              gain={this.state.gain}
+              classList={"click-me"}
+              />
+
+              <Oblong
+              x={300}
+              y={300}
+              width={300*0.70}
+              height={300*0.60}
+              audioPath={aside}
+              startTime={0.6765}
+              imgPath={grate4}
+              gain={this.state.gain}
+              classList={"click-me"}
+              />
+
+                <Archipelago x={160} y={100} w={30} h={30}
+                imgW={2304}
+                imgH={2304}
+                amount={40}
+                density={1000}
+                classList={"hellfun"}
+                audioPath={clunks}
+                gain={this.state.gain}
+                />
+
+                <Archipelago x={260} y={200} w={100} h={100}
+                imgW={2304}
+                imgH={2304}
+                amount={20}
+                density={100}
+                classList={"hellfun"}
+                audioPath={clunks}
+                gain={this.state.gain}
+                />
+
+                <Link to="/" style={{position: 'absolute', top: '250px', left: '1000px', color: 'white'}}>aside</Link>
+
+
+            </div>
+          );
+        }
+
+
 
     return (page);
   }
@@ -267,36 +356,3 @@ class Map extends React.Component {
 
 
 export default Map;
-
-
-
-
-// from notfallprey
-// <Fuite x={550} y={1370} w={700*0.1} h={500*0.1}
-// classList={'nanum'}
-// text={null}
-// imgPath={squidge}
-// route={() => this.reRoute(1)}
-// />
-
-
-// <Fuite x={1000} y={850} w={100} h={100}
-// classList={'nanum seafoam'}
-// text={'a long walk to somewhere close'}
-// imgPath={null}
-// route={() => this.reRoute(0)}
-// />
-
-// <Fuite x={150} y={100} w={100} h={100}
-// classList={'nanum'}
-// text={'fuites'}
-// imgPath={null}
-// route={() => this.reRoute(2)}
-// />
-
-// <Fuite x={900} y={150} w={200} h={200}
-// classList={'nanum navy'}
-// text={'non-being ad nauseam'}
-// imgPath={null}
-// route={() => this.reRoute(0)}
-// />

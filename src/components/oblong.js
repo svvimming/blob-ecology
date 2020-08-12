@@ -62,7 +62,7 @@ class Oblong extends React.Component {
     return(
       <Draggable handle=".handle">
           <div
-            className={"abso oblong handle "+view}
+            className={"abso oblong handle "+this.props.classList+view}
             style={{left: this.props.x+'px', top: this.props.y+'px'}}
             onClick={this.handleMouseClick}
             >

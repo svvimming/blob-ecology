@@ -27,6 +27,9 @@ function App() {
           <Route path="/alongwalksomewhereclose">
             <LongWalkSomewhereClose />
           </Route>
+          <Route path="/aside">
+            <Aside />
+          </Route>
         </Switch>
       </div>
     </Router>
@@ -56,6 +59,14 @@ function LongWalkSomewhereClose() {
   return (
     <Map
     portal={2}
+    />
+  );
+}
+
+function Aside() {
+  return (
+    <Map
+    portal={3}
     />
   );
 }
