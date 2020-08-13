@@ -52,7 +52,7 @@ class Map extends React.Component {
   }
 
   render(props) {
-    if(this.state.route === 0){
+    if(this.state.route === 0){ //A LONG WALK TO SOMEWHERE CLOSE
       var page = (
           <div className="weltanschauung">
 
@@ -195,7 +195,7 @@ class Map extends React.Component {
           </div>);
       }
 
-      if(this.state.route === 2){ // A LONG WALK TO SOMEWHERE CLOSE
+      if(this.state.route === 2){ //OVALING rollingunrolling
         var page = (
           <div className="weltanschauung">
 
@@ -223,7 +223,7 @@ class Map extends React.Component {
               classList={"fortyfive"}
               />
 
-              <Link to="/" style={{position: 'absolute', top: '850px', left: '1000px', color: '#497373'}}>how not to fall prey to the archive?</Link>
+              <Link to="/" style={{position: 'absolute', top: '850px', left: '1000px', color: '#497373'}}>rollingunrolling</Link>
               <Link to="/aside" style={{position: 'absolute', top: '1100px', left: '600px'}}>
                   <img
                   src={grate1}
