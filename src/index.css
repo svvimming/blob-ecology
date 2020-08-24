@@ -167,6 +167,21 @@ img {
   background-size: 894px, 724px;
 }
 
+.hellfun{
+  position: absolute;
+  background-image: url('assets/grate/hellfun.png');
+  background-repeat: no-repeat;
+  background-size: 2304px, 2304px;
+}
+
+.mustard{
+  position: absolute;
+  background-image: url('assets/grate/mustard.png');
+  background-repeat: no-repeat;
+  background-size: 100%, 100%;
+  overflow: hidden;
+}
+
 /* archipelagos ^^^^ */
 /* island animation */
 

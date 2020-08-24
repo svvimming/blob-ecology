@@ -71,6 +71,32 @@ const culling = Shaders.create({
 ` }
 });
 
+// const wigglestrips = Shaders.create({
+//   fftGloop: {
+//     frag: GLSL`
+//     precision highp float;
+//     varying vec2 uv;
+//     float rand(float n){return fract(sin(n) * 43758.5453123);}
+//     float noise(float p){
+//     	float fl = floor(p);
+//       	float fc = fract(p);
+//     	return mix(rand(fl), rand(fl + 1.0), fc);
+//     }
+//
+//     void main(){
+//         vec2 ij = vec2(uv.x, uv.y);
+//         ij.x += 0.2 * sin(time + uv.y * 4.0);
+//         float numLines = 15. + fragCoord.y * 0.4;
+//         float colNoise = noise(0.6 * ij.x * numLines);
+//         float colStripes = 0.5 + 0.5 * sin(uv.x * numLines * 0.75);
+//         float col = mix(colNoise, colStripes, 0.5 + 0.5 * sin(iTime));
+//         float aA = 1./(iResolution.x * 0.005) ;
+//         col = smoothstep(0.5 - aA, 0.5 + aA, col);
+//     	fragColor = vec4(vec3(col),1.0);
+//     }
+// ` }
+// });
+
 const shaders = [culling, squiggly];
 
 function getBinLevels(fftIn){
