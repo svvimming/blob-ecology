@@ -7,6 +7,7 @@ class Archipelago extends React.Component {
     super(props);
     this.initializePlayer = this.initializePlayer.bind(this);
     this.handlePlayer = this.handlePlayer.bind(this);
+    this.archipelagoMouseData = this.archipelagoMouseData.bind(this);
     this.state = {
       isLoaded: false,
       player: new Tone.Player({
@@ -25,6 +26,8 @@ class Archipelago extends React.Component {
       islands: new Array(this.props.amount).fill(0)
     };
     this.timer = null;
+    this.mouseCoords = {x: 0, y:0};
+    this.mouseVec = {x:0, y: 0};
   }
 
   initializePlayer() {
@@ -34,6 +37,19 @@ class Archipelago extends React.Component {
       this.setState({
         isLoaded: true
       });
+  }
+
+  componentDidMount(){
+    document.addEventListener('mousemove', this.handleMouseMove, false);
+  }
+
+  handleMouseMove = (e) => {
+    this.mouseVec = {x: e.pageX - this.mouseCoords.x, y: e.pageY - this.mouseCoords.y};
+    this.mouseCoords = {x: e.pageX, y: e.pageY};
+  }
+
+  archipelagoMouseData() {
+    return this.mouseVec;
   }
 
   componentWillUnmount(){
@@ -67,6 +83,7 @@ class Archipelago extends React.Component {
             imgW={this.props.imgW}
             imgH={this.props.imgH}
             onHoverSelect={trig}
+            mouseData={() => this.archipelagoMouseData()}
             />
         ))}
       </span>

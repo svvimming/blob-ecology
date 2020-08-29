@@ -11,7 +11,6 @@ import squidge from '../assets/nban-squidge.png';
 import mewr from '../assets/radial/mew-sat-r.png';
 import dots from '../assets/radial/dots3.png';
 
-import hellfun from '../assets/grate/hellfun.png';
 import grate1 from '../assets/grate/1.png';
 import grate2 from '../assets/grate/2.png';
 import grate3 from '../assets/grate/3.png';

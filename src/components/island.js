@@ -12,17 +12,6 @@ class Island extends React.Component{
       imgPos: {x: -1*this.props.imgW*Math.random(), y: -1*this.props.imgH*Math.random()},
       classlist: "appear "+this.props.classList
     };
-    this.mouseCoords = {x: 0, y:0};
-    this.mouseVec = {x:0, y: 0};
-  }
-
-  componentDidMount(){
-    document.addEventListener('mousemove', this.handleMouseMove, false);
-  }
-
-  handleMouseMove = (e) => {
-    this.mouseVec = {x: e.pageX - this.mouseCoords.x, y: e.pageY - this.mouseCoords.y};
-    this.mouseCoords = {x: e.pageX, y: e.pageY};
   }
 
   handleMouseHover(){
@@ -33,7 +22,7 @@ class Island extends React.Component{
         y: this.state.y + 6*offY,
         classlist: "appear "+this.props.classList
       });
-    }, 400, this.mouseVec.x, this.mouseVec.y);
+    }, 400, this.props.mouseData().x, this.props.mouseData().y);
   }
 
     render(props){
