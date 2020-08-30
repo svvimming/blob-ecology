@@ -24,8 +24,8 @@ function App() {
           <Route path="/nban">
             <Nban />
           </Route>
-          <Route path="/alongwalksomewhereclose">
-            <LongWalkSomewhereClose />
+          <Route path="/rollingunrolling">
+            <Rollingunrolling />
           </Route>
           <Route path="/aside">
             <Aside />
@@ -55,7 +55,7 @@ function Nban() {
   );
 }
 
-function LongWalkSomewhereClose() {
+function Rollingunrolling() {
   return (
     <Map
     portal={2}
