@@ -98,6 +98,8 @@ class Map extends React.Component {
                               fontsize={25}
                               rand={35}
                               characters={['how', 'not', 't', 'o', 'f', 'a', 'l', 'l', 'p', 'r', 'e', 'y', 'to', 't', 'h', 'e', 'a', 'r', 'c', 'h', 'i', 'v', 'e', '?']}
+                              audioPath={svvities}
+                              gain={this.state.gain}
                               />
 
                               <Letter
@@ -108,6 +110,8 @@ class Map extends React.Component {
                               fontsize={25}
                               rand={35}
                               characters={['in', ' ', 'a,', ' ', 's', 'w', 'e', 'e', 'p', 'i', 'n', 'g', 'm', 'o', 't', 'i', 'o', 'n']}
+                              audioPath={svvities}
+                              gain={this.state.gain}
                               />
 
                               <Letter
@@ -118,6 +122,8 @@ class Map extends React.Component {
                               fontsize={35}
                               rand={35}
                               characters={['t', 'i', 'n', 'y', 't', 'i', 'n', 'y', 't', 'i', 'i', 'i', 'n', 'y']}
+                              audioPath={svvities}
+                              gain={this.state.gain}
                               />
 
 

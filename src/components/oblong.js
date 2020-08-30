@@ -1,5 +1,5 @@
 import React from 'react';
-import Draggable from 'react-draggable';
+// import Draggable from 'react-draggable';
 import Tone from 'tone';
 
 class Oblong extends React.Component {
@@ -60,7 +60,7 @@ class Oblong extends React.Component {
     const view = this.state.isLoaded ? " " : "byebye";
     const animation = this.state.isPlaying ? "oblong-light" : " ";
     return(
-      <Draggable handle=".handle">
+
           <div
             className={"abso oblong handle "+this.props.classList+view}
             style={{left: this.props.x+'px', top: this.props.y+'px'}}
@@ -72,9 +72,12 @@ class Oblong extends React.Component {
             src={this.props.imgPath}
             alt="okie"></img>
           </div>
-        </Draggable>
+
     );
   }
 }
 
 export default Oblong;
+
+  // <Draggable handle=".handle">
+  //   </Draggable>
