@@ -8,10 +8,9 @@ import Oblong from './oblong';
 
 import irridescent from '../assets/radial/irridescent.png';
 import squidge from '../assets/nban-squidge.png';
-import mewr from '../assets/radial/mew-sat-r.png';
+import mew from '../assets/radial/mew.png';
 import dots from '../assets/radial/dots3.png';
 
-import hellfun from '../assets/grate/hellfun.png';
 import grate1 from '../assets/grate/1.png';
 import grate2 from '../assets/grate/2.png';
 import grate3 from '../assets/grate/3.png';
@@ -49,6 +48,13 @@ class Map extends React.Component {
     this.state.follower.connect(this.state.meter);
     this.state.gain.connect(this.state.fft);
     this.state.gain.connect(this.state.follower);
+  }
+
+  componentWillUnmount(){
+    this.state.follower.dispose();
+    this.state.meter.dispose();
+    this.state.gain.dispose();
+    this.state.fft.dispose();
   }
 
   render(props) {
@@ -98,7 +104,7 @@ class Map extends React.Component {
                               orient={10}
                               fontsize={25}
                               rand={35}
-                              characters={['how', 'not', 't', 'o', 'f', 'a', 'l', 'l', 'p', 'r', 'e', 'y', 'to', 't', 'h', 'e', 'a', 'r', 'c', 'h', 'i', 'v', 'e', '?']}
+                              characters={['a', 'l', 'o', 'n', 'g', ' ', 'w', 'a', 'l', 'k', 'to', 's', 'o', 'm', 'e', 'w', 'h', 'e', 'r', 'e', ' ', 'c', 'l', 'o', 's', 'e', '?']}
                               />
 
                               <Letter
@@ -108,7 +114,7 @@ class Map extends React.Component {
                               orient={10}
                               fontsize={25}
                               rand={35}
-                              characters={['in', ' ', 'a,', ' ', 's', 'w', 'e', 'e', 'p', 'i', 'n', 'g', 'm', 'o', 't', 'i', 'o', 'n']}
+                              characters={['k', 'i', 'n', 'g', 'd', 'o', 'm', 'c', 'o', 'm', 'e', ' ', 'f', 'a', 'l', 'l', 'i', 'n', 'g']}
                               />
 
                               <Letter
@@ -116,14 +122,12 @@ class Map extends React.Component {
                               y={2400}
                               trans={'rotate3d(-0.2, 1, -0.5, 45deg)'}
                               orient={10}
-                              fontsize={35}
+                              fontsize={30}
                               rand={35}
-                              characters={['t', 'i', 'n', 'y', 't', 'i', 'n', 'y', 't', 'i', 'i', 'i', 'n', 'y']}
+                              characters={['in', ' ', 'a,', ' ', 's', 'w', 'e', 'e', 'p', 'i', 'n', 'g', 'm', 'o', 't', 'i', 'o', 'n']}
                               />
 
 
-
-{/*change slopoke buffer here*/}
               <Oblong
               x={260}
               y={800}
@@ -165,7 +169,7 @@ class Map extends React.Component {
                     </img>
                 </Link>
 
-                <Link to="/alongwalksomewhereclose" style={{position: 'absolute', top: '100px', left: '150px', width: '100px'}}>a long walk to somewhere close</Link>
+                <Link to="/rollingunrolling" style={{position: 'absolute', top: '100px', left: '150px', width: '100px'}}>rollingunrolling</Link>
 
 
               <div className={"bottom"}>hola</div>
@@ -190,7 +194,7 @@ class Map extends React.Component {
               shaderNo={1}
               />
 
-              <Link to="/" style={{position: 'absolute', top: '150px', left: '900px', color: '#083182'}}>non-being ad nauseam</Link>
+              <Link to="/" style={{position: 'absolute', top: '150px', left: '900px', color: '#083182'}}>a long walk to somewhere close</Link>
 
           </div>);
       }
@@ -206,7 +210,7 @@ class Map extends React.Component {
           orient={10}
           fontsize={55}
           rand={35}
-          characters={['k', 'i', 'n', 'g', 'd', 'o', 'm', 'c', 'o', 'm', 'e', 'f', 'a', 'l', 'l', 'i', 'n', 'g']}
+          characters={['r', 'o', 'l', 'l', 'i', 'n', 'g', 'u', 'n', 'r', 'o', 'l', 'l', 'i', 'n', 'g', 'g', 'g']}
           />
 
               {/* shader number is 0=culling, 1=squiggly */}
@@ -217,13 +221,13 @@ class Map extends React.Component {
               height={1100}
               meter={this.state.meter}
               fft={this.state.fft}
-              canvasImg={mewr}
+              canvasImg={mew}
               movement={0.3}
               shaderNo={0}
               classList={"fortyfive"}
               />
 
-              <Link to="/" style={{position: 'absolute', top: '850px', left: '1000px', color: '#497373'}}>rollingunrolling</Link>
+              <Link to="/" style={{position: 'absolute', width: '100px', top: '850px', left: '1000px', color: '#497373'}}>a long walk to somewhere close</Link>
               <Link to="/aside" style={{position: 'absolute', top: '1100px', left: '600px'}}>
                   <img
                   src={grate1}
@@ -341,7 +345,7 @@ class Map extends React.Component {
                 gain={this.state.gain}
                 />
 
-                <Link to="/" style={{position: 'absolute', top: '250px', left: '1000px', color: 'white'}}>aside</Link>
+                <Link to="/" style={{position: 'absolute', width: '100px', top: '250px', left: '1000px', color: 'white'}}>a long walk to somewhere close</Link>
 
 
             </div>
