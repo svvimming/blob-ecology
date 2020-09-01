@@ -192,6 +192,7 @@ class Map extends React.Component {
               canvasImg={squidge}
               movement={1.0}
               shaderNo={1}
+              classList={"slither"}
               />
 
               <Link to="/" style={{position: 'absolute', top: '150px', left: '900px', color: '#083182'}}>a long walk to somewhere close</Link>
