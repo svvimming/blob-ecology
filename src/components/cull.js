@@ -11,18 +11,14 @@ const squiggly = Shaders.create({
     precision highp float;
     varying vec2 uv;
     uniform sampler2D t;
-
-    uniform vec2 mouse;
-    uniform float time, level, throb;
-    uniform vec3 bins;
+    uniform float time, throb;
 
     void main() {
 
-      float dist = distance(uv, mouse*0.5);
       vec2 ij = vec2(uv.x, uv.y);
 
-      ij.x += (cos((12.0*time)-uv.x)-0.8) * 0.0025 * level * sin(bins.y*uv.y*4.0) * sin(uv.y*50.0);
-      ij.y += (cos((4.0*time)-uv.y)-0.8) * 0.0025 * bins.z * throb * cos(bins.x*uv.y*60.0) * sin(uv.x*70.0);
+      ij.x += cos(time + uv.x * 10.0) * 0.05 * throb;
+      ij.y -= sin(time + uv.y * 11.0) * 0.04 * throb;
 
       vec4 img = vec4(texture2D(t, ij));
 
@@ -71,31 +67,38 @@ const culling = Shaders.create({
 ` }
 });
 
-// const wigglestrips = Shaders.create({
+// const squiggly = Shaders.create({
 //   fftGloop: {
 //     frag: GLSL`
 //     precision highp float;
 //     varying vec2 uv;
-//     float rand(float n){return fract(sin(n) * 43758.5453123);}
+//     uniform sampler2D t;
+//     uniform float time;
+//
+//     float rand(float n){
+//       return fract(sin(n) * 43758.5453123);
+//     }
 //     float noise(float p){
 //     	float fl = floor(p);
-//       	float fc = fract(p);
+//       float fc = fract(p);
 //     	return mix(rand(fl), rand(fl + 1.0), fc);
 //     }
 //
 //     void main(){
 //         vec2 ij = vec2(uv.x, uv.y);
-//         ij.x += 0.2 * sin(time + uv.y * 4.0);
-//         float numLines = 15. + fragCoord.y * 0.4;
+//         ij.x += 0.2 * sin(time + ij.y * 4.0);
+//         float numLines = 15. + ij.y * 0.4;
 //         float colNoise = noise(0.6 * ij.x * numLines);
-//         float colStripes = 0.5 + 0.5 * sin(uv.x * numLines * 0.75);
-//         float col = mix(colNoise, colStripes, 0.5 + 0.5 * sin(iTime));
-//         float aA = 1./(iResolution.x * 0.005) ;
+//         float colStripes = 0.5 + 0.5 * sin(ij.x * numLines * 0.75);
+//         float col = mix(colNoise, colStripes, 0.5 + 0.5 * sin(time));
+//         float aA = 1./(2560.0 * 0.005) ;
 //         col = smoothstep(0.5 - aA, 0.5 + aA, col);
-//     	fragColor = vec4(vec3(col),1.0);
+//         vec4 img = vec4(texture2D(t, ij));
+//     	gl_FragColor = vec4(vec3(col),1.0);
 //     }
 // ` }
 // });
+
 
 const shaders = [culling, squiggly];
 
@@ -110,9 +113,9 @@ function getBinLevels(fftIn){
   return [high/5, mid/5, Math.max(low/5, 0.1)];
 }
 
-const Cullshader = timeLoop(({ children: t, time, mouse, meter, fft, throb, shader }) =>
+const Cullshader = timeLoop(({ children: t, time, mouse, meter, fft, throb }) =>
   <Node
-    shader={shader.fftGloop}
+    shader={culling.fftGloop}
     uniforms={{
       t,
       time: time / 10000,
@@ -123,19 +126,48 @@ const Cullshader = timeLoop(({ children: t, time, mouse, meter, fft, throb, shad
     }}
   />);
 
+  const SquidgeShader = timeLoop(({ children: t, time, throb}) =>
+    <Node
+      shader={squiggly.fftGloop}
+      uniforms={{ t, time: time / 1000, throb: throb }}
+    />);
+
 export default class Cull extends Component {
-  state = {
-    mouse: [0.5, 0.5]
+  constructor(props){
+    super(props);
+    this.state = {
+    mouse: [0.5, 0.5],
+    shader: this.props.shaderNo
+    }
   }
+
   render() {
     const styling = {left: this.props.x+'px', top: this.props.y+'px'};
     const {mouse} = this.state;
+    if (this.state.shader === 0) {
+      var shaderType = (
+        <Cullshader
+        mouse={mouse}
+        meter={this.props.meter}
+        fft={this.props.fft}
+        throb={this.props.movement}
+        >
+          {this.props.canvasImg}
+        </Cullshader>
+      );
+    } else if (this.state.shader === 1) {
+      var shaderType = (
+        <SquidgeShader
+        throb={0.15}
+        >
+          {this.props.canvasImg}
+        </SquidgeShader>
+      );
+    }
     return (
       <div className={"abso "+this.props.classList} style={styling}>
         <Surface width={this.props.width} height={this.props.height} onMouseMove={this.onMouseMove}>
-          <Cullshader mouse={mouse} meter={this.props.meter} fft={this.props.fft} throb={this.props.movement} shader={shaders[this.props.shaderNo]}>
-            {this.props.canvasImg}
-          </Cullshader>
+          {shaderType}
         </Surface>
       </div>
     );
