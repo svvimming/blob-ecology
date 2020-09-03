@@ -67,41 +67,6 @@ const culling = Shaders.create({
 ` }
 });
 
-// const squiggly = Shaders.create({
-//   fftGloop: {
-//     frag: GLSL`
-//     precision highp float;
-//     varying vec2 uv;
-//     uniform sampler2D t;
-//     uniform float time;
-//
-//     float rand(float n){
-//       return fract(sin(n) * 43758.5453123);
-//     }
-//     float noise(float p){
-//     	float fl = floor(p);
-//       float fc = fract(p);
-//     	return mix(rand(fl), rand(fl + 1.0), fc);
-//     }
-//
-//     void main(){
-//         vec2 ij = vec2(uv.x, uv.y);
-//         ij.x += 0.2 * sin(time + ij.y * 4.0);
-//         float numLines = 15. + ij.y * 0.4;
-//         float colNoise = noise(0.6 * ij.x * numLines);
-//         float colStripes = 0.5 + 0.5 * sin(ij.x * numLines * 0.75);
-//         float col = mix(colNoise, colStripes, 0.5 + 0.5 * sin(time));
-//         float aA = 1./(2560.0 * 0.005) ;
-//         col = smoothstep(0.5 - aA, 0.5 + aA, col);
-//         vec4 img = vec4(texture2D(t, ij));
-//     	gl_FragColor = vec4(vec3(col),1.0);
-//     }
-// ` }
-// });
-
-
-const shaders = [culling, squiggly];
-
 function getBinLevels(fftIn){
   var bins = [];
   for(let i=0; i<fftIn.length; i++) {
