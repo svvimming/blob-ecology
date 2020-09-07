@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 import Tone from 'tone';
 import Cull from './cull';
@@ -36,6 +37,7 @@ import aside from '../assets/grate/aside.mp3';
 
 const smoothing = 0.3;
 const windowSize = 16;
+const paths = ["/alongwalk", "/nban", "/rollingunrolling", "/aside"];
 
 function ALongWalk(props) {
   return (
@@ -174,7 +176,7 @@ function Nban(props){
         classList={"slither"}
         />
 
-        <Link to="/" style={{position: 'absolute', top: '150px', left: '900px', color: '#083182'}}>a long walk to somewhere close</Link>
+        <Link to="/alongwalk" style={{position: 'absolute', top: '150px', left: '900px', color: '#083182'}}>a long walk to somewhere close</Link>
 
     </div>
   );
@@ -208,7 +210,7 @@ function Rollingunrolling(props){
         classList={"fortyfive"}
         />
 
-        <Link to="/" style={{position: 'absolute', width: '100px', top: '850px', left: '1000px', color: '#497373'}}>a long walk to somewhere close</Link>
+        <Link to="/alongwalk" style={{position: 'absolute', width: '100px', top: '850px', left: '1000px', color: '#497373'}}>a long walk to somewhere close</Link>
         <Link to="/aside" style={{position: 'absolute', top: '1100px', left: '600px'}}>
             <img
             src={grate1}
@@ -326,7 +328,7 @@ function Aside(props){
                   gain={props.gain}
                   />
 
-                  <Link to="/" style={{position: 'absolute', width: '100px', top: '250px', left: '1000px', color: 'white'}}>a long walk to somewhere close</Link>
+                  <Link to="/alongwalk" style={{position: 'absolute', width: '100px', top: '250px', left: '1000px', color: 'white'}}>a long walk to somewhere close</Link>
 
 
               </div>
@@ -337,6 +339,7 @@ class Map extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      redirect: paths[Math.floor(Math.random()*paths.length)],
       follower: new Tone.Follower(smoothing),
       meter: new Tone.Meter(),
       gain: new Tone.Gain(4.0),
@@ -362,7 +365,7 @@ class Map extends React.Component {
       <Router>
         <div id="router">
           <Switch>
-            <Route exact path="/">
+            <Route path="/alongwalk">
               <ALongWalk meter={this.state.meter} fft={this.state.fft} gain={this.state.gain}/>
             </Route>
             <Route path="/nban">
@@ -374,6 +377,11 @@ class Map extends React.Component {
             <Route path="/aside">
               <Aside meter={this.state.meter} fft={this.state.fft} gain={this.state.gain}/>
             </Route>
+
+            <Route>
+              <Redirect to={this.state.redirect}/>
+            </Route>
+
           </Switch>
         </div>
       </Router>
