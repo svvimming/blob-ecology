@@ -215,6 +215,17 @@ img {
 .fortyfive{
   transform: rotateZ(-45deg);
 }
+
+.slither{
+  animation-name: crawl;
+  animation-duration: 240.0s;
+}
+
+@keyframes crawl {
+  0% {transform: translateX(0px)}
+  50% {transform: translateX(-400px)}
+  100% {transform: translateX(0px)}
+}
 /* culls^^^^ */
 
 
