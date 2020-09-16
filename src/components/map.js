@@ -339,7 +339,7 @@ class Map extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      redirect: paths[Math.floor(Math.random()*paths.length)],
+      redirect: paths[0],//paths[Math.floor(Math.random()*paths.length)],
       follower: new Tone.Follower(smoothing),
       meter: new Tone.Meter(),
       gain: new Tone.Gain(4.0),
