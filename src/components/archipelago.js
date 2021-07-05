@@ -31,12 +31,12 @@ class Archipelago extends React.Component {
   }
 
   initializePlayer() {
-      this.state.env.toMaster();
-      this.state.env.connect(this.props.gain);
-      this.state.player.connect(this.state.env);
-      this.setState({
-        isLoaded: true
-      });
+    this.state.env.toMaster();
+    this.state.env.connect(this.props.gain);
+    this.state.player.connect(this.state.env);
+    this.setState({
+      isLoaded: true
+    });
   }
 
   componentDidMount(){
