@@ -11,7 +11,7 @@ import ALongWalk from '../pages/ALongWalk';
 import Rollingunrolling from '../pages/Rollingunrolling';
 import Nban from '../pages/Nban';
 import Aside from '../pages/Aside';
-import Slippery from '../pages/Slippery';
+import FollowingStrangers from '../pages/FollowingStrangers';
 
 const smoothing = 0.3;
 const windowSize = 16;
@@ -59,8 +59,8 @@ class Map extends React.Component {
             <Route path="/aside">
               <Aside meter={this.state.meter} fft={this.state.fft} gain={this.state.gain}/>
             </Route>
-            <Route path="/slippery">
-              <Slippery meter={this.state.meter} fft={this.state.fft} gain={this.state.gain}/>
+            <Route path="/following-strangers">
+              <FollowingStrangers meter={this.state.meter} fft={this.state.fft} gain={this.state.gain}/>
             </Route>
 
             <Route>
