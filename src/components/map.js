@@ -29,18 +29,17 @@ class Map extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.state.follower.connect(this.state.meter);
     this.state.gain.connect(this.state.fft);
     this.state.gain.connect(this.state.follower);
   }
 
-  componentWillUnmount(){
+  componentWillUnmount () {
     this.state.follower.dispose();
     this.state.meter.dispose();
     this.state.gain.dispose();
     this.state.fft.dispose();
-    if (this.state.init) { window.removeEventListener('click', this.state.init); }
   }
 
   render(props) {
