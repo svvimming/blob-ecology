@@ -53,8 +53,9 @@ class Archipelago extends React.Component {
   }
 
   componentWillUnmount(){
-    this.state.player.dispose();
+    clearTimeout(this.timer);
     this.state.env.dispose();
+    this.state.player.dispose();
   }
 
   handlePlayer() {
