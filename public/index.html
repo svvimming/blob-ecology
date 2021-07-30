@@ -6,26 +6,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+    <meta name="description" content="An absorbing reflection, reflecting absorption of the spills" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
     <title>fuites</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
     <style>
     button{
       color: rgba(0, 0, 0, 0.5);
@@ -46,20 +30,6 @@
       left: 0px;
       background-color: white;
       z-index: 100;
-    }
-
-    /* #enter {
-      width: 220px;
-      font-family: "Times New Roman", Times, serif;
-      color: rgba(0.0, 0.0, 0.0, 0.5);
-      background-image: url('/assets/culltext.png');
-    } */
-
-    /* #enter:hover{
-      color: rgba(0.0, 0.0, 0.0, 0.85);
-    } */
-
-    .blur {
     }
 
     .closed {
@@ -84,34 +54,102 @@
       -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
     }
+
+    .center:hover {
+      cursor: pointer;
+    }
+
     </style>
   </head>
   <body>
-    <!-- <noscript>You need to enable JavaScript to run this app.</noscript> -->
-    <div id="curtain" class="closed">
-      <button id="enter" class="center" onClick="showTime()">enter</button>
-    </div>
+
+    <div id="curtain" class="closed"></div>
+
     <div id="root"></div>
+
     <script>
 
+    const curtain = document.getElementById("curtain");
+    var canvas;
+
     function showTime() {
-        document.getElementById("curtain").classList.add('open');
-        document.getElementById("curtain").classList.remove('closed');
-        document.getElementById("enter").classList.add('byebye');
+      curtain.classList.add('open');
+      curtain.classList.remove('closed');
+      if (curtain.children.length) {
+        curtain.children[0].classList.add('byebye');
+        remove();
+      }
+    }
+
+    var x = 0.01;
+    var y = 0.01;
+    var z = 0.01;
+
+    var a = 10.0;
+    var b = 28.0;
+    var c = 8.0/3.0;
+
+    var dt = 0.01;
+    var stut = 0.1;
+    var limit = 400;
+
+    var minds = "An absorbing reflection, reflecting absorption of the spills. Call it life and feel it leave you alone. To illume a sight, soft as the other side. Feel the center divide. A coming and going of direction itself: detours, disorientations, Pandemia. Somewhere far, something slow and then sudden: a contamination. A pandemonium of particles, an orbit of turning points in space around leaking ghosts too heavy to fly."
+    var points = [];
+    var letters;
+    var chars = [];
+    var myFont;
+    var stretch = 2.0;
+
+    function preload(){
+      myFont = loadFont('%PUBLIC_URL%/assets/NanumMyeongjo-Regular.ttf');
+    }
+
+    function setup() {
+      canvas = createCanvas(800, 600, WEBGL);
+      canvas.addClass('center');
+      canvas.mouseClicked(showTime);
+      canvas.parent('curtain');
+      background(255);
+      frameRate(30);
+      textFont(myFont);
+      textAlign(CENTER, CENTER);
+
+      letters = split(minds, '');
+      for (var i=0;i<letters.length; i++){
+        chars[i] = ({character: letters[i], size: random(2.0, 4.0)});
+      }
+    }
+
+    function draw () {
+      background(255);
+      var dx = (a * (y - x))*dt;
+      var dy = (x * (b - z) - y)*dt;
+      var dz = (x * y - c * z)*dt;
+      x = x + dx;
+      y = y + dy;
+      z = z + dz;
+
+      var vec = createVector((x+random(-1*stut, stut))*stretch, (y+random(-1*stut, stut))*stretch, (z+random(-1*stut, stut))*stretch);
+      points.push({ position: vec, rotY: y*0.1, rotZ: 1.57+z*0.1} );
+      if (limit < points.length) {
+        points.shift();
+      }
+
+      orbitControl();
+      scale(3);
+      fill(0);
+      var len = points.length;
+      for(let i=0; i < len; i++){
+        push();
+        translate(points[i].position);
+        rotateX(points[i].rotY);
+        rotateZ(points[i].rotZ);
+        textSize(chars[i].size);
+        text(chars[i].character, 0, 0);
+        pop();
+      }
     }
 
     </script>
-    <!-- <button id="toneStart" onClick="playSound();">start audio</button> -->
-
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>
