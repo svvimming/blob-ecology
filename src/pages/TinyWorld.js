@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import Cull from '../components/cull';
 
 import tiny from '../assets/radial/tiny-world.png';
