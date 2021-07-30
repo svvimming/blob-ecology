@@ -12,6 +12,7 @@ import Rollingunrolling from '../pages/Rollingunrolling';
 import Nban from '../pages/Nban';
 import Aside from '../pages/Aside';
 import FollowingStrangers from '../pages/FollowingStrangers';
+import TinyWorld from '../pages/TinyWorld';
 
 const smoothing = 0.3;
 const windowSize = 16;
@@ -61,6 +62,9 @@ class Map extends React.Component {
             </Route>
             <Route path="/following-strangers">
               <FollowingStrangers meter={this.state.meter} fft={this.state.fft} gain={this.state.gain}/>
+            </Route>
+            <Route path="/tiny-world">
+              <TinyWorld meter={this.state.meter} fft={this.state.fft} gain={this.state.gain}/>
             </Route>
 
             <Route>
