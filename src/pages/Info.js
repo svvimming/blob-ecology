@@ -7,7 +7,7 @@ import mew from '../assets/radial/mew-copy.png';
 
 function Info(props) {
   const name = 'fuit.es'
-  const first_paragraph_1 = ' is an online interactive sound installation seeking creative alternatives to new streaming industry standards. This ongoing and collective experimentation situates process as the streamable content proper; music, sound and visual works are in an ever shifting process of composition, proliferating variations on themselves with each next iteration. In this sense '
+  const first_paragraph_1 = ' is an online interactive sound installation seeking creative alternatives to new streaming industry standards. This ongoing and collective experimentation situates process as the streamable content proper; music, sound, written and visual works are in an ever shifting process of composition, proliferating variations on themselves with each next iteration. In this sense '
   const first_paragraph_2 = ' acts as a digital ‘anarchive’; a technique for making process a process making machine.'
   const second_paragraph = ' is also a collective; an assemblage of artists from various disciplines brought together by an affinity for how seemingly disparate practices can shape and inflect one another. Recent experimentation has brought the project into a physical iteration as artist in residence with Art Souterrain. In the Art Souterrain context, it is taking on a new dimension as it integrates the physical world with a sound sculpture made by Niko Pageau-Timar.'
   const reflection = 'an absorbing reflection'
