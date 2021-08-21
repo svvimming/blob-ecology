@@ -13,6 +13,7 @@ import Nban from '../pages/Nban';
 import Aside from '../pages/Aside';
 import FollowingStrangers from '../pages/FollowingStrangers';
 import TinyWorld from '../pages/TinyWorld';
+import Info from '../pages/Info';
 
 const smoothing = 0.3;
 const windowSize = 16;
@@ -65,6 +66,9 @@ class Map extends React.Component {
             </Route>
             <Route path="/tiny-world">
               <TinyWorld meter={this.state.meter} fft={this.state.fft} gain={this.state.gain}/>
+            </Route>
+            <Route path="/info">
+              <Info meter={this.state.meter} fft={this.state.fft} gain={this.state.gain}/>
             </Route>
 
             <Route>

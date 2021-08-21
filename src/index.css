@@ -14,11 +14,11 @@
   z-index: -1000;
 }
 
-.abso{
+.abso {
   position: absolute;
 }
 
-a{
+a {
   font-family: 'Nanum Myeongjo', serif;
   font-size: 13px;
   text-decoration: none;
@@ -215,6 +215,44 @@ img {
 
 .fortyfive{
   transform: rotateZ(-45deg);
+}
+
+.ninety {
+  transform: rotateZ(105deg) scaleY(-1);
+}
+
+.info {
+  overflow: hidden;
+}
+
+.info-text-wrapper {
+  position: absolute;
+  top: 50%;
+  margin: 0 130px;
+  transform: translateY(-50%);
+  z-index: 10000;
+}
+
+.info-text {
+  width: 600px;
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 16px;
+  color: #515050;
+}
+
+.info-link {
+  font-size: 16px;
+  font-style: italic;
+}
+
+.absorption {
+  font-size: 13px;
+}
+
+.copyright {
+  font-size: 10px;
+  font-family: 'Nanum Myeongjo', serif;
+  color: #515050;
 }
 
 .slither{
