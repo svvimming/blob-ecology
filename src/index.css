@@ -225,6 +225,12 @@ img {
   overflow: hidden;
 }
 
+.info-title {
+  font-family: 'Merriweather';
+  font-size: 24px;
+  font-style: normal;
+}
+
 .info-text-wrapper {
   position: absolute;
   top: 50%;
@@ -234,19 +240,27 @@ img {
 }
 
 .info-text {
-  width: 600px;
-  font-family: 'Nanum Myeongjo', serif;
-  font-size: 16px;
+  width: 500px;
+  font-family: 'Merriweather';
   color: #515050;
+  line-height: 1.4;
+  font-size: 12px;
 }
 
 .info-link {
-  font-size: 16px;
   font-style: italic;
+  font-size: 13px;
 }
 
-.absorption {
-  font-size: 13px;
+.art-souterrain {
+  font-style: normal;
+}
+
+ul { padding-left: 0; }
+
+li {
+  list-style: none;
+  padding: 8px 0;
 }
 
 .copyright {
